@@ -91,11 +91,12 @@
   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
   <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 </table>
+<br>
 <mat-paginator
-
 [pageSizeOptions]="[5,10,15]"
 showFirstLastButtons
 aria-label="Select page">
 </mat-paginator>
-<span>Number of leaves{{this.dataSource.length}}</span>
+<br>
+<span>Number of Applied leaves:-{{this.dataSource.length}}</span>
 </div></html>

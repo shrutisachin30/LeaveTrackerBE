@@ -29,9 +29,9 @@ empid = localStorage.getItem('dasId');
     enddate: "",
     dasid: "",
     updatedBy : "",
-    updatedOn : "",
+    updatedOn : new Date(),
   }
-  date = new Date();
+  //date = new Date();
   length = 0;
 
   dataSource = [{
@@ -105,7 +105,8 @@ data: MatTableDataSource<any>;
         this.canceldata.enddate = enddate;
         this.canceldata.updatedBy = updatedBy;
         this.canceldata.updatedOn = updatedOn;
-        console.log(this.canceldata)
+        console.log(updatedOn);
+        console.log(this.canceldata);
         this.http.post(this.url + "cancelLeave", this.canceldata).subscribe();
         window.location.reload();
         //this.router.navigate(['view']);
