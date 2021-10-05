@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { ApplyleaveComponent } from './applyleave/applyleave.component';
+import { ChangePasswordComponent } from './change-password/change-password.component';
 import { ForgotpasswordComponent } from './forgotpassword/forgotpassword.component';
 import { ListComponent } from './list/list.component';
 import { SigninComponent } from './signin/signin.component';
@@ -12,6 +13,7 @@ const routes: Routes = [
   {path:'', component: SigninComponent},
   //{path:'**', component: SigninComponent},
   {path:'signup', component: SignupComponent},
+  {path:'changePassword', component: ChangePasswordComponent},
   {path:'signin', component: SigninComponent},
   {path:'list', component: ListComponent},
   {path:'applyleave', component: ApplyleaveComponent},

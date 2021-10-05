@@ -13,6 +13,13 @@
 .demo-table {
   width: 95%;
 }
+.field{
+    
+  width: 30%;
+  margin-top: 20px;
+  margin-left: 20px;
+  font-size: 15px;
+}
 
 .mat-row .mat-cell {
   border-bottom: 1px solid transparent;

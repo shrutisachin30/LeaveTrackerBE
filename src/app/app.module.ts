@@ -39,6 +39,7 @@ import { ForgotpasswordComponent } from './forgotpassword/forgotpassword.compone
 import {MatStepperModule} from '@angular/material/stepper';
 import { MatSortModule } from '@angular/material/sort';
 import { DemoMaterialModule } from './material-module';
+import { ChangePasswordComponent } from './change-password/change-password.component';
    
   
 @NgModule({
@@ -51,6 +52,7 @@ import { DemoMaterialModule } from './material-module';
     ViewComponent,
     DialogComponent,
     ForgotpasswordComponent,
+    ChangePasswordComponent,
    
   ],
   imports: [

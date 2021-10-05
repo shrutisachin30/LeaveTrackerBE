@@ -11,6 +11,10 @@
       <mat-icon>more_vert</mat-icon>
     </button>
     <mat-menu class="contact" #menu="matMenu">
+      <button mat-menu-item routerLink="/changePassword">
+        <mat-icon>lock</mat-icon>
+        <span>Change Password</span>
+      </button>
       <button mat-menu-item routerLink="/applyleave">
         <mat-icon>AL</mat-icon>
         <span>Apply Leave</span>
@@ -26,10 +30,10 @@
   <router-outlet></router-outlet>
 </body><br><br>
 <div>
-  <span style="margin-left:44% ;   font-size : 20px ; font-weight: 200 ">Employee Details</span><br>
+  <span style="margin-left:43% ;   font-size : 25px ; font-weight: 200 ">Employee Details</span><br>
 
-  <mat-form-field>
-    <input (keyup)="applyFilter($any($event.target).value)" matInput placeholder="Search by DasId and Name">
+  <mat-form-field class="field">
+    <input (keyup)="applyFilter($any($event.target).value)" matInput placeholder="Search by Name and Das Id">
   </mat-form-field>
 
   <table style=" width: 98%;" mat-table [dataSource]="data" matSort class="mat-elevation-z8 demo-table">
@@ -110,7 +114,7 @@
   </table>
   <mat-paginator 
            
-              [pageSizeOptions]="[2,5,10,15]"
+              [pageSizeOptions]="[5,10,15]"
               showFirstLastButtons
               aria-label="Select page">
 </mat-paginator> 
