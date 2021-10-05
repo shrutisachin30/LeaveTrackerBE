@@ -1,0 +1,30 @@
+.ybutton {
+    margin-left: 24%;
+    background-color:green;
+    color: #fff;
+    font-weight: bold;
+    margin-top: 10px;
+    margin-bottom: 20px;
+    width: 25%;
+    height: 40px;
+    font-size: 18px;
+    }
+    
+    
+    
+    .nbutton {
+    background-color: red;
+    color: #fff;
+    font-weight: bold;
+    margin-top: 10px;
+    width: 25%;
+    height: 40px;
+    margin-bottom: 20px;
+    font-size: 18px;
+    }
+
+    .msg{
+        font-size: large;
+        font-weight: bold; 
+        margin-left: 5%;
+    }

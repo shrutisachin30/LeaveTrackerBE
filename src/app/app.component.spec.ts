@@ -1,6 +1,8 @@
 import { TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { AppComponent } from './app.component';
+import { LeaveComponent } from './leave/leave.component';
+import { SigninComponent } from './signin/signin.component';
 
 describe('AppComponent', () => {
   beforeEach(async () => {
@@ -9,7 +11,9 @@ describe('AppComponent', () => {
         RouterTestingModule
       ],
       declarations: [
-        AppComponent
+        AppComponent,
+        SigninComponent,
+        LeaveComponent 
       ],
     }).compileComponents();
   });
@@ -21,9 +25,15 @@ describe('AppComponent', () => {
   });
 
   it(`should have as title 'LeaveTracker'`, () => {
-    const fixture = TestBed.createComponent(AppComponent);
+    const fixture = TestBed.createComponent(SigninComponent);
     const app = fixture.componentInstance;
-    expect(app.title).toEqual('LeaveTracker');
+    expect(app.title).toEqual('signin');
+  });
+
+  it(`should have as title 'LeaveTracker'`, () => {
+    const fixture = TestBed.createComponent(LeaveComponent);
+    const app = fixture.componentInstance;
+    expect(app.title).toEqual('leave');
   });
 
   it('should render title', () => {

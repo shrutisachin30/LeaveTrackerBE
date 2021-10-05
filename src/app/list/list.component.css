@@ -1,0 +1,73 @@
+.card{
+  font-size: medium;
+  margin : 2.5% 3% 3%;
+  background-color:aliceblue;
+}
+
+.th{
+  font-size: larger;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  font-weight: 900;
+}
+
+.demo-table {
+  width: 95%;
+}
+
+.mat-row .mat-cell {
+  border-bottom: 1px solid transparent;
+  border-top: 1px solid transparent;
+  cursor: pointer;
+}
+
+.mat-row:hover .mat-cell {
+  border-color: currentColor;
+}
+
+table{
+  padding: 10px;
+  margin: 10px;
+}
+
+.heading{
+    margin-left: 50%;
+    margin: 10px !important;
+    font-size: 20px;
+    font-weight: 200;
+}
+
+.size{
+  margin-top: 0;
+  height: 110px;
+}
+
+.spacer {
+  flex: 1 1 auto;
+  
+  height: 30%;
+  font-size: 55px;
+  margin-left: 31%;
+  
+}
+
+.jumbotron{
+  
+  
+  height: 100%;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat; 
+  margin: -8px;
+  overflow-x: hidden;
+}
+
+.imagenav{
+
+  margin-left: 10px;
+  height:50%;
+  width: 100px;
+}
+
+.contact{
+  font-size: 20px;
+}

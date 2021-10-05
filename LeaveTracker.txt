@@ -1,0 +1,4 @@
+1. please enter the username and password (for user name password blank)
+2. please enter the username  (for user name blank)
+3. please enter the password(for password blank)
+4. please enter the correct username and password (for wrong user name password)

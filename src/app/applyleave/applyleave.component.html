@@ -1,0 +1,76 @@
+<html lang="en" class="main">
+<div>
+  <body class="jumbotron">
+  <mat-toolbar color="primary" class="size">
+    <img class="imagenav" src="./assets/logo.png">
+    <span class="spacer">Leave Tracker</span>
+    <button class="home" mat-menu-item routerLink="/list">
+      <mat-icon style="color: white;">home</mat-icon>
+    </button>
+    <button class="right" mat-icon-button [matMenuTriggerFor]="menu">
+      <mat-icon>more_vert</mat-icon>
+    </button>
+    <mat-menu class="contact" #menu="matMenu">
+      <button mat-menu-item routerLink="/list">
+        <mat-icon>person</mat-icon>
+        <span>Employee Details</span>
+      </button>
+      <button mat-menu-item routerLink="">
+        <mat-icon>logout</mat-icon>
+        <span>Logout</span>
+      </button>
+    </mat-menu>
+    
+  </mat-toolbar>
+</body>
+<form autocomplete="off">
+    
+  <mat-card class="card" >
+
+      <img class="image" style="width: 110px; margin-left: 40%;" src="./assets/applyleave.png">
+      
+      <mat-form-field class="field" appearance="fill">
+        <mat-label>DAS ID</mat-label>
+        <input matInput name="EmpID" [(ngModel)]="emp.empid" readonly>
+      </mat-form-field>
+
+      <mat-form-field class="field" appearance="fill">
+        <mat-label>Start Date</mat-label>
+        <input matInput type="date"  name="startDate"  [(ngModel)]="user.startDate" required>
+      </mat-form-field>
+
+       <!-- <mat-form-field appearance="fill">
+        <mat-label>Start date</mat-label>
+        <input matInput [matDatepicker]="picker" [max]="maxDate">
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field> -->
+      
+      <mat-form-field class="field" appearance="fill">
+        <mat-label>End Date</mat-label>
+        <input matInput type="date"  name="endDate" [(ngModel)]="user.endDate" required>
+      </mat-form-field>
+ 
+      <!-- <mat-form-field class="field" appearance="fill">
+        <mat-label>Type of Leaves</mat-label>
+        <input matInput type="text" name="typeOfLeave" [(ngModel)]="user.typeOfLeave" required>
+      </mat-form-field> -->
+
+      <mat-form-field class="field" appearance="fill">
+        <mat-label>Type of Leave</mat-label>
+        <mat-select name="typeOfLeave" [(ngModel)]="user.typeOfLeave" required>
+            <mat-option *ngFor="let leave of typeOfLeave " [value]="leave.value">
+                {{leave.viewValue}}
+            </mat-option>
+        </mat-select>
+      </mat-form-field>  
+
+      <button class="button" type="submit" (click)="applyLeaveEmployee()" mat-raised-button color="primary">
+          Submit
+      </button>
+
+  </mat-card>
+
+</form>
+</div>
+</html>

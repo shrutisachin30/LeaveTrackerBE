@@ -1,0 +1,55 @@
+<html lang="en" class="main">
+<div>
+
+  <body class="jumbotron">
+
+    <mat-toolbar color="primary" class="size">
+
+      <img class="image" src="./assets/logo.png">
+      <span class="spacer">Leave Tracker</span>
+
+
+    </mat-toolbar>
+
+    <router-outlet></router-outlet>
+  </body>
+  <mat-card class="card">
+
+    <img class="image" style="width: 110px; margin-left: 40%;" src="./assets/login.png">
+
+    <form>
+
+      <mat-form-field class="field" appearance="fill">
+        <mat-label>DAS ID</mat-label>
+        <mat-icon matSuffix>account_circle</mat-icon>
+        <input type="text" name="dasId" minlength="7" maxlength="7" [(ngModel)]="user.dasId" matInput>
+      </mat-form-field>
+
+      <mat-form-field class="field" appearance="fill">
+        <mat-label>Password</mat-label>
+        <input pattern="[0-9]{10}" minlength="8" maxlength="12" [type]="hide ? 'password' : 'text'" matInput
+          name="password" [(ngModel)]="user.password">
+        <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+          [attr.aria-pressed]="hide">
+          <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+        </button>
+      </mat-form-field>
+
+      <button (click)="login()" mat-raised-button class="login" color="primary">
+        Login
+      </button>
+      <button mat-raised-button (click)="reset()" class="reset" color="warn"> Reset</button><br><br>
+
+      <mat-divider [inset]="true"></mat-divider><br><br>
+      <mat-label class="forgot">Don't have an Account?</mat-label>
+      <mat-label class="forgot">Forgot Password?</mat-label><br>
+
+      <a class="color" routerLink="/signup"> Register Now!</a>
+      <a class="colorfp" routerLink="/forgotpassword"> Click Here!</a><br><br>
+
+    </form>
+
+  </mat-card>
+</div>
+
+</html>

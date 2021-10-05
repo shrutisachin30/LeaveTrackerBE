@@ -1,0 +1,101 @@
+<html lang="en" class="main">
+<div>
+  <body class="jumbotron">
+  <mat-toolbar color="primary" class="size">
+    <img class="imagenav" src="./assets/logo.png">
+    <span class="spacer">Leave Tracker</span>
+    <button class="home" mat-menu-item routerLink="/list">
+      <mat-icon style="color: white;">home</mat-icon>
+    </button>
+    <button  mat-icon-button [matMenuTriggerFor]="menu">
+      <mat-icon>more_vert</mat-icon>
+    </button>
+    <mat-menu class="contact" #menu="matMenu">
+      <button mat-menu-item routerLink="/applyleave">
+        <mat-icon>AL</mat-icon>
+        <span>Apply Leave</span>
+      </button>
+      <button mat-menu-item routerLink="">
+        <mat-icon>logout</mat-icon>
+        <span>Logout</span>
+      </button>
+    </mat-menu>
+    
+  </mat-toolbar>
+</body><br><br>
+
+<span style="margin-left:46% ;   font-size : 20px ; font-weight: 200 ">Leave Details</span><br><br>
+<table mat-table [dataSource]="data" class="mat-elevation-z8 demo-table">
+  <!-- Position Column -->
+  <ng-container matColumnDef="id">
+    <th mat-header-cell style="font-size: medium;padding-right: 70px;" *matHeaderCellDef> <b>Sr No.</b> </th>
+    <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+  </ng-container>
+
+  <!-- Name Column -->
+
+
+  <!-- Weight Column -->
+  <ng-container matColumnDef="startdate">
+    <th mat-header-cell style="font-size: medium;padding-right: 70px;" *matHeaderCellDef> <b>Start Date</b> </th>
+    <td mat-cell *matCellDef="let element"> {{element.startDate}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="enddate">
+    <th mat-header-cell style="font-size: medium;padding-right: 70px;" *matHeaderCellDef> <b>End Date</b></th>
+    <td mat-cell *matCellDef="let element"> {{element.endDate}} </td>
+  </ng-container>
+
+  <!-- Symbol Column -->
+  <ng-container matColumnDef="typeOfLeave">
+    <th mat-header-cell style="font-size: medium; padding-right: 70px;" *matHeaderCellDef> <b>Type Of Leave</b> </th>
+    <td mat-cell *matCellDef="let element"> {{element.typeOfLeave}} </td>
+  </ng-container>
+
+  <!-- Symbol Column -->
+  <ng-container matColumnDef="status">
+    <th mat-header-cell style="font-size: medium; padding-right: 70px;" *matHeaderCellDef> <b> Status</b> </th>
+    <td mat-cell *matCellDef="let element"> {{element.status}} </td>
+  </ng-container>
+
+  <!-- <ng-container matColumnDef="count">
+    <th mat-header-cell style="font-size: medium; padding-right: 70px;" *matHeaderCellDef> <b> Count</b> </th>
+    <td mat-cell *matCellDef="let element"> {{element.count}} </td>
+  </ng-container> -->
+
+  <ng-container matColumnDef="updatedBy">
+    <th mat-header-cell style="font-size: medium; padding-right: 70px;" *matHeaderCellDef> <b> Updated By </b> </th>
+    <td mat-cell *matCellDef="let element"> {{element.updatedBy}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="updatedOn">
+    <th mat-header-cell style="font-size: medium; " *matHeaderCellDef> <b> Updated On </b> </th>
+    <td mat-cell *matCellDef="let element"> {{element.updatedOn}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="view">
+    <th class="th" style="font-size: medium; padding-left: 70px;" mat-header-cell *matHeaderCellDef> <b> Action</b></th>
+    <td mat-cell style="float:right; margin-right:50px" *matCellDef="let element">
+
+
+      <button style="margin-top: 5px; margin-left: 30px;
+        margin-bottom: 5px;" (click)="cancelLeave(element.id,element.startDate,element.endDate,element.updatedBy,element.updatedOn)" [disabled]="element.disable"
+        mat-raised-button color="primary">Cancel
+      </button>
+
+
+
+    </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>
+<mat-paginator
+
+[pageSizeOptions]="[5,10,15]"
+showFirstLastButtons
+aria-label="Select page">
+</mat-paginator>
+<span>Number of leaves{{this.dataSource.length}}</span>
+</div></html>
