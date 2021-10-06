@@ -100,7 +100,8 @@ export class ForgotpasswordComponent implements OnInit {
       this.showSpinner = false
       return;
     }
-    this.http.post<any>('http://localhost:8080/psa/updatePassword',
+    else{
+      this.http.post<any>('http://localhost:8080/psa/updatePassword',
     {
       "id":this.form1.firstCtrl.value,
       "password":this.form3.thirdCtrl.value
@@ -115,7 +116,7 @@ export class ForgotpasswordComponent implements OnInit {
         }
       });
   }
-
+  }
   ngOnInit(): void {
   // this.getdasId(this.id);
   this.firstFormGroup.reset()

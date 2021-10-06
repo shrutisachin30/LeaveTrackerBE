@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { ApplyleaveComponent } from './applyleave/applyleave.component';
 import { ChangePasswordComponent } from './change-password/change-password.component';
+import { EditprofileComponent } from './editprofile/editprofile.component';
 import { ForgotpasswordComponent } from './forgotpassword/forgotpassword.component';
 import { ListComponent } from './list/list.component';
 import { SigninComponent } from './signin/signin.component';
@@ -19,6 +20,7 @@ const routes: Routes = [
   {path:'applyleave', component: ApplyleaveComponent},
   {path:'view', component: ViewComponent},
   {path:'forgotpassword', component: ForgotpasswordComponent},
+  {path:'editprofile', component: EditprofileComponent},
 ];
 
 @NgModule({

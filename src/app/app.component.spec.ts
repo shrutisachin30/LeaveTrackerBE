@@ -1,8 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { AppComponent } from './app.component';
-import { LeaveComponent } from './leave/leave.component';
+import { ListComponent } from './list/list.component';
 import { SigninComponent } from './signin/signin.component';
+import { ApplyleaveComponent } from './applyleave/applyleave.component';
+import { ChangePasswordComponent } from './change-password/change-password.component';
+import { ForgotpasswordComponent } from './forgotpassword/forgotpassword.component';
+import { ViewComponent } from './view/view.component';
+
 
 describe('AppComponent', () => {
   beforeEach(async () => {
@@ -13,7 +18,11 @@ describe('AppComponent', () => {
       declarations: [
         AppComponent,
         SigninComponent,
-        LeaveComponent 
+        ListComponent,
+        ApplyleaveComponent, 
+        ChangePasswordComponent,
+        ForgotpasswordComponent,
+        ViewComponent
       ],
     }).compileComponents();
   });
@@ -31,11 +40,33 @@ describe('AppComponent', () => {
   });
 
   it(`should have as title 'LeaveTracker'`, () => {
-    const fixture = TestBed.createComponent(LeaveComponent);
+    const fixture = TestBed.createComponent(ListComponent);
     const app = fixture.componentInstance;
-    expect(app.title).toEqual('leave');
+    expect(app.title).toEqual('list');
   });
 
+  it(`should have as title 'LeaveTracker'`, () => {
+    const fixture = TestBed.createComponent(ApplyleaveComponent);
+    const app = fixture.componentInstance;
+    expect(app.title).toEqual('apply');
+  });
+
+it(`should have as title 'LeaveTracker'`, () => {
+    const fixture = TestBed.createComponent(ChangePasswordComponent);
+    const app = fixture.componentInstance;
+    expect(app.title).toEqual('changepassword');
+  });
+
+  it(`should have as title 'LeaveTracker'`, () => {
+    const fixture = TestBed.createComponent(ForgotpasswordComponent);
+    const app = fixture.componentInstance;
+    expect(app.title).toEqual('forgotpassword');
+  });
+  it(`should have as title 'LeaveTracker'`, () => {
+    const fixture = TestBed.createComponent(ViewComponent);
+    const app = fixture.componentInstance;
+    expect(app.title).toEqual('view');
+  });
   it('should render title', () => {
     const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
