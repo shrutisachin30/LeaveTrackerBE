@@ -18,8 +18,8 @@ export class List {
     public email: string,
     public reportingManager: string,
     public projectName: string,
-    public jobRole: string
-
+    public jobRole: string,
+    public domain:string
   ) { }
 
 }

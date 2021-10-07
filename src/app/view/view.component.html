@@ -92,11 +92,12 @@
   <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 </table>
 <br>
-<mat-paginator
+<mat-paginator *ngIf="dataSource.length > 0"
 [pageSizeOptions]="[5,10,15]"
 showFirstLastButtons
 aria-label="Select page">
 </mat-paginator>
-<br>
-<span>Number of Applied leaves:-{{this.dataSource.length}}</span>
+<span class="leave" *ngIf="dataSource.length == 0">Leaves Not Applied</span><br>
+<span class="num" *ngIf="dataSource.length > 0">Number of leaves :- {{this.dataSource.length}}</span><br>
+
 </div></html>
