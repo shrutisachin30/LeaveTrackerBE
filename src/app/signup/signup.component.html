@@ -18,11 +18,11 @@
   </mat-card-header>
 
   <mat-card-content>
-    <form class="example-form">
+    <form  class="example-form">
 
       <mat-form-field class="field" appearance="fill">
         <mat-label>Das ID</mat-label>
-        <input matInput minlength="7" maxlength="7" name="dasId" pattern="[A0-9]{7}$" [(ngModel)]="user.dasId" #dasId="ngModel" required>
+        <input matInput minlength="7" maxlength="7" name="dasId" pattern="[A][0-9]{6}" [(ngModel)]="user.dasId" #dasId="ngModel" required>
         
         <mat-error>
           <div *ngIf="dasId.invalid && (dasId.dirty || dasId.touched)" class="alert">
@@ -30,11 +30,8 @@
               <div *ngIf="dasId.errors?.required">
                 DAS ID is required.
               </div>
-              <div *ngIf="!isValid">
-                DAS ID must start with 'A'.
-              </div>
-              <div *ngIf="dasId.errors?.minlength">
-                DAS ID must be at least 7 characters long.
+              <div *ngIf="dasId.errors?.minlength || dasId.errors?.pattern">
+                DAS ID must start with 'A' and must be at least 7 characters long.
               </div>
           </div>
       </mat-error>
@@ -49,8 +46,9 @@
                 <div *ngIf="employeeId.errors?.required">
                   Employee ID is required.
                 </div>
-                <div *ngIf="employeeId.errors?.minlength">
-                  EMployee ID must be at least 7 characters long.
+                
+                <div *ngIf="employeeId.errors?.minlength || employeeId.errors?.pattern">
+                  Employee ID must be at least 7 digits long.
                 </div>
             </div>
         </mat-error>
@@ -59,7 +57,7 @@
 
       <mat-form-field class="field" appearance="fill">
         <mat-label>Name</mat-label>
-        <input matInput name="name" [(ngModel)]="user.name" #name="ngModel" required>
+        <input matInput name="name" [(ngModel)]="user.name" #name="ngModel" pattern="[a-zA-Z ]*" required>
           
         <mat-error>
             <div *ngIf="name.invalid && (name.dirty || name.touched)" class="alert">
@@ -67,19 +65,24 @@
                 <div *ngIf="name.errors?.required">
                   Name is required.
                 </div>
-
+                <div *ngIf="name.errors?.pattern">
+                  Please enter valid Name
+                </div>
             </div>
           </mat-error>    
       </mat-form-field>
 
       <mat-form-field class="field" appearance="fill">
         <mat-label>GCM Level</mat-label>
-        <input matInput pattern="[0-9]{1}" minlength="1" maxlength="1" name="gcmLevel" [(ngModel)]="user.gcmLevel" #gcmLevel="ngModel"  required>
+        <input matInput pattern="[1-9]{1}" minlength="1" maxlength="1" name="gcmLevel" [(ngModel)]="user.gcmLevel" #gcmLevel="ngModel"  required>
         <mat-error>
           <div *ngIf="gcmLevel.invalid && (gcmLevel.dirty || gcmLevel.touched)" class="alert">
 
               <div *ngIf="gcmLevel.errors?.required">
                 GCM Level is required.
+              </div>
+              <div *ngIf="gcmLevel.errors?.pattern">
+                Please enter valid GCM Level
               </div>
           </div>
       </mat-error>
@@ -91,8 +94,8 @@
           <mat-error>
             <div *ngIf="mobile.invalid && (mobile.dirty || mobile.touched)" class="alert">
 
-                <div *ngIf="mobile.errors?.required">
-                  Mobile no. is required.
+                <div *ngIf="mobile.errors?.required || mobile.errors?.pattern">
+                  Please enter valid Mobile no. 
                 </div>
 
             </div>
@@ -118,7 +121,7 @@
 
       <mat-form-field class="field" appearance="fill">
         <mat-label>Password</mat-label>
-        <input matInput type="password" pattern="^[a-zA-Z0-9!@#\$%\^\&*_=+-]{8,10}$" minlength="8" maxlength="10" 
+        <input matInput type="text" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#/\$%\^\&*_=+-])[a-zA-Z0-9!@#/\$%\^\&*_=+-]+$" minlength="8" maxlength="12" 
         name="password" [(ngModel)]="user.Password" #password="ngModel" required>
         <mat-error>
         <div *ngIf="password.invalid && (password.dirty || password.touched)" class="alert">
@@ -131,7 +134,7 @@
               Password must contain at least 1 Uppercase,
               At least 1 Lowercase,
               At least 1 Number,
-              At least 1 special character, Min 8 characters and Max 10 characters
+              At least 1 special character, Min 8 characters and Max 12 characters
             </div>
           
           </div>
@@ -158,21 +161,23 @@
 
       <mat-form-field class="field" appearance="fill">
         <mat-label>Reporting Manager</mat-label>
-        <input matInput name="reportingManager" [(ngModel)]="user.reportingManager" #reportingManager="ngModel" required>
+        <input matInput name="reportingManager" pattern="[a-zA-Z ]*" [(ngModel)]="user.reportingManager" #reportingManager="ngModel" required>
         <mat-error>
           <div *ngIf="reportingManager.invalid && (reportingManager.dirty || reportingManager.touched)" class="alert">
 
               <div *ngIf="reportingManager.errors?.required">
                 Reporting Manager's Name is required.
               </div>
-
+              <div *ngIf="reportingManager.errors?.pattern">
+                Please enter valid Reporting Manager's Name
+              </div>
           </div>
         </mat-error> 
       </mat-form-field>
 
       <mat-form-field class="field" appearance="fill">
         <mat-label>Project Name</mat-label>
-        <input matInput name="projectName" [(ngModel)]="user.projectName" #projectName="ngModel" required>
+        <input matInput name="projectName"  [(ngModel)]="user.projectName" #projectName="ngModel" required>
         <mat-error>
           <div *ngIf="projectName.invalid && (projectName.dirty || projectName.touched)" class="alert">
 
@@ -207,7 +212,7 @@
 
       <mat-form-field class="field" appearance="fill">
         <mat-label>Job Role</mat-label>
-        <input matInput name="jobRole" [(ngModel)]="user.jobRole" #jobRole="ngModel" required>
+        <input matInput name="jobRole"  [(ngModel)]="user.jobRole" #jobRole="ngModel" required>
         <mat-error>
           <div *ngIf="jobRole.invalid && (jobRole.dirty || jobRole.touched)" class="alert">
 

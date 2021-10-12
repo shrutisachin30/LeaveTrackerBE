@@ -11,7 +11,7 @@ import { ToastrService } from 'ngx-toastr';
   styleUrls: ['./forgotpassword.component.css']
 })
 export class ForgotpasswordComponent implements OnInit {
-  isLinear = false;
+  // isLinear = false;
   showSpinner = false;
   firstFormGroup: FormGroup;
   secondFormGroup: FormGroup;

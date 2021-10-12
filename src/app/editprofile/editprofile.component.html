@@ -52,6 +52,7 @@
 
 <form class="field">
 <mat-form-field class="fieldd" appearance="fill">
+    <mat-label>Das ID</mat-label>
 <input matInput name="dasId" [(ngModel)]="emp.empid" readonly #dasId="ngModel">
 </mat-form-field>
 </form>
@@ -69,16 +70,16 @@
 
 <mat-form-field class="field" appearance="fill">
 <mat-label>Name</mat-label>
-<input matInput placeholder="Enter your name" formControlName="name" required>
-<mat-error>Name is required</mat-error>
+<input matInput placeholder="Enter your name" formControlName="name" pattern="[a-zA-Z ]*" required>
+<mat-error>Please enter valid name</mat-error>
 </mat-form-field>
 
 
 
 <mat-form-field class="field" appearance="fill">
 <mat-label>GCM Level</mat-label>
-<input matInput formControlName="gcmLevel" minlength="1" maxlength="1" pattern="[0-9]" required>
-<mat-error>GCM Level is required</mat-error>
+<input matInput formControlName="gcmLevel" minlength="1" maxlength="1" pattern="[1-9]" required>
+<mat-error>Enter a valid GCM Level</mat-error>
 </mat-form-field>
 
 
@@ -102,8 +103,8 @@
 
 <mat-form-field class="field" appearance="fill">
 <mat-label>Reporting Manager</mat-label>
-<input matInput formControlName="reportingManager" required>
-<mat-error>Reporting Manager is required</mat-error>
+<input matInput formControlName="reportingManager"  pattern="[a-zA-Z ]*"required>
+<mat-error>Please enter valid Reporting Manager name</mat-error>
 </mat-form-field>
 
 

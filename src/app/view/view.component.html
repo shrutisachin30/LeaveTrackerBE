@@ -30,7 +30,7 @@
   <!-- Position Column -->
   <ng-container matColumnDef="id">
     <th mat-header-cell style="font-size: medium;padding-right: 70px;" *matHeaderCellDef> <b>Sr No.</b> </th>
-    <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+    <td style="padding-left: 40px;" mat-cell *matCellDef="let element"> {{element.id}} </td>
   </ng-container>
 
   <!-- Name Column -->
@@ -83,7 +83,7 @@
     <td mat-cell style="float:right; margin-right:50px" *matCellDef="let element">
 
 
-      <button style="margin-top: 5px; margin-left: 30px;
+      <button style="margin-top: 5px; margin-left: 40px;
         margin-bottom: 5px;" (click)="cancelLeave(element.id,element.startDate,element.endDate,element.updatedBy,element.updatedOn)" [disabled]="element.disable"
         mat-raised-button color="primary">Cancel
       </button>

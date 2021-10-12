@@ -36,9 +36,31 @@ export class ChangePasswordComponent implements OnInit {
     console.log("old password:",this.user.oldPassword);
     console.log("new password:",this.user.newPassword);
     console.log("Confirm password:",this.user.cpassword);
-
-    if(this.user.newPassword !== this.user.cpassword) {
+    
+    this.showSpinner = true
+  
+    if(this.user.oldPassword === undefined || this.user.oldPassword== ''){
+      this.toastr.warning('Please enter Old Password');
+      this.showSpinner = false
+      return; 
+    }
+    else if(this.user.newPassword === undefined || this.user.newPassword== ''){
+      this.toastr.warning('Please enter New Password');
+      this.showSpinner = false
+      return; 
+    }
+    else if(this.user.cpassword === undefined || this.user.cpassword== ''){
+      this.toastr.warning('Please enter New Confirm Password and must match with new password');
+      this.showSpinner = false
+      return; 
+    }
+    else if(this.user.newPassword !== this.user.cpassword) {
       this.toastr.error('Confirm Password must match Password');
+      this.showSpinner = false
+      return;
+    }
+    else if(this.user.oldPassword == this.user.newPassword) {
+      this.toastr.error('New Password is matching with new Password. Please enter different new password');
       this.showSpinner = false
       return;
     }
@@ -55,7 +77,7 @@ export class ChangePasswordComponent implements OnInit {
           this.router.navigate(['list']);
         }
         else if (data.statusCode == "500") {
-          this.toastr.warning('Incorrect Old Password!!');
+          this.toastr.error('Incorrect Old Password!!');
         }
       });
   }

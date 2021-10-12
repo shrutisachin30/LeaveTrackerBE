@@ -51,7 +51,7 @@
 }
 
 .color{
-    color:tomato;
+    color:primary;
     padding: 16%;
 }
 
@@ -103,6 +103,6 @@
 }
 
 .colorfp{
-    color:tomato;
+    color: primary;
     padding: 14%;
 }

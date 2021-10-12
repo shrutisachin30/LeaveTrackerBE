@@ -22,7 +22,18 @@
       <mat-form-field class="field" appearance="fill">
         <mat-label>DAS ID</mat-label>
         <mat-icon matSuffix>account_circle</mat-icon>
-        <input type="text" name="dasId" minlength="7" maxlength="7" [(ngModel)]="user.dasId" matInput>
+        <input type="text" name="dasId" minlength="7" maxlength="7" pattern="[A][0-9]{6}" [(ngModel)]="user.dasId" #dasId="ngModel" matInput>
+        <mat-error>
+          <div *ngIf="dasId.invalid && (dasId.dirty || dasId.touched)" class="alert">
+
+              <div *ngIf="dasId.errors?.required">
+                DAS ID is required.
+              </div>
+              <div *ngIf="dasId.errors?.minlength || dasId.errors?.pattern">
+                DAS ID must start with 'A' and must be at least 7 characters long.
+              </div>
+          </div>
+      </mat-error>
       </mat-form-field>
 
       <mat-form-field class="field" appearance="fill">
