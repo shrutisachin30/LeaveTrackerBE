@@ -1,7 +1,17 @@
 <html lang="en" class="main">
 <div>
+
+
+
 <body class="jumbotron">
+
+
+
+
 <mat-toolbar color="primary" class="size">
+
+
+
 <img class="imagenav" src="./assets/logo.png">
 <span class="spacer">Leave Tracker</span>
 <button class="home" mat-menu-item routerLink="/list">
@@ -15,16 +25,21 @@
 <mat-icon>AL</mat-icon>
 <span>Apply Leave</span>
 </button>
+
+
 <button mat-menu-item routerLink="">
 <mat-icon>logout</mat-icon>
 <span>Logout</span>
 </button>
 </mat-menu>
 </mat-toolbar>
+
+
+
 <router-outlet></router-outlet>
 </body>
 
-<br><br><br>
+
 
 <form [formGroup]="editCustomer" autocomplete="off">
 <mat-card class="card">
@@ -32,139 +47,113 @@
 <img class="image" src="./assets/edit.png">
 </mat-card-header>
 
+
+
+
 <form class="field">
 <mat-form-field class="fieldd" appearance="fill">
-<mat-label>Das ID</mat-label>
 <input matInput name="dasId" [(ngModel)]="emp.empid" readonly #dasId="ngModel">
 </mat-form-field>
 </form>
+
+
+
 
 <mat-form-field class="field" appearance="fill">
 <mat-label>Employee ID</mat-label>
 <input matInput formControlName="employeeId" readonly>
 </mat-form-field>
 
+
+
+
 <mat-form-field class="field" appearance="fill">
 <mat-label>Name</mat-label>
 <input matInput placeholder="Enter your name" formControlName="name" required>
-
-<!-- <mat-error>
-<div *ngIf="name.invalid && (name.dirty || name.touched)" class="alert">
-
-<div *ngIf="name.errors?.required">
-Name is required.
-</div>
-
-</div>
-</mat-error> -->
+<mat-error>Name is required</mat-error>
 </mat-form-field>
+
+
 
 <mat-form-field class="field" appearance="fill">
 <mat-label>GCM Level</mat-label>
-<input matInput formControlName="gcmLevel" required>
-<!-- <mat-error>
-<div *ngIf="gcmLevel.invalid && (gcmLevel.dirty || gcmLevel.touched)" class="alert">
-
-<div *ngIf="gcmLevel.errors?.required">
-GCM Level is required.
-</div>
-</div>
-</mat-error> -->
+<input matInput formControlName="gcmLevel" minlength="1" maxlength="1" pattern="[0-9]" required>
+<mat-error>GCM Level is required</mat-error>
 </mat-form-field>
+
+
 
 <mat-form-field class="field" appearance="fill">
 <mat-label>Contact No</mat-label>
-<input matInput formControlName="mobile" required>
-<!-- <mat-error>
-<div *ngIf="mobile.invalid && (mobile.dirty || mobile.touched)" class="alert">
-
-<div *ngIf="mobile.errors?.required">
-Mobile no. is required.
-</div>
-
-</div>
-</mat-error> -->
+<input matInput formControlName="mobile" maxlength="10" required>
+<mat-error>Enter a valid Mobile Number</mat-error>
 </mat-form-field>
+
+
 
 <mat-form-field class="field" appearance="fill">
 <mat-label>Email ID</mat-label>
-<input matInput formControlName="email" required>
-<!-- <mat-error>
-<div *ngIf="email.invalid && (email.dirty || email.touched)" class="alert">
-
-<div *ngIf="email.errors?.required">
-Email is required.
-</div>
-
-<div *ngIf="email.errors?.pattern">
-Please enter valid email Id
-</div>
-</div>
-</mat-error> -->
+<input matInput formControlName="email" pattern="^[a-z0-9._%+-]+@atos.net" required>
+<mat-error>Enter a valid E-mail ID</mat-error>
 </mat-form-field>
+
+
+
 
 <mat-form-field class="field" appearance="fill">
 <mat-label>Reporting Manager</mat-label>
 <input matInput formControlName="reportingManager" required>
-<!-- <mat-error>
-<div *ngIf="reportingManager.invalid && (reportingManager.dirty || reportingManager.touched)" class="alert">
-
-<div *ngIf="reportingManager.errors?.required">
-Reporting Manager's Name is required.
-</div>
-
-</div>
-</mat-error> -->
+<mat-error>Reporting Manager is required</mat-error>
 </mat-form-field>
+
+
 
 <mat-form-field class="field" appearance="fill">
 <mat-label>Project Name</mat-label>
 <input matInput formControlName="projectName" required>
-<!-- <mat-error>
-<div *ngIf="projectName.invalid && (projectName.dirty || projectName.touched)" class="alert">
-
-<div *ngIf="projectName.errors?.required">
-Project Name is required.
-</div>
-
-</div>
-</mat-error> -->
+<mat-error>Project Name is required</mat-error>
 </mat-form-field>
+
+
+
 
 <mat-form-field class="field" appearance="fill">
 <mat-label>Domain Type</mat-label>
-<mat-select formControlName="typeOfDomain">
+<mat-select formControlName="domain">
 <mat-option *ngFor="let domain of typeOfDomain " [value]="domain.value">
 {{domain.viewValue}}
 </mat-option>
 </mat-select>
 </mat-form-field>
 
+
+
 <mat-form-field class="field" appearance="fill">
 <mat-label>Job Role</mat-label>
 <input matInput formControlName="jobRole" required >
-<!-- <mat-error>
-<div *ngIf="jobRole.invalid && (jobRole.dirty || jobRole.touched)" class="alert">
-
-<div *ngIf="jobRole.errors?.required">
-Job Role is required.
-</div>
-
-</div>
-</mat-error> -->
+<mat-error>Job Role is required</mat-error>
 </mat-form-field>
 
+
+
 <mat-card-actions>
-<button class="button" style="margin-left: 46.5%;" color="primary" (click)="edit()"
+<button class="button" type ="submit" style="margin-left: 46.5%;" color="primary" (click)="edit()" [disabled]="!editCustomer.valid"
 mat-raised-button>Update</button>
 </mat-card-actions>
 
+
+
 <br><br>
+
+
 
 </mat-card>
 </form>
 
+
+
 <mat-spinner [diameter]="100" class="loader" *ngIf="showSpinner" color="accent"></mat-spinner>
 
+
+
 </div>
-</html>

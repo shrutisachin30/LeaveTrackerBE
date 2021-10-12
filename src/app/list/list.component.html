@@ -1,3 +1,5 @@
+<html lang="en" class="main">
+<div>
 <body class="jumbotron">
 
   <mat-toolbar color="primary" class="size">
@@ -34,7 +36,7 @@
   <router-outlet></router-outlet>
 </body><br><br>
 <div>
-  <span style="margin-left:43% ;   font-size : 25px ; font-weight: 200 ">Employee Details</span><br>
+  <span class="details">Employee Details</span><br>
 
   <mat-form-field class="field">
     <input (keyup)="applyFilter($any($event.target).value)" matInput placeholder="Search by Name and Das Id">
@@ -124,3 +126,5 @@
 </mat-paginator> 
  
 </div>
+</div>
+</html>

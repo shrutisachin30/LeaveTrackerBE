@@ -18,7 +18,9 @@
         top: 30px;
     }
 
-
+    .fieldd{
+        width: 100%;
+    }
 
 
     .text{
@@ -62,9 +64,7 @@
         font-size: 15px;
     }
 
-    .fieldd{
-        width: 100%;
-    }
+
     .button{
         text-align: center;
         background-color: #3f51b5;

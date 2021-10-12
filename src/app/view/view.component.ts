@@ -22,8 +22,11 @@ export class ViewComponent implements OnInit {
   viewDasId: any = localStorage.getItem('viewId');
 isCancel:any = true;
 empid = localStorage.getItem('dasId');
+     CL=0;
+     SL=0;
+     VL=0;
 
-  displayedColumns: string[] = ['id', 'startdate', 'enddate','typeOfLeave', 'status', 'updatedBy','updatedOn','view'];
+  displayedColumns: string[] = ['id', 'startdate', 'enddate','typeOfLeave', 'status', 'noOfDays','updatedBy','updatedOn','view'];
   canceldata = {
     startdate: "",
     enddate: "",
@@ -39,7 +42,8 @@ empid = localStorage.getItem('dasId');
     startDate: "",
     endDate: "",
     status: "",
-    // count:"",
+    typeOfLeave:"",
+    noOfDays:"",
     updatedBy : "",
     updatedOn : "",
     disable: false,
@@ -49,6 +53,8 @@ empid = localStorage.getItem('dasId');
   @ViewChild(MatPaginator)
 paginator: MatPaginator;
 data: MatTableDataSource<any>;
+
+    
 
   constructor(private dialogservice: DialogService, private http: HttpClient, private router: Router) {
     this.id = 1;
@@ -117,11 +123,20 @@ data: MatTableDataSource<any>;
 
     //window.location.reload();
   }
-
+  calculateDiff(startDate, endDate){
+   startDate = new Date(startDate);
+    endDate = new Date(endDate);
+    var diff = Math.floor((Date.UTC(endDate.getFullYear(), endDate.getMonth(), endDate.getDate()) - Date.UTC(startDate.getFullYear(), startDate.getMonth(), startDate.getDate()) ) /(1000 * 60 * 60 * 24))+1;
+    console.log(diff);
+    return diff;
+  }
 
   fun() {
+    
     console.log('fun');
     for (let l of this.dataSource) {
+      l.noOfDays = this.calculateDiff(l.startDate,l.endDate).toString();
+      var typeOfLeave = l.typeOfLeave.toString();
       var status = l.status.toString();
       console.log('id:', l.id);
       console.log('status:', status);
@@ -130,6 +145,21 @@ data: MatTableDataSource<any>;
       console.log('current date:', new Date());
       //console.log('count:',this.count());
       l.id = this.id++;
+      if(status.includes('Applied') && typeOfLeave.includes('Sick Leave')){
+        //this.SL=this.SL+1;
+        this.SL += this.calculateDiff(l.startDate,l.endDate);
+        console.log("Sick Leave :- ", this.SL)
+      }
+
+      if(status.includes('Applied') && typeOfLeave.includes('Casual Leave')){
+        this.CL +=  this.calculateDiff(l.startDate,l.endDate);
+        console.log("Casual Leave :- ", this.CL)
+      }
+
+      if(status.includes('Applied') && typeOfLeave.includes('Vacational Leave')){
+        this.VL += this.calculateDiff(l.startDate,l.endDate);
+        console.log("Vacational Leave :- ", this.VL)
+      }
       if (status.includes('cancelled') || new Date(l.startDate) < new Date()) {
         l.disable = true;
         console.log('disable:', l.disable);
@@ -139,6 +169,8 @@ data: MatTableDataSource<any>;
       }
     }
     this.data = new MatTableDataSource<any>(this.dataSource);
+    
+    
   }
   // count():any{
   //   //console.log('count');

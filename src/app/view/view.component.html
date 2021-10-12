@@ -24,7 +24,8 @@
   </mat-toolbar>
 </body><br><br>
 
-<span style="margin-left:46% ;   font-size : 20px ; font-weight: 200 ">Leave Details</span><br><br>
+<span class="details">Leave Details</span><br><br>
+<span class="num" *ngIf="dataSource.length > 0">Number of leaves :- {{this.dataSource.length}}</span>
 <table mat-table [dataSource]="data" class="mat-elevation-z8 demo-table">
   <!-- Position Column -->
   <ng-container matColumnDef="id">
@@ -62,7 +63,11 @@
     <th mat-header-cell style="font-size: medium; padding-right: 70px;" *matHeaderCellDef> <b> Count</b> </th>
     <td mat-cell *matCellDef="let element"> {{element.count}} </td>
   </ng-container> -->
+  <ng-container matColumnDef="noOfDays">
+    <th mat-header-cell style="font-size: medium;padding-right: 70px;" *matHeaderCellDef> <b>No Of Days</b> </th>
+    <td style="padding-left: 30px;" mat-cell *matCellDef="let element"> {{element.noOfDays}} </td>
 
+  </ng-container>
   <ng-container matColumnDef="updatedBy">
     <th mat-header-cell style="font-size: medium; padding-right: 70px;" *matHeaderCellDef> <b> Updated By </b> </th>
     <td mat-cell *matCellDef="let element"> {{element.updatedBy}} </td>
@@ -97,7 +102,10 @@
 showFirstLastButtons
 aria-label="Select page">
 </mat-paginator>
-<span class="leave" *ngIf="dataSource.length == 0">Leaves Not Applied</span><br>
-<span class="num" *ngIf="dataSource.length > 0">Number of leaves :- {{this.dataSource.length}}</span><br>
+<span class="leave" *ngIf="dataSource.length == 0">Leaves Not Applied</span><br><br>
 
+<button class="button" style="margin-left: 45%;" color="primary" routerLink="/applyleave" mat-raised-button>Apply Leave</button><br>
+<span class="num" *ngIf="dataSource.length>0" >Number of Days for Sick Leaves :- {{this.SL}}</span><br>
+<span class="num" *ngIf="dataSource.length>0">Number of Days for Casual Leaves :- {{this.CL}}</span><br>
+<span class="num" *ngIf="dataSource.length>0">Number of Days for Vacational Leaves :- {{this.VL}}</span><br>
 </div></html>

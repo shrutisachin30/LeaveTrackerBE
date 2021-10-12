@@ -64,7 +64,7 @@ table{
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat; 
-  margin: -8px;
+  margin: -18px;
   overflow-x: hidden;
 }
 
@@ -77,4 +77,14 @@ table{
 
 .contact{
   font-size: 20px;
+}
+.main{
+  height: 500px;
+  width: 1396px;
+}
+.details{
+  margin-left:42% ;   
+  font-size : 30px ; 
+  font-weight: 200;
+  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
 }

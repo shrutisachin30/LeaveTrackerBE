@@ -101,7 +101,7 @@
 
       <mat-form-field class="field" appearance="fill">
         <mat-label>Email ID</mat-label>
-        <input matInput name="email" pattern="[^@\s]+@[^@\s]+\.[^@\s]+" type="email" [(ngModel)]="user.emailId" #email="ngModel" required>
+        <input matInput name="email" pattern="^[a-z0-9._%+-]+@atos.net" type="email" [(ngModel)]="user.emailId" #email="ngModel" required>
           <mat-error>
             <div *ngIf="email.invalid && (email.dirty || email.touched)" class="alert">
 
