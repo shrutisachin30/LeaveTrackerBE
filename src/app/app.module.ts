@@ -41,6 +41,8 @@ import { MatSortModule } from '@angular/material/sort';
 import { DemoMaterialModule } from './material-module';
 import { ChangePasswordComponent } from './change-password/change-password.component';
 import { EditprofileComponent } from './editprofile/editprofile.component';
+import { ExportComponent } from './export/export.component';
+import { MatTableExporterModule } from 'mat-table-exporter';
    
   
 @NgModule({
@@ -54,7 +56,8 @@ import { EditprofileComponent } from './editprofile/editprofile.component';
     DialogComponent,
     ForgotpasswordComponent,
     ChangePasswordComponent,
-    EditprofileComponent
+    EditprofileComponent,
+    ExportComponent
    
   ],
   imports: [
@@ -67,6 +70,8 @@ import { EditprofileComponent } from './editprofile/editprofile.component';
     AppRoutingModule,
     BrowserAnimationsModule,
     FormsModule,
+    MatTableExporterModule,
+    MatTableExporterModule,
     DemoMaterialModule,
     MatStepperModule,
     ReactiveFormsModule,

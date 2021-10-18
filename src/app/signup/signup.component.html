@@ -88,7 +88,7 @@
       </mat-error>
       </mat-form-field>
 
-      <mat-form-field class="field" appearance="fill">
+      <!-- <mat-form-field class="field" appearance="fill">
         <mat-label>Contact No</mat-label>
         <input matInput pattern="[0-9]{10}" minlength="10" maxlength="10" name="mobile" [(ngModel)]="user.mobile" #mobile="ngModel" required>
           <mat-error>
@@ -98,6 +98,23 @@
                   Please enter valid Mobile no. 
                 </div>
 
+            </div>
+        </mat-error>
+      </mat-form-field> -->
+      <mat-form-field class="field" appearance="fill">
+        <mat-label>Contact No</mat-label>
+        <input matInput pattern="^[+](?:(?:\+|0{0,2})[91]*[33]*(\s*[\-]\s*)?|[0]?)?[0-9]\d{9}$" minlength="13" maxlength="13"  name="mobile" [(ngModel)]="user.mobile" #mobile="ngModel" required>
+          <mat-error>
+            <div *ngIf="mobile.invalid && (mobile.dirty || mobile.touched)" class="alert">
+                <div *ngIf="mobile.errors?.required ">
+                  Mobile no. is required.
+                </div>
+                <div *ngIf="mobile.errors?.pattern ">
+                  Indian country code is +91 and France country code is +33
+                </div>
+                <div *ngIf="mobile.errors?.minlength">
+                  Please enter valid Mobile no. including country code.
+                </div>       
             </div>
         </mat-error>
       </mat-form-field>
@@ -121,7 +138,7 @@
 
       <mat-form-field class="field" appearance="fill">
         <mat-label>Password</mat-label>
-        <input matInput type="text" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#/\$%\^\&*_=+-])[a-zA-Z0-9!@#/\$%\^\&*_=+-]+$" minlength="8" maxlength="12" 
+        <input matInput type="password" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#/\$%\^\&*_=+-])[a-zA-Z0-9!@#/\$%\^\&*_=+-]+$" minlength="8" maxlength="12" 
         name="password" [(ngModel)]="user.Password" #password="ngModel" required>
         <mat-error>
         <div *ngIf="password.invalid && (password.dirty || password.touched)" class="alert">
@@ -212,14 +229,16 @@
 
       <mat-form-field class="field" appearance="fill">
         <mat-label>Job Role</mat-label>
-        <input matInput name="jobRole"  [(ngModel)]="user.jobRole" #jobRole="ngModel" required>
+        <input matInput name="jobRole"  pattern="[a-zA-Z ]*" [(ngModel)]="user.jobRole" #jobRole="ngModel" required>
         <mat-error>
           <div *ngIf="jobRole.invalid && (jobRole.dirty || jobRole.touched)" class="alert">
 
               <div *ngIf="jobRole.errors?.required">
                 Job Role is required.
               </div>
-
+              <div *ngIf="jobRole.errors?.pattern">
+                Please enter valid Job Role
+              </div>
           </div>
         </mat-error>
       </mat-form-field>

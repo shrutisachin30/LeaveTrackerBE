@@ -145,6 +145,7 @@ data: MatTableDataSource<any>;
       console.log('current date:', new Date());
       //console.log('count:',this.count());
       l.id = this.id++;
+      
       if(status.includes('Applied') && typeOfLeave.includes('Sick Leave')){
         //this.SL=this.SL+1;
         this.SL += this.calculateDiff(l.startDate,l.endDate);

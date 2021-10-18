@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { ApplyleaveComponent } from './applyleave/applyleave.component';
 import { ChangePasswordComponent } from './change-password/change-password.component';
 import { EditprofileComponent } from './editprofile/editprofile.component';
+import { ExportComponent } from './export/export.component';
 import { ForgotpasswordComponent } from './forgotpassword/forgotpassword.component';
 import { ListComponent } from './list/list.component';
 import { SigninComponent } from './signin/signin.component';
@@ -21,6 +22,7 @@ const routes: Routes = [
   {path:'view', component: ViewComponent},
   {path:'forgotpassword', component: ForgotpasswordComponent},
   {path:'editprofile', component: EditprofileComponent},
+  {path:'export', component: ExportComponent},
 ];
 
 @NgModule({

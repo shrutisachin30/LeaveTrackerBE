@@ -1,0 +1,57 @@
+.ng-hide:not(.ng-hide-animate) {
+    /* These are just alternative ways of hiding an element */
+    display: block!important;
+    position: absolute;
+    top: -9999px;
+    left: -9999px;
+  }
+
+  .jumbotron{
+    height: 100%;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    margin: -18px;
+    overflow-x: hidden;
+  }
+
+  .size{
+    margin-top: 0;
+    height: 110px;
+  }
+
+  .imagenav{
+    margin-left: 10px;
+    height:50%;
+    width: 100px;
+  }  
+
+  .spacer {
+    flex: 1 1 auto;
+    height: 30%;
+    font-size: 55px;
+    margin-left: 31%;
+  }
+
+  .contact{
+    font-size: 20px;
+  }
+
+  .card{
+    font-size: medium;
+    margin: 11% 30% 30%;
+    height: 470px;
+    background-color:aliceblue;
+}
+
+.field{
+  display:inline-block;
+  width: 80%;
+  margin-top: 15px;
+  font-size: 15px;
+  margin-left: 10%;
+}
+.main{
+    height: 500px;
+    width: 1396px;
+  }

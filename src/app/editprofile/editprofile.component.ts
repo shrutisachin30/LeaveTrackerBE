@@ -134,7 +134,8 @@ export class EditprofileComponent implements OnInit {
           console.log(data);
           if (data == "Employee Updated Successfuly") {
             this.toastr.success("Employee Details Updated Successfully");
-            this.showSpinner = false
+            this.showSpinner = false;
+            this.router.navigate(['list']);
           } else {
             this.toastr.error("Employee Details Updation Failed");
             this.showSpinner = false
