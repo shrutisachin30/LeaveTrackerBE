@@ -24,6 +24,7 @@ export class List {
 
 }
 
+  
 @Component({
   selector: 'app-list',
   templateUrl: './list.component.html',
@@ -53,6 +54,7 @@ export class ListComponent implements OnInit {
     this.emp = {};
     this.emp.empid = localStorage.getItem('dasid');
     this.isAdmin = localStorage.getItem('Admin');
+    this.namev = localStorage.getItem('name');
   }
   getList() {
     this._http.get<any>('http://localhost:8080/psa/getEmployeeDetails').subscribe(
@@ -60,7 +62,7 @@ export class ListComponent implements OnInit {
         this.list = response;
        
         
-
+        
         this.data = new MatTableDataSource<any>(this.list);
         this.data.paginator = this.paginator;
         this.data.sort=this.sort;

@@ -46,19 +46,16 @@ export class DeactivateComponent implements OnInit {
       "df":"Yes"
     }).subscribe(
       data => {
+        console.log(data);
         if (data.statusCode == "201" || data.statusCode == "200") {
           this.toastr.success('Employee Deactivated');
           this.router.navigate(['list']);
         }
-        else if(data.isActive.includes('No')) {
+        else if(data.statusMsg === "Operation already performed") {
+          
           this.toastr.warning('Employee is already Deactivated');
-        }
-        else if (data.statusCode == "500") {
-          this.toastr.warning('DasId is not registered');
-        }
-        
-        
-        
+        }else
+        this.toastr.warning('Employee is not registered');
       });
 
   }
@@ -84,12 +81,12 @@ export class DeactivateComponent implements OnInit {
           this.toastr.success('Employee Activated');
           this.router.navigate(['list']);
         }
-        else if(data.statusCode == "500" || data.isActive == "Yes") {
+        else if(data.statusMsg == "Operation already performed") {
           this.toastr.warning('Employee is already Activated');
         }
-        else if (data.statusCode == "500") {
+        else
           this.toastr.warning('DasId is not registered');
-        }
+        
         
         
         
