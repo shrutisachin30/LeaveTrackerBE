@@ -1,0 +1,107 @@
+@import '~@angular/material/prebuilt-themes/indigo-pink.css';
+
+.mycenter
+{
+    align-content: center;
+    justify-content: center;
+    display: grid;
+    width: 100%;
+}
+
+.example-full-width
+{
+    width: 400px;
+   
+}
+
+.toastr-top-right {
+    top: 30px;
+}
+
+.size{
+    margin-top: 0;
+    height: 110px;
+  }
+  
+  .spacer {
+    flex: 1 1 auto;
+    
+    height: 30%;
+    font-size: 55px;
+    margin-left: 31%;
+    
+  }
+  
+  .jumbotron{
+    
+    
+    height: 100%;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat; 
+    margin: -18px;
+    overflow-x: hidden;
+  }
+  .image{
+
+    margin-left: 10px;
+    height:40%;
+    width: 40%;
+}
+  .imagenav{
+  
+    margin-left: 10px;
+    height:50%;
+    width: 100px;
+  }
+  
+  .contact{
+    font-size: 20px;
+  }
+
+  .field{
+    
+
+    display:inline-block;
+    width: 80%;
+    margin-top: 10%;
+    font-size: 15px;
+    margin-left: 10%;
+}
+
+.card{
+    font-size: medium;
+    margin: 11% 30% 30%;
+    height: 350px;
+    background-color:aliceblue;
+}
+
+.buttond{
+    text-align: center;
+    background-color: #272727;
+    font-weight: bold;
+    margin-left: 20%;
+    margin-top: 20px;
+    height: 40px;
+    font-size: 18px;
+}
+.buttona{
+  text-align: center;
+  color: white;
+  background-color: darkgreen;
+  font-weight: bold;
+  margin-left: 16%;
+  margin-top: 20px;
+  height: 40px;
+  font-size: 18px;
+}
+.main{
+  height: 500px;
+  width: 1396px;
+}
+.right{
+  margin-left: 1%;
+}
+.home{
+  margin-left: 30%;
+}

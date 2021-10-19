@@ -1,0 +1,71 @@
+<html lang="en" class="main">
+<div>
+  <body class="jumbotron">
+  <mat-toolbar color="primary" class="size">
+    <img class="imagenav" src="./assets/logo.png">
+    <span class="spacer">Leave Tracker</span>
+    <button class="home" mat-menu-item routerLink="/list">
+      <mat-icon style="color: white;">home</mat-icon>
+    </button>
+    <button class="right" mat-icon-button [matMenuTriggerFor]="menu">
+      <mat-icon>more_vert</mat-icon>
+    </button>
+    <mat-menu class="contact" #menu="matMenu">
+      <button mat-menu-item routerLink="/applyleave">
+        <mat-icon>AL</mat-icon>
+        <span>Apply Leave</span>
+      </button>
+      <button mat-menu-item routerLink="/changePassword">
+        <mat-icon>lock</mat-icon>
+        <span>Change Password</span>
+      </button>
+      <button mat-menu-item routerLink="/export">
+        <mat-icon>download</mat-icon>
+        <span>Export Leave Details</span>
+      </button>
+      <button mat-menu-item routerLink="/editprofile">
+        <mat-icon>account_circle</mat-icon>
+        <span>Edit Profile</span>
+      </button>
+      <button mat-menu-item routerLink="">
+        <mat-icon>logout</mat-icon>
+        <span>Logout</span>
+      </button>      
+    </mat-menu>
+    
+  </mat-toolbar>
+</body>
+<form autocomplete="off">
+    
+  <mat-card class="card" >
+
+      <img class="image" style="width: 150px; margin-left: 35%;" src="./assets/deactivate1.png">
+      
+      <mat-form-field class="field" appearance="fill">
+        <mat-label>Das ID</mat-label>
+        <input matInput minlength="7" maxlength="7" name="dasId" pattern="[A][0-9]{6}" [(ngModel)]="user.dasId" #dasId="ngModel" required>
+        
+        <mat-error>
+          <div *ngIf="dasId.invalid && (dasId.dirty || dasId.touched)" class="alert">
+
+              <div *ngIf="dasId.errors?.required">
+                DAS ID is required.
+              </div>
+              <div *ngIf="dasId.errors?.minlength || dasId.errors?.pattern">
+                DAS ID must start with 'A' and must be at least 7 characters long.
+              </div>
+          </div>
+      </mat-error>
+      </mat-form-field>
+     <br>
+      <button class="buttond" type="deactivate" (click)="deactivate()" mat-raised-button color="warn">
+          Deactivate
+      </button>
+      <button class="buttona" type="activate" (click)="activate()" mat-raised-button color="green">
+        Activate
+    </button>
+  </mat-card>
+
+</form>
+</div>
+</html>

@@ -15,6 +15,14 @@
         <mat-icon>lock</mat-icon>
         <span>Change Password</span>
       </button>
+      <button *ngIf="isAdmin" mat-menu-item routerLink="/deactivate">
+        <mat-icon>autorenew</mat-icon>
+        <span>Deactivate</span>
+      </button>
+      <button *ngIf="isAdmin" mat-menu-item routerLink="/export">
+        <mat-icon>download</mat-icon>
+        <span>Export Leave Details</span>
+      </button>
       <button mat-menu-item routerLink="/editprofile">
         <mat-icon>account_circle</mat-icon>
         <span>Edit Profile</span>

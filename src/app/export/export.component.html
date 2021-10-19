@@ -4,17 +4,24 @@
     <mat-toolbar color="primary" class="size">
       <img class="imagenav" src="./assets/logo.png">
       <span class="spacer">Leave Tracker</span>
-      <button mat-icon-button [matMenuTriggerFor]="menu">
+      <button class="home" mat-menu-item routerLink="/list">
+        <mat-icon style="color: white;">home</mat-icon>
+      </button>
+      <button class="right" mat-icon-button [matMenuTriggerFor]="menu">
         <mat-icon>more_vert</mat-icon>
       </button>
       <mat-menu class="contact" #menu="matMenu">
+        <button mat-menu-item routerLink="/applyleave">
+          <mat-icon>AL</mat-icon>
+          <span>Apply Leave</span>
+        </button>
         <button mat-menu-item routerLink="/changePassword">
           <mat-icon>lock</mat-icon>
           <span>Change Password</span>
         </button>
-        <button mat-menu-item routerLink="/applyleave">
-          <mat-icon>AL</mat-icon>
-          <span>Apply Leave</span>
+        <button mat-menu-item routerLink="/deactivate">
+          <mat-icon>autorenew</mat-icon>
+          <span>Deactivate</span>
         </button>
         <button mat-menu-item routerLink="/editprofile">
           <mat-icon>account_circle</mat-icon>
@@ -23,8 +30,9 @@
         <button mat-menu-item routerLink="">
           <mat-icon>logout</mat-icon>
           <span>Logout</span>
-        </button>
+        </button>      
       </mat-menu>
+      
     </mat-toolbar>
     <router-outlet></router-outlet>
   </body><br><br>

@@ -43,6 +43,7 @@ import { ChangePasswordComponent } from './change-password/change-password.compo
 import { EditprofileComponent } from './editprofile/editprofile.component';
 import { ExportComponent } from './export/export.component';
 import { MatTableExporterModule } from 'mat-table-exporter';
+import { DeactivateComponent } from './deactivate/deactivate.component';
    
   
 @NgModule({
@@ -57,7 +58,8 @@ import { MatTableExporterModule } from 'mat-table-exporter';
     ForgotpasswordComponent,
     ChangePasswordComponent,
     EditprofileComponent,
-    ExportComponent
+    ExportComponent,
+    DeactivateComponent
    
   ],
   imports: [

@@ -52,6 +52,7 @@ export class ListComponent implements OnInit {
     }
     this.emp = {};
     this.emp.empid = localStorage.getItem('dasid');
+    this.isAdmin = localStorage.getItem('Admin');
   }
   getList() {
     this._http.get<any>('http://localhost:8080/psa/getEmployeeDetails').subscribe(
@@ -69,6 +70,7 @@ export class ListComponent implements OnInit {
       }
     );
   }
+  
   
   applyFilter(filterValue: string) {
     filterValue = filterValue.trim(); // Remove whitespace

@@ -31,7 +31,7 @@ empid = localStorage.getItem('dasId');
     startdate: "",
     enddate: "",
     dasid: "",
-    updatedBy : "",
+    updatedBy : localStorage.getItem('dasId'),
     updatedOn : new Date(),
   }
   //date = new Date();
@@ -53,6 +53,7 @@ empid = localStorage.getItem('dasId');
   @ViewChild(MatPaginator)
 paginator: MatPaginator;
 data: MatTableDataSource<any>;
+  isAdmin: any;
 
     
 
@@ -66,7 +67,7 @@ data: MatTableDataSource<any>;
       this.length = this.dataSource.length;
       this.data.paginator = this.paginator;
     });
-
+    this.isAdmin = localStorage.getItem('Admin');
   }
 
   id: any;
@@ -109,7 +110,7 @@ data: MatTableDataSource<any>;
         this.canceldata.dasid = (this.dasid);
         this.canceldata.startdate = startdate;
         this.canceldata.enddate = enddate;
-        this.canceldata.updatedBy = updatedBy;
+        //this.canceldata.updatedBy = updatedBy;
         //this.canceldata.updatedOn = uOnFormattedDate;
         console.log(uOnFormattedDate);
         console.log(this.canceldata);
@@ -146,18 +147,18 @@ data: MatTableDataSource<any>;
       //console.log('count:',this.count());
       l.id = this.id++;
       
-      if(status.includes('Applied') && typeOfLeave.includes('Sick Leave')){
+      if((status.includes('Applied') || status.includes('Availed')) && typeOfLeave.includes('Sick Leave')){
         //this.SL=this.SL+1;
         this.SL += this.calculateDiff(l.startDate,l.endDate);
         console.log("Sick Leave :- ", this.SL)
       }
 
-      if(status.includes('Applied') && typeOfLeave.includes('Casual Leave')){
+      if((status.includes('Applied') || status.includes('Availed')) && typeOfLeave.includes('Casual Leave')){
         this.CL +=  this.calculateDiff(l.startDate,l.endDate);
         console.log("Casual Leave :- ", this.CL)
       }
 
-      if(status.includes('Applied') && typeOfLeave.includes('Vacational Leave')){
+      if((status.includes('Applied') || status.includes('Availed')) && typeOfLeave.includes('Vacational Leave')){
         this.VL += this.calculateDiff(l.startDate,l.endDate);
         console.log("Vacational Leave :- ", this.VL)
       }

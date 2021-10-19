@@ -65,9 +65,22 @@ login() {
         localStorage.setItem('dasId', this.user.dasId);
 
           if (data.statusCode == "201") {
-            this.toastr.success('Login successful');
-            
-            this.router.navigate(['list']);
+            if(data.isActive == "Yes"){
+
+        
+            if(data.isAdmin == "Yes"){
+              this.toastr.success('Logged in as Admin');
+              localStorage.setItem('Admin', "Yes");
+              this.router.navigate(['list']);
+            }
+            else if(data.isAdmin == "No") {
+              this.toastr.success('Login successful');
+              this.router.navigate(['list']);
+            }
+            }
+            else{
+              this.toastr.error('User is deactivated please contact Admin');
+            } 
           }
 
           else if(data.statusCode == "500") {

@@ -38,7 +38,7 @@
 
       <mat-form-field class="field" appearance="fill">
         <mat-label>Password</mat-label>
-        <input pattern="[0-9]{10}" minlength="8" maxlength="12" [type]="hide ? 'password' : 'text'" matInput
+        <input [type]="hide ? 'password' : 'text'" matInput
           name="password" [(ngModel)]="user.password">
         <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
           [attr.aria-pressed]="hide">
@@ -56,7 +56,7 @@
       <mat-label class="forgot">Forgot Password?</mat-label><br>
 
       <a class="color" routerLink="/signup"> Register Now!</a>
-      <a class="colorfp" routerLink="/forgotpassword"> Click Here!</a><br><br>
+      <a class="colorfp" routerLink="/forgotpassword">Click Here!</a><br><br>
 
     </form>
 

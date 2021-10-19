@@ -109,12 +109,9 @@
                 <div *ngIf="mobile.errors?.required ">
                   Mobile no. is required.
                 </div>
-                <div *ngIf="mobile.errors?.pattern ">
-                  Indian country code is +91 and France country code is +33
-                </div>
-                <div *ngIf="mobile.errors?.minlength">
+                <div *ngIf="mobile.errors?.pattern && mobile.errors?.minlength">
                   Please enter valid Mobile no. including country code.
-                </div>       
+                </div>      
             </div>
         </mat-error>
       </mat-form-field>
@@ -130,7 +127,7 @@
                 </div>
 
                 <div *ngIf="email.errors?.pattern">
-                  Please enter valid email Id
+                  Please enter official email Id
                 </div>
             </div>
           </mat-error>
@@ -253,8 +250,8 @@
 
     </mat-card-actions>
     <mat-divider [inset]="true"></mat-divider><br><br>
-    <mat-label class="acc">Already have an Account?</mat-label>
-    <a class="color" routerLink="/signin"> Sign in </a>
+    <mat-label class="acc">Already have an Account? </mat-label>
+    <a class="color" routerLink="/signin">Sign in </a>
   <br><br>
 
   </mat-card-content>

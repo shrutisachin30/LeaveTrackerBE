@@ -38,6 +38,7 @@ export class ApplyleaveComponent implements OnInit {
     }
     this.emp = {};
     this.emp.empid = localStorage.getItem('dasId');
+    this.isAdmin = localStorage.getItem('Admin');
   }
 
   ngOnInit(): void {

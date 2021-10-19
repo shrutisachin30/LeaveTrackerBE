@@ -45,19 +45,19 @@ data: MatTableDataSource<any>;
   getExport() {
     this.isDataPresent = false;
     if (this.user.typeOfDomain === undefined && this.user.typeOfDomain === undefined) {
-      this.toastr.error('Please select Domain type');
+      this.toastr.warning('Please select Domain type');
       return;
     }
     else if (this.user.startDate === undefined && this.user.endDate === undefined) {
-      this.toastr.error('Please select Start Date and End Date');
+      this.toastr.warning('Please select Start Date and End Date');
       return;
     }
     else if (this.user.startDate === undefined) {
-      this.toastr.error('Please select Start Date');
+      this.toastr.warning('Please select Start Date');
       return;
     }
     else if (this.user.startDate == this.user.startDate && this.user.endDate == undefined) {
-      this.toastr.error('Please select End Date');
+      this.toastr.warning('Please select End Date');
       return;
     }
     else if (this.user.startDate > this.user.endDate) {
@@ -85,7 +85,7 @@ data: MatTableDataSource<any>;
 
         }
         else{
-
+          this.toastr.error('Data not present');
         }
 
         this.data = new MatTableDataSource<any>(this.list);
