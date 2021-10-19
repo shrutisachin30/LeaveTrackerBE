@@ -36,7 +36,11 @@ export class DeactivateComponent implements OnInit {
     
       return;
     }
-   
+    else if(this.user.dasId == this.user.dasId ){
+      this.toastr.error('DasId is not registered');
+    
+      return;
+    }
 
     this.http.post<any>('http://localhost:8080/psa/deactivateEmployee',
 
@@ -50,10 +54,10 @@ export class DeactivateComponent implements OnInit {
           this.toastr.success('Employee Deactivated');
           this.router.navigate(['list']);
         }
-        else if(data.isActive.includes('No')) {
+        else if(data.statusCode == "500") {
           this.toastr.warning('Employee is already Deactivated');
         }
-        else if (data.statusCode == "500") {
+        else {
           this.toastr.warning('DasId is not registered');
         }
         
@@ -87,7 +91,7 @@ export class DeactivateComponent implements OnInit {
         else if(data.statusCode == "500" || data.isActive == "Yes") {
           this.toastr.warning('Employee is already Activated');
         }
-        else if (data.statusCode == "500") {
+        else {
           this.toastr.warning('DasId is not registered');
         }
         

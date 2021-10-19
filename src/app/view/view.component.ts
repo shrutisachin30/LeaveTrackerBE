@@ -164,9 +164,9 @@ data: MatTableDataSource<any>;
       }
       if (status.includes('cancelled') || new Date(l.startDate)< new Date()) {
         l.disable = true;
-        // if(new Date(l.startDate) == new Date()){
-        //   l.disable = false;
-        // }
+        if(status.includes('Applied') && new Date(l.startDate) == new Date()){
+          l.disable = false;
+        }
         console.log('disable:', l.disable);
       }
       if(this.viewDasId != this.empid){

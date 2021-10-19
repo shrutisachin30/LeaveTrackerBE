@@ -26,6 +26,7 @@ export class SignupComponent implements OnInit {
   title = 'signup';
   signup: any;
   user: any;
+ hide=true;
 
   typeOfDomain: Domain [] = [
     { value: 'ASCV', viewValue: 'ASCV' },

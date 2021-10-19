@@ -63,7 +63,7 @@
   
     </form><br>
     <button style ="margin-left: 25%;" mat-raised-button color="primary" (click)="getExport()">Generate</button>
-    <button style ="margin-left: 15%;" [disabled]="!isDataPresent" mat-raised-button color="primary" routerLink="/list" (click)="exporter.exportTable('xls', {fileName : 'Employee List'} );">Download</button>
+    <button style ="margin-left: 15%;" [disabled]="!isDataPresent" mat-raised-button color="primary" routerLink="/list" (click)="exporter.exportTable('xls', {fileName : 'Employee Leaves Details'} );">Download</button>
 
     
 
