@@ -83,7 +83,13 @@ export class ListComponent implements OnInit {
     localStorage.setItem('viewId', id);
     this.router.navigate(['view']);
   }
-
+  
+  onLogout() {
+    localStorage.removeItem('token');
+    localStorage.clear();
+    this.router.navigate(['']);
+  
+  }
   ngOnInit(): void {
     this.getList();
   }

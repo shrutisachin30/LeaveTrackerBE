@@ -22,7 +22,12 @@ export class DeactivateComponent implements OnInit {
     }
   }
 
-
+  onLogout() {
+    localStorage.removeItem('token');
+    localStorage.clear();
+    this.router.navigate(['']);
+  
+  }
 
   deactivate(){
     // this.dialogservice.openConfirmDialog('Are you sure you want to Deactivate the Employee?')
@@ -45,7 +50,7 @@ export class DeactivateComponent implements OnInit {
           this.toastr.success('Employee Deactivated');
           this.router.navigate(['list']);
         }
-        else if(data.isActive == "No") {
+        else if(data.isActive.includes('No')) {
           this.toastr.warning('Employee is already Deactivated');
         }
         else if (data.statusCode == "500") {

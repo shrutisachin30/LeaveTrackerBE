@@ -162,17 +162,33 @@ data: MatTableDataSource<any>;
         this.VL += this.calculateDiff(l.startDate,l.endDate);
         console.log("Vacational Leave :- ", this.VL)
       }
-      if (status.includes('cancelled') || new Date(l.startDate) < new Date()) {
+      if (status.includes('cancelled') || new Date(l.startDate)< new Date()) {
         l.disable = true;
+        // if(new Date(l.startDate) == new Date()){
+        //   l.disable = false;
+        // }
         console.log('disable:', l.disable);
       }
       if(this.viewDasId != this.empid){
         l.disable = true;
       }
+      if(this.isAdmin){
+        l.disable = false;
+        if(status.includes('cancelled') || status.includes('Availed')){
+          l.disable = true;
+        }
+      }
     }
     this.data = new MatTableDataSource<any>(this.dataSource);
     
     
+  }
+
+  onLogout() {
+    localStorage.removeItem('token');
+    localStorage.clear();
+    this.router.navigate(['']);
+  
   }
   // count():any{
   //   //console.log('count');

@@ -106,7 +106,12 @@ export class EditprofileComponent implements OnInit {
     console.log(form);
     alert("Details Updated Successfuly")
   }
-
+  onLogout() {
+    localStorage.removeItem('token');
+    localStorage.clear();
+    this.router.navigate(['']);
+  
+  }
   getService(dasId: any) {
 
     this._http.get("http://localhost:8080/psa/getEmployee/" + dasId, this.route.snapshot.params.id)

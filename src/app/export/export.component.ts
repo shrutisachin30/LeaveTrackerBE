@@ -28,7 +28,7 @@ export class ExportComponent implements OnInit {
     { value: 'RSCV', viewValue: 'RSCV' }
   ];
   
-  displayedColumns: string[] = ['dasId', 'name', 'gcmLevel', 'domain', 'startDate', 'endDate', 'status', 'typeOfLeave'];
+  displayedColumns: string[] = ['dasId', 'name', 'gcmLevel', 'mobile','reportingManager','domain', 'startDate', 'endDate', 'status', 'typeOfLeave'];
 dataSource=this.list
 data: MatTableDataSource<any>;
   constructor(private _http: HttpClient, private router: Router, private toastr: ToastrService) {
@@ -93,7 +93,12 @@ data: MatTableDataSource<any>;
       }
     )
   }
-
+  onLogout() {
+    localStorage.removeItem('token');
+    localStorage.clear();
+    this.router.navigate(['']);
+  
+  }
   ngOnInit(): void {
     
   }

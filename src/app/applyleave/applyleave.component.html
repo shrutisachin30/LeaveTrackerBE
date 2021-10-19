@@ -17,7 +17,7 @@
       </button>
       <button *ngIf="isAdmin" mat-menu-item routerLink="/deactivate">
         <mat-icon>autorenew</mat-icon>
-        <span>Deactivate</span>
+        <span>Activate / Deactivate</span>
       </button>
       <button *ngIf="isAdmin" mat-menu-item routerLink="/export">
         <mat-icon>download</mat-icon>
@@ -27,7 +27,7 @@
         <mat-icon>account_circle</mat-icon>
         <span>Edit Profile</span>
       </button>
-      <button mat-menu-item routerLink="">
+      <button mat-menu-item (click)="onLogout()">
         <mat-icon>logout</mat-icon>
         <span>Logout</span>
       </button>

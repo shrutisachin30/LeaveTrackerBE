@@ -44,7 +44,12 @@ export class ApplyleaveComponent implements OnInit {
   ngOnInit(): void {
 
   }
- 
+  onLogout() {
+    localStorage.removeItem('token');
+    localStorage.clear();
+    this.router.navigate(['']);
+  
+  }
     getDate(){   
      var date:any = new Date();       
      var today:any = date.getDate();    

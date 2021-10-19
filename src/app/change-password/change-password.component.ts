@@ -31,7 +31,12 @@ export class ChangePasswordComponent implements OnInit {
     this.emp.empid = localStorage.getItem('dasId');
     this.isAdmin = localStorage.getItem('Admin');
    }
-
+   onLogout() {
+    localStorage.removeItem('token');
+    localStorage.clear();
+    this.router.navigate(['']);
+  
+  }
   changePassword(){
     console.log("dasid:",localStorage.getItem('dasId'));
     console.log("old password:",this.user.oldPassword);
