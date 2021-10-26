@@ -1,127 +1,142 @@
 <html lang="en" class="main">
 <div>
+
+  <!--body tag uses jumbotron class and jumbotron class is defined in css-->
+
   <body class="jumbotron">
-  <mat-toolbar color="primary" class="size">
-    <img class="imagenav" src="./assets/logo.png">
-    <span class="spacer">Leave Tracker</span>
-    <button class="home" mat-menu-item routerLink="/list">
-      <mat-icon style="color: white;">home</mat-icon>
-    </button>
-    <button  mat-icon-button [matMenuTriggerFor]="menu">
-      <mat-icon>more_vert</mat-icon>
-    </button>
-    <mat-menu class="contact" #menu="matMenu">
-      <button mat-menu-item routerLink="/applyleave">
-        <mat-icon>AL</mat-icon>
-        <span>Apply Leave</span>
+    <!--mat-toolbar tag is used to display the title of application i.e. Leave Tracker with logo of Atos, Home icon and Menu -->
+    <mat-toolbar color="primary" class="size">
+      <!--img tag is used for Atos Logo-->
+      <img class="imagenav" src="./assets/logo.png">
+      <span class="spacer">Leave Tracker</span>
+      <!--button tag is used to redirect to Employee List Page-->
+      <button mat-icon-button class="home"  routerLink="/list">
+        <mat-icon>home</mat-icon>
       </button>
-      <button mat-menu-item routerLink="/changePassword">
-        <mat-icon>lock</mat-icon>
-        <span>Change Password</span>
+      <!--button tag is used to trigger menu-->
+      <button mat-icon-button [matMenuTriggerFor]="menu">
+        <mat-icon>more_vert</mat-icon>
       </button>
-      <button *ngIf="isAdmin" mat-menu-item routerLink="/deactivate">
-        <mat-icon>autorenew</mat-icon>
-        <span>Activate / Deactivate</span>
-      </button>
-      <button *ngIf="isAdmin" mat-menu-item routerLink="/export">
-        <mat-icon>download</mat-icon>
-        <span>Export Leave Details</span>
-      </button>
-      <button mat-menu-item routerLink="/editprofile">
-        <mat-icon>account_circle</mat-icon>
-        <span>Edit Profile</span>
-      </button>
-      <button mat-menu-item (click)="onLogout()">
-        <mat-icon>logout</mat-icon>
-        <span>Logout</span>
-      </button>
-    </mat-menu>
-    
-  </mat-toolbar>
-</body><br><br>
+      <!--mat-menu tag is used to display 6 field's i.e. Apply Leave, Change Password, Activate/Deactivate, Export Leave Details, Edit Profile and Logout-->
+      <mat-menu class="contact" #menu="matMenu">
+        <!--button tag is used to redirect to Apply Leave Page-->
+        <button mat-menu-item routerLink="/applyleave">
+          <mat-icon>AL</mat-icon>
+          <span>Apply Leave</span>
+        </button>
+        <!--button tag is used to redirect to Change Password Page-->
+        <button mat-menu-item routerLink="/changePassword">
+          <mat-icon>lock</mat-icon>
+          <span>Change Password</span>
+        </button>
+        <!--button tag is used to redirect to Activate/Deactivate Page only if the user is Admin-->
+        <button *ngIf="isAdmin" mat-menu-item routerLink="/deactivate">
+          <mat-icon>autorenew</mat-icon>
+          <span>Deactivate</span>
+        </button>
+        <!--button tag is used to redirect to Export Leave Details Page only if the user is Admin-->
+        <button *ngIf="isAdmin" mat-menu-item routerLink="/export">
+          <mat-icon>download</mat-icon>
+          <span>Export Leave Details</span>
+        </button>
+        <!--button tag is used to redirect to Edit Profile Page-->
+        <button mat-menu-item routerLink="/editprofile">
+          <mat-icon>account_circle</mat-icon>
+          <span>Edit Profile</span>
+        </button>
+        <!--button tag is used to redirect to Sign In Page-->
+        <button mat-menu-item (click)="onLogout()">
+          <mat-icon>logout</mat-icon>
+          <span>Logout</span>
+        </button>
+      </mat-menu>
 
-<span class="details">Leave Details</span><br><br>
-<span class="num" *ngIf="dataSource.length > 0">Number of leaves :- {{this.dataSource.length}}</span><br><br>
-<table mat-table [dataSource]="data" class="mat-elevation-z8 demo-table">
-  <!-- Position Column -->
-  <ng-container matColumnDef="id">
-    <th mat-header-cell style="font-size: medium;padding-right: 70px;" *matHeaderCellDef> <b>Sr No.</b> </th>
-    <td style="padding-left: 40px;" mat-cell *matCellDef="let element"> {{element.id}} </td>
-  </ng-container>
+    </mat-toolbar>
+  </body><br><br>
 
-  <!-- Name Column -->
+  <span class="details">Leave Details</span><br><br>
+  <span class="num" *ngIf="dataSource.length > 0">Number of leaves :- {{this.dataSource.length}}</span><br><br>
+  <!--table tag is used to display all the Employee Leaves in table where th tag is used for heading and td for row's-->
+  <table mat-table [dataSource]="data" class="mat-elevation-z8 demo-table">
 
+    <!--Serial Number Coloumn-->
+    <ng-container matColumnDef="id">
+      <th mat-header-cell class="ng" *matHeaderCellDef> <b>Sr No.</b> </th>
+      <td class="Sr" mat-cell *matCellDef="let element"> {{element.id}} </td>
+    </ng-container>
 
-  <!-- Weight Column -->
-  <ng-container matColumnDef="startdate">
-    <th mat-header-cell style="font-size: medium;padding-right: 70px;" *matHeaderCellDef> <b>Start Date</b> </th>
-    <td mat-cell *matCellDef="let element"> {{element.startDate}} </td>
-  </ng-container>
+    <!--Start Date Coloumn-->
+    <ng-container matColumnDef="startdate">
+      <th mat-header-cell class="ng" *matHeaderCellDef> <b>Start Date</b> </th>
+      <td mat-cell *matCellDef="let element"> {{element.startDate}} </td>
+    </ng-container>
 
-  <ng-container matColumnDef="enddate">
-    <th mat-header-cell style="font-size: medium;padding-right: 70px;" *matHeaderCellDef> <b>End Date</b></th>
-    <td mat-cell *matCellDef="let element"> {{element.endDate}} </td>
-  </ng-container>
+    <!--End Date Coloumn-->
+    <ng-container matColumnDef="enddate">
+      <th mat-header-cell class="ng" *matHeaderCellDef> <b>End Date</b></th>
+      <td mat-cell *matCellDef="let element"> {{element.endDate}} </td>
+    </ng-container>
 
-  <!-- Symbol Column -->
-  <ng-container matColumnDef="typeOfLeave">
-    <th mat-header-cell style="font-size: medium; padding-right: 70px;" *matHeaderCellDef> <b>Type Of Leave</b> </th>
-    <td mat-cell *matCellDef="let element"> {{element.typeOfLeave}} </td>
-  </ng-container>
+    <!--Type of Leave Coloumn-->
+    <ng-container matColumnDef="typeOfLeave">
+      <th mat-header-cell class="ng" *matHeaderCellDef> <b>Type Of Leave</b> </th>
+      <td mat-cell *matCellDef="let element"> {{element.typeOfLeave}} </td>
+    </ng-container>
 
-  <!-- Symbol Column -->
-  <ng-container matColumnDef="status">
-    <th mat-header-cell style="font-size: medium; padding-right: 70px;" *matHeaderCellDef> <b> Status</b> </th>
-    <td mat-cell *matCellDef="let element"> {{element.status}} </td>
-  </ng-container>
+    <!--Status Coloumn-->
+    <ng-container matColumnDef="status">
+      <th mat-header-cell class="ng" *matHeaderCellDef> <b> Status</b> </th>
+      <td mat-cell *matCellDef="let element"> {{element.status}} </td>
+    </ng-container>
 
-  <!-- <ng-container matColumnDef="count">
-    <th mat-header-cell style="font-size: medium; padding-right: 70px;" *matHeaderCellDef> <b> Count</b> </th>
-    <td mat-cell *matCellDef="let element"> {{element.count}} </td>
-  </ng-container> -->
-  <ng-container matColumnDef="noOfDays">
-    <th mat-header-cell style="font-size: medium;padding-right: 70px;" *matHeaderCellDef> <b>No Of Days</b> </th>
-    <td style="padding-left: 30px;" mat-cell *matCellDef="let element"> {{element.noOfDays}} </td>
+    <!--No of Day's Coloumn-->
+    <ng-container matColumnDef="noOfDays">
+      <th mat-header-cell class="ng" *matHeaderCellDef> <b>No Of Days</b> </th>
+      <td class="Sr" mat-cell *matCellDef="let element"> {{element.noOfDays}} </td>
+    </ng-container>
 
-  </ng-container>
-  <ng-container matColumnDef="updatedBy">
-    <th mat-header-cell style="font-size: medium; padding-right: 70px;" *matHeaderCellDef> <b> Updated By </b> </th>
-    <td mat-cell *matCellDef="let element"> {{element.updatedBy}} </td>
-  </ng-container>
+    <!--Updated By Coloumn-->
+    <ng-container matColumnDef="updatedBy">
+      <th mat-header-cell class="ng" *matHeaderCellDef> <b> Updated By </b> </th>
+      <td mat-cell *matCellDef="let element"> {{element.updatedBy}} </td>
+    </ng-container>
 
-  <ng-container matColumnDef="updatedOn">
-    <th mat-header-cell style="font-size: medium; " *matHeaderCellDef> <b> Updated On </b> </th>
-    <td mat-cell *matCellDef="let element"> {{element.updatedOn}} </td>
-  </ng-container>
+    <!--Updated On Coloumn-->
+    <ng-container matColumnDef="updatedOn">
+      <th mat-header-cell class="ng" *matHeaderCellDef> <b> Updated On </b> </th>
+      <td mat-cell *matCellDef="let element"> {{element.updatedOn}} </td>
+    </ng-container>
 
-  <ng-container matColumnDef="view">
-    <th class="th" style="font-size: medium; padding-left: 70px;" mat-header-cell *matHeaderCellDef> <b> Action</b></th>
-    <td mat-cell style="float:right; margin-right:50px" *matCellDef="let element">
+    <!--Action Coloumn-->
+    <ng-container matColumnDef="view">
+      <th class="ng" mat-header-cell *matHeaderCellDef> <b> Action</b>
+      </th>
+      <td mat-cell class="tdview" *matCellDef="let element">
+        <button class="buttonv"
+          (click)="cancelLeave(element.id,element.startDate,element.endDate,element.updatedBy,element.updatedOn)"
+          [disabled]="element.disable" mat-raised-button color="primary">Cancel
+        </button>
+      </td>
+    </ng-container>
 
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table><br>
 
-      <button style="margin-top: 5px; margin-left: 40px;
-        margin-bottom: 5px;" (click)="cancelLeave(element.id,element.startDate,element.endDate,element.updatedBy,element.updatedOn)" [disabled]="element.disable"
-        mat-raised-button color="primary">Cancel
-      </button>
+  <!--mat-paginator provides navigation for paged information, typically used with a table-->
+  <mat-paginator *ngIf="dataSource.length > 0" [pageSizeOptions]="[5,10,15]" showFirstLastButtons
+    aria-label="Select page">
+  </mat-paginator>
 
+  <span class="leave" *ngIf="dataSource.length == 0">Leaves Not Applied</span><br><br>
 
+  <!--button tag is used to Apply the Leaves and Redirect toApply Leave Page-->
+  <button class="button" color="primary" routerLink="/applyleave" mat-raised-button>Apply
+    Leave</button><br>
+  <!--Number of Days of Sick Leaves, Casual Leaves and Vacational Leaves are displayed on web Page-->
+  <span class="num" *ngIf="dataSource.length>0">Number of Days for Sick Leaves :- {{this.SL}}</span><br>
+  <span class="num" *ngIf="dataSource.length>0">Number of Days for Casual Leaves :- {{this.CL}}</span><br>
+  <span class="num" *ngIf="dataSource.length>0">Number of Days for Vacational Leaves :- {{this.VL}}</span><br>
+</div>
 
-    </td>
-  </ng-container>
-
-  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-</table>
-<br>
-<mat-paginator *ngIf="dataSource.length > 0"
-[pageSizeOptions]="[5,10]"
-showFirstLastButtons
-aria-label="Select page">
-</mat-paginator>
-<span class="leave" *ngIf="dataSource.length == 0">Leaves Not Applied</span><br><br>
-
-<button class="button" style="margin-left: 45%;" color="primary" routerLink="/applyleave" mat-raised-button>Apply Leave</button><br>
-<span class="num" *ngIf="dataSource.length>0" >Number of Days for Sick Leaves :- {{this.SL}}</span><br>
-<span class="num" *ngIf="dataSource.length>0">Number of Days for Casual Leaves :- {{this.CL}}</span><br>
-<span class="num" *ngIf="dataSource.length>0">Number of Days for Vacational Leaves :- {{this.VL}}</span><br>
-</div></html>
+</html>

@@ -19,22 +19,26 @@ Injectable({
 export class ViewComponent implements OnInit {
   title = "view";
   url = "http://localhost:8080/psa/";
+  //Getting ViewId from Local Storage
   viewDasId: any = localStorage.getItem('viewId');
-isCancel:any = true;
-empid = localStorage.getItem('dasId');
-     CL=0;
-     SL=0;
-     VL=0;
+  isCancel: any = true;
+  //Getting DasId from Local Storage
+  empid = localStorage.getItem('dasId');
 
-  displayedColumns: string[] = ['id', 'startdate', 'enddate','typeOfLeave', 'status', 'noOfDays','updatedBy','updatedOn','view'];
+  CL = 0;
+  SL = 0;
+  VL = 0;
+
+  displayedColumns: string[] = ['id', 'startdate', 'enddate', 'typeOfLeave', 'status', 'noOfDays', 'updatedBy', 'updatedOn', 'view'];
   canceldata = {
     startdate: "",
     enddate: "",
     dasid: "",
-    updatedBy : localStorage.getItem('dasId'),
-    updatedOn : new Date(),
+    //Getting Name from Local Storage
+    updatedBy: localStorage.getItem('name'),
+    updatedOn: new Date(),
   }
-  //date = new Date();
+
   length = 0;
 
   dataSource = [{
@@ -42,20 +46,20 @@ empid = localStorage.getItem('dasId');
     startDate: "",
     endDate: "",
     status: "",
-    typeOfLeave:"",
-    noOfDays:"",
-    updatedBy : "",
-    updatedOn : "",
+    typeOfLeave: "",
+    noOfDays: "",
+    updatedBy: "",
+    updatedOn: "",
     disable: false,
   }];
+  //Getting DasId(ViewId) from Local Storage
   dasid: any = localStorage.getItem('viewId');
 
+  //@ViewChild decorator to access template reference variable inside the component.
   @ViewChild(MatPaginator)
-paginator: MatPaginator;
-data: MatTableDataSource<any>;
+  paginator: MatPaginator;
+  data: MatTableDataSource<any>;
   isAdmin: any;
-
-    
 
   constructor(private dialogservice: DialogService, private http: HttpClient, private router: Router) {
     this.id = 1;
@@ -63,147 +67,112 @@ data: MatTableDataSource<any>;
     this.getLeaves(this.viewDasId).subscribe((res: any) => {
       this.dataSource = res;
       this.fun();
-      //this.count();
       this.length = this.dataSource.length;
       this.data.paginator = this.paginator;
     });
+    //Getting Admin Status from Local Storage
     this.isAdmin = localStorage.getItem('Admin');
   }
-
   id: any;
 
 
   ngOnInit(): void {
-    console.log(this.viewDasId,this.empid)
-    if(this.viewDasId != this.empid){
-      this.isCancel =true;
-      
+    //ViewId is equal to DasId
+    if (this.viewDasId != this.empid) {
+      this.isCancel = true;
     }
-    else{
-      console.log(this.viewDasId,this.empid)
+    //ViewId is not equal to DasId
+    else {
       this.isCancel = false;
     }
   }
 
+  //getLeaves() funtion is used to display the List of Leaves
   getLeaves(id: String): any {
+    //Getting ViewId from Local Storage
     let Id = localStorage.getItem('viewId');
-
+    //Http get call for communicating with Backend services to get the list of Leaves from BackEnd
     return this.http.get(this.url + "retrieveLeaveData/" + Id);
   }
-  pad2(n:any) {
+
+  pad2(n: any) {
     return (n < 10 ? '0' : '') + n;
   }
-  cancelLeave(id: any, startdate: any, enddate: any, updatedBy:any, updatedOn:any) {
-    /*  this.leavedata.startdate=startdate;
-     this.leavedata.enddate=enddate; */
-     var uOn = new Date();
-     var month = this.pad2(uOn.getMonth() + 1);//months (0-11)
-     var day = this.pad2(uOn.getDate());//day (1-31)
-     var year = uOn.getFullYear();
- 
-     var uOnFormattedDate:any = day + "-" + month + "-" + year;
-     console.log(uOnFormattedDate);
+  //cancelLeave() function is use to cancel the leaves of any Employee
+  cancelLeave(id: any, startdate: any, enddate: any, updatedBy: any, updatedOn: any) {
+    var uOn = new Date();
+    var month = this.pad2(uOn.getMonth() + 1);//months (0-11)
+    var day = this.pad2(uOn.getDate());//day (1-31)
+    var year = uOn.getFullYear();
+    var uOnFormattedDate: any = day + "-" + month + "-" + year;
     this.dialogservice.openConfirmDialog('Are you sure you want to Cancel?').afterClosed().subscribe(res => {
-      console.log('id :- ' + res)
       if (res) {
-        console.log('id :- ' + id)
         this.canceldata.dasid = (this.dasid);
         this.canceldata.startdate = startdate;
         this.canceldata.enddate = enddate;
-        //this.canceldata.updatedBy = updatedBy;
-        //this.canceldata.updatedOn = uOnFormattedDate;
-        console.log(uOnFormattedDate);
-        console.log(this.canceldata);
+        //Http post call for communicating with Backend services to cnacel the Leaves from BackEnd
         this.http.post(this.url + "cancelLeave", this.canceldata).subscribe();
         window.location.reload();
-        //this.router.navigate(['view']);
       }
     })
-    console.log(startdate)
-
-
-    //window.location.reload();
   }
-  calculateDiff(startDate, endDate){
-   startDate = new Date(startDate);
+
+  //calculateDiff() function is to calculate difference between End Date and Start Date
+  calculateDiff(startDate, endDate) {
+    startDate = new Date(startDate);
     endDate = new Date(endDate);
-    var diff = Math.floor((Date.UTC(endDate.getFullYear(), endDate.getMonth(), endDate.getDate()) - Date.UTC(startDate.getFullYear(), startDate.getMonth(), startDate.getDate()) ) /(1000 * 60 * 60 * 24))+1;
-    console.log(diff);
+    var diff = Math.floor((Date.UTC(endDate.getFullYear(), endDate.getMonth(), endDate.getDate()) - Date.UTC(startDate.getFullYear(), startDate.getMonth(), startDate.getDate())) / (1000 * 60 * 60 * 24)) + 1;
     return diff;
   }
 
+  //fun() function is used to display the main list of leaves as well as calculate number of days of sick leaves, casual leaves and vacational leaves
   fun() {
-    
-    console.log('fun');
+    //for loop of dataSource
     for (let l of this.dataSource) {
-      l.noOfDays = this.calculateDiff(l.startDate,l.endDate).toString();
+      l.noOfDays = this.calculateDiff(l.startDate, l.endDate).toString();
       var typeOfLeave = l.typeOfLeave.toString();
       var status = l.status.toString();
-      console.log('id:', l.id);
-      console.log('status:', status);
-      console.log('leave start date:', new Date(l.startDate));
-      console.log('leave end date:', new Date(l.endDate));
-      console.log('current date:', new Date());
-      //console.log('count:',this.count());
       l.id = this.id++;
-      
-      if((status.includes('Applied') || status.includes('Availed')) && typeOfLeave.includes('Sick Leave')){
-        //this.SL=this.SL+1;
-        this.SL += this.calculateDiff(l.startDate,l.endDate);
-        console.log("Sick Leave :- ", this.SL)
+
+      if ((status.includes('Applied') || status.includes('Availed')) && typeOfLeave.includes('Sick Leave')) {
+        this.SL += this.calculateDiff(l.startDate, l.endDate);
       }
 
-      if((status.includes('Applied') || status.includes('Availed')) && typeOfLeave.includes('Casual Leave')){
-        this.CL +=  this.calculateDiff(l.startDate,l.endDate);
-        console.log("Casual Leave :- ", this.CL)
+      if ((status.includes('Applied') || status.includes('Availed')) && typeOfLeave.includes('Casual Leave')) {
+        this.CL += this.calculateDiff(l.startDate, l.endDate);
       }
 
-      if((status.includes('Applied') || status.includes('Availed')) && typeOfLeave.includes('Vacational Leave')){
-        this.VL += this.calculateDiff(l.startDate,l.endDate);
-        console.log("Vacational Leave :- ", this.VL)
+      if ((status.includes('Applied') || status.includes('Availed')) && typeOfLeave.includes('Vacational Leave')) {
+        this.VL += this.calculateDiff(l.startDate, l.endDate);
       }
-      if (status.includes('cancelled') || new Date(l.startDate)< new Date()) {
-        l.disable = true;
-        if(status.includes('Applied') && new Date(l.startDate) == new Date()){
-          l.disable = false;
-        }
-        console.log('disable:', l.disable);
-      }
-      if(this.viewDasId != this.empid){
+
+      if (status.includes('cancelled') || new Date(l.startDate) < new Date()) {
         l.disable = true;
       }
-      if(this.isAdmin){
+
+      else if (status.includes('Applied') && new Date(l.startDate) >= new Date()) {
         l.disable = false;
-        if(status.includes('cancelled') || status.includes('Availed')){
+      }
+
+      if (this.viewDasId != this.empid) {
+        l.disable = true;
+      }
+
+      if (this.isAdmin) {
+        l.disable = false;
+        if (status.includes('cancelled')) {
           l.disable = true;
         }
       }
     }
     this.data = new MatTableDataSource<any>(this.dataSource);
-    
-    
-  }
 
+  }
+  //onLogout() function is to remove each and every item from Local storage and to redirect to Sign In Page
   onLogout() {
     localStorage.removeItem('token');
     localStorage.clear();
     this.router.navigate(['']);
-  
+
   }
-  // count():any{
-  //   //console.log('count');
-  //   for (let c of this.dataSource) { 
-  //   var date1 = new Date(c.startDate); 
-  //   var date2 = new Date(c.endDate); 
-    
-  //     var Time = date2.getTime() - date1.getTime(); 
-  //     var Days = Time / (1000 * 3600 * 24); 
-  //    return Days;
-  // }
-//}
 }
-
-
-
-
-

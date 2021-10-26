@@ -1,170 +1,141 @@
 <html lang="en" class="main">
 <div>
-
-
-
-<body class="jumbotron">
-
-
-
-
-<mat-toolbar color="primary" class="size">
-
-
-
-<img class="imagenav" src="./assets/logo.png">
-<span class="spacer">Leave Tracker</span>
-<button class="home" mat-menu-item routerLink="/list">
-<mat-icon style="color: white;">home</mat-icon>
-</button>
-<button mat-icon-button [matMenuTriggerFor]="menu">
-<mat-icon>more_vert</mat-icon>
-</button>
-<mat-menu class="contact" #menu="matMenu">
-<button mat-menu-item routerLink="/applyleave">
-<mat-icon>AL</mat-icon>
-<span>Apply Leave</span>
-</button>
-<button *ngIf="isAdmin" mat-menu-item routerLink="/deactivate">
-  <mat-icon>autorenew</mat-icon>
-  <span>Activate / Deactivate</span>
-</button>
-<button *ngIf="isAdmin" mat-menu-item routerLink="/export">
-  <mat-icon>download</mat-icon>
-  <span>Export Leave Details</span>
-</button>
-<button mat-menu-item routerLink="/changePassword">
-    <mat-icon>lock</mat-icon>
-    <span>Change Password</span>
-  </button>
-<button mat-menu-item (click)="onLogout()">
-<mat-icon>logout</mat-icon>
-<span>Logout</span>
-</button>
-</mat-menu>
-</mat-toolbar>
-
-
-
-<router-outlet></router-outlet>
-</body>
-
-
-
-<form [formGroup]="editCustomer" autocomplete="off">
-<mat-card class="card">
-<mat-card-header>
-<img class="image" src="./assets/edit.png">
-</mat-card-header>
-
-
-
-
-<form class="field">
-<mat-form-field class="fieldd" appearance="fill">
-    <mat-label>Das ID</mat-label>
-<input matInput name="dasId" [(ngModel)]="emp.empid" readonly #dasId="ngModel">
-</mat-form-field>
-</form>
-
-
-
-
-<mat-form-field class="field" appearance="fill">
-<mat-label>Employee ID</mat-label>
-<input matInput formControlName="employeeId" readonly>
-</mat-form-field>
-
-
-
-
-<mat-form-field class="field" appearance="fill">
-<mat-label>Name</mat-label>
-<input matInput placeholder="Enter your name" formControlName="name" pattern="[a-zA-Z ]*" required>
-<mat-error>Please enter valid name</mat-error>
-</mat-form-field>
-
-
-
-<mat-form-field class="field" appearance="fill">
-<mat-label>GCM Level</mat-label>
-<input matInput formControlName="gcmLevel" minlength="1" maxlength="1" pattern="[1-9]" required>
-<mat-error>Enter a valid GCM Level</mat-error>
-</mat-form-field>
-
-
-
-<mat-form-field class="field" appearance="fill">
-<mat-label>Contact No</mat-label>
-<input matInput formControlName="mobile" maxlength="10" required>
-<mat-error>Enter a valid Mobile Number</mat-error>
-</mat-form-field>
-
-
-
-<mat-form-field class="field" appearance="fill">
-<mat-label>Email ID</mat-label>
-<input matInput formControlName="email" pattern="^[a-z0-9._%+-]+@atos.net" required>
-<mat-error>Enter a valid E-mail ID</mat-error>
-</mat-form-field>
-
-
-
-
-<mat-form-field class="field" appearance="fill">
-<mat-label>Reporting Manager</mat-label>
-<input matInput formControlName="reportingManager"  pattern="[a-zA-Z ]*"required>
-<mat-error>Please enter valid Reporting Manager name</mat-error>
-</mat-form-field>
-
-
-
-<mat-form-field class="field" appearance="fill">
-<mat-label>Project Name</mat-label>
-<input matInput formControlName="projectName" required>
-<mat-error>Project Name is required</mat-error>
-</mat-form-field>
-
-
-
-
-<mat-form-field class="field" appearance="fill">
-<mat-label>Domain Type</mat-label>
-<mat-select formControlName="domain">
-<mat-option *ngFor="let domain of typeOfDomain " [value]="domain.value">
-{{domain.viewValue}}
-</mat-option>
-</mat-select>
-</mat-form-field>
-
-
-
-<mat-form-field class="field" appearance="fill">
-<mat-label>Job Role</mat-label>
-<input matInput formControlName="jobRole" required >
-<mat-error>Job Role is required</mat-error>
-</mat-form-field>
-
-
-
-<mat-card-actions>
-<button class="button" type ="submit" style="margin-left: 46.5%;" color="primary" (click)="edit()" [disabled]="!editCustomer.valid"
-mat-raised-button>Update</button>
-</mat-card-actions>
-
-
-
-<br><br>
-
-
-
-</mat-card>
-</form>
-
-
-
-<mat-spinner [diameter]="100" class="loader" *ngIf="showSpinner" color="accent"></mat-spinner>
-
-
-
+  <!--body tag uses jumbotron class and jumbotron class is defined in css-->
+
+  <body class="jumbotron">
+    <!--mat-toolbar tag is used to display the title of application i.e. Leave Tracker with logo of Atos, Home icon and Menu -->
+    <mat-toolbar color="primary" class="size">
+      <!--img tag is used for Atos Logo-->
+      <img class="imagenav" src="./assets/logo.png">
+      <span class="spacer">Leave Tracker</span>
+      <!--button tag is used for redirect to Home Page-->
+      <button mat-icon-button class="home" routerLink="/list">
+        <mat-icon>home</mat-icon>
+      </button>
+      <!--button tag is used to trigger menu-->
+      <button mat-icon-button [matMenuTriggerFor]="menu">
+        <mat-icon>more_vert</mat-icon>
+      </button>
+      <!--mat-menu tag is used to display 5 field's i.e. Apply Leave,Deactivate/Activate, Change Password, Export Leave Details and Logout-->
+      <mat-menu class="contact" #menu="matMenu">
+        <!--button tag is used to redirect to Apply Leave Page-->
+        <button mat-menu-item routerLink="/applyleave">
+          <mat-icon>AL</mat-icon>
+          <span>Apply Leave</span>
+        </button>
+        <!--button tag is used to redirect to Deactivate/Activate Page only if the user is Admin-->
+        <button *ngIf="isAdmin" mat-menu-item routerLink="/deactivate">
+          <mat-icon>autorenew</mat-icon>
+          <span>Activate / Deactivate</span>
+        </button>
+        <!--button tag is used to redirect to Export Leave Details Page only if the user is Admin-->
+        <button *ngIf="isAdmin" mat-menu-item routerLink="/export">
+          <mat-icon>download</mat-icon>
+          <span>Export Leave Details</span>
+        </button>
+        <!--button tag is used to redirect to Change Password Page-->
+        <button mat-menu-item routerLink="/changePassword">
+          <mat-icon>lock</mat-icon>
+          <span>Change Password</span>
+        </button>
+        <!--button tag is used to redirect to Sign In Page-->
+        <button mat-menu-item (click)="onLogout()">
+          <mat-icon>logout</mat-icon>
+          <span>Logout</span>
+        </button>
+      </mat-menu>
+    </mat-toolbar>
+
+    <router-outlet></router-outlet>
+  </body><br><br><br>
+  <span class="details">Edit Profile</span>
+  <!--form tag is used to Edit an Employee details-->
+  <form [formGroup]="editCustomer" autocomplete="off">
+    <!--mat-card tag(all the field's and Submit button are inserted)-->
+    <mat-card class="card">
+      <img class="image" src="./assets/edit.png">
+
+      <form class="field">
+        <!--DasId field in readonly mode-->
+        <mat-form-field class="fieldd" appearance="fill">
+          <mat-label>Das ID</mat-label>
+          <input matInput name="dasId" [(ngModel)]="emp.empid" readonly #dasId="ngModel">
+        </mat-form-field>
+      </form>
+
+      <!--Employee Id field in readonly mode-->
+      <mat-form-field class="field" appearance="fill">
+        <mat-label>Employee ID</mat-label>
+        <input matInput formControlName="employeeId" readonly>
+      </mat-form-field>
+
+      <!--Name field-->
+      <mat-form-field class="field" appearance="fill">
+        <mat-label>Name</mat-label>
+        <input matInput placeholder="Enter your name" formControlName="name" pattern="[a-zA-Z ]*" required>
+        <mat-error>Please enter valid name</mat-error>
+      </mat-form-field>
+
+      <!--GCM Level field-->
+      <mat-form-field class="field" appearance="fill">
+        <mat-label>GCM Level</mat-label>
+        <input matInput formControlName="gcmLevel" minlength="1" maxlength="1" pattern="[1-9]" required>
+        <mat-error>Enter a valid GCM Level</mat-error>
+      </mat-form-field>
+
+      <!--Contact No field-->
+      <mat-form-field class="field" appearance="fill">
+        <mat-label>Contact No</mat-label>
+        <input matInput formControlName="mobile" minlength="11" maxlength="14" required>
+        <mat-error>Enter a valid Mobile Number</mat-error>
+      </mat-form-field>
+
+      <!--Email Id field-->
+      <mat-form-field class="field" appearance="fill">
+        <mat-label>Email ID</mat-label>
+        <input matInput formControlName="email" pattern="^[a-z0-9._%+-]+@atos.net" required>
+        <mat-error>Enter a valid E-mail ID</mat-error>
+      </mat-form-field>
+
+      <!--Reporting Manager field-->
+      <mat-form-field class="field" appearance="fill">
+        <mat-label>Reporting Manager</mat-label>
+        <input matInput formControlName="reportingManager" pattern="[a-zA-Z ]*" required>
+        <mat-error>Please enter valid Reporting Manager name</mat-error>
+      </mat-form-field>
+
+      <!--Project Name field-->
+      <mat-form-field class="field" appearance="fill">
+        <mat-label>Project Name</mat-label>
+        <input matInput formControlName="projectName" required>
+        <mat-error>Project Name is required</mat-error>
+      </mat-form-field>
+
+      <!--Domain Type field-->
+      <mat-form-field class="field" appearance="fill">
+        <mat-label>Domain Type</mat-label>
+        <mat-select formControlName="domain">
+          <mat-option *ngFor="let domain of typeOfDomain " [value]="domain.value">
+            {{domain.viewValue}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <!--Job Role field-->
+      <mat-form-field class="field" appearance="fill">
+        <mat-label>Job Role</mat-label>
+        <input matInput formControlName="jobRole" required>
+        <mat-error>Job Role is required</mat-error>
+      </mat-form-field>
+
+      <!--button tag is used to Update the Data and redirect to Sign In page-->
+      <button class="button" type="submit" color="primary" (click)="edit()" [disabled]="!editCustomer.valid"
+        mat-raised-button>Update</button>
+
+    </mat-card>
+  </form>
+
+  <mat-spinner [diameter]="100" class="loader" *ngIf="showSpinner" color="accent"></mat-spinner>
 </div>
+
+</html>

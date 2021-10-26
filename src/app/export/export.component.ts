@@ -17,7 +17,7 @@ export class ExportComponent implements OnInit {
   static subscribe: any;
   [x: string]: any;
   isDataPresent: any
- 
+  res:any;
 
   typeOfDomain: Domain[] = [
     { value: 'ASCV', viewValue: 'ASCV' },
@@ -25,10 +25,11 @@ export class ExportComponent implements OnInit {
     { value: 'ISEA', viewValue: 'ISEA' },
     { value: 'PSMC', viewValue: 'PSMC' },
     { value: 'BSCV', viewValue: 'BSCV' },
-    { value: 'RSCV', viewValue: 'RSCV' }
+    { value: 'RSCV', viewValue: 'RSCV' },
+    { value: 'All', viewValue: 'All' }
   ];
   
-  displayedColumns: string[] = ['dasId', 'name', 'gcmLevel', 'mobile','reportingManager','domain', 'startDate', 'endDate', 'status', 'typeOfLeave'];
+  displayedColumns: string[] = ['dasId', 'name', 'gcmLevel', 'mobile','reportingManager','domain', 'startDate', 'endDate', 'noOfDays','status', 'typeOfLeave','isActive'];
 dataSource=this.list
 data: MatTableDataSource<any>;
   constructor(private _http: HttpClient, private router: Router, private toastr: ToastrService) {
@@ -38,12 +39,17 @@ data: MatTableDataSource<any>;
 
     this.emp = {};
     this.emp.empid = localStorage.getItem('dasId');
+    var date = new Date("HH:mm:ss");
+console.log(date)
   }
   pad2(n:any) {
     return (n < 10 ? '0' : '') + n;
   }
+  
+
   getExport() {
     this.isDataPresent = false;
+    
     if (this.user.typeOfDomain === undefined && this.user.typeOfDomain === undefined) {
       this.toastr.warning('Please select Domain type');
       return;
@@ -65,18 +71,20 @@ data: MatTableDataSource<any>;
       return;
     }
 
+
     let domain = this.user.typeOfDomain
     console.log("domain:",domain);
-    
-    let startDate = this.user.startDate + " 00:00:00"
+    console.log(this.user.startDate);
+    let startDate = this.user.startDate + " 05:30:00"
     console.log("startDate:",startDate);
 
-    let endDate = this.user.endDate+ " 00:00:00"
+    let endDate = this.user.endDate+ " 05:30:00"
     console.log("endDate:",endDate);
 
     this._http.get<any>('http://localhost:8080/psa/exportData/' + domain + '/'+startDate +'/'+endDate).subscribe(
       res => {
         this.list = res
+        console.log("list:",this.list)
         console.log("list:",this.list.length)
         this.dataSource=this.list;
         if(this.list.length > 0){
@@ -93,6 +101,7 @@ data: MatTableDataSource<any>;
       }
     )
   }
+  
   onLogout() {
     localStorage.removeItem('token');
     localStorage.clear();

@@ -1,138 +1,147 @@
 <html lang="en" class="main">
 <div>
-<body class="jumbotron">
+  <!--body tag uses jumbotron class and jumbotron class is defined in css-->
 
-  <mat-toolbar color="primary" class="size">
-
-
-    <img class="imagenav" src="./assets/logo.png">
-    <span class="spacer">Leave Tracker</span>
-
-
-    <button mat-icon-button [matMenuTriggerFor]="menu">
-      <mat-icon>more_vert</mat-icon>
-    </button>
-    <mat-menu class="contact" #menu="matMenu">
-      <button mat-menu-item routerLink="/applyleave">
-        <mat-icon>AL</mat-icon>
-        <span>Apply Leave</span>
+  <body class="jumbotron">
+    <!--mat-toolbar tag is used to display the title of application i.e. Leave Tracker with logo of Atos, Home icon and Menu -->
+    <mat-toolbar color="primary" class="size">
+      <!--img tag is used for Atos Logo-->
+      <img class="imagenav" src="./assets/logo.png">
+      <span class="spacer">Leave Tracker</span>
+      <!--button tag is used to trigger menu-->
+      <button mat-icon-button [matMenuTriggerFor]="menu">
+        <mat-icon>more_vert</mat-icon>
       </button>
-      <button mat-menu-item routerLink="/changePassword">
-        <mat-icon>lock</mat-icon>
-        <span>Change Password</span>
-      </button>
-      <button *ngIf="isAdmin" mat-menu-item routerLink="/deactivate">
-        <mat-icon>autorenew</mat-icon>
-        <span>Activate / Deactivate</span>
-      </button>
-      <button *ngIf="isAdmin" mat-menu-item routerLink="/export">
-        <mat-icon>download</mat-icon>
-        <span>Export Leave Details</span>
-      </button>
-      <button mat-menu-item routerLink="/editprofile">
-        <mat-icon>account_circle</mat-icon>
-        <span>Edit Profile</span>
-      </button>
-      <button mat-menu-item (click)="onLogout()">
-        <mat-icon>logout</mat-icon>
-        <span>Logout</span>
-      </button>      
-    </mat-menu>
-
-  </mat-toolbar>
-
-  <router-outlet></router-outlet>
-</body><br><br>
-<div>
-  <span class="details">Employee Details</span><br>
-
-  <mat-form-field class="field">
-    <input (keyup)="applyFilter($any($event.target).value)" matInput placeholder="Search by Name and Das Id">
-  </mat-form-field>
-
-  <table style=" width: 98%;" mat-table [dataSource]="data" matSort class="mat-elevation-z8 demo-table">
-
-    <!-- <ng-container matColumnDef="employeeId">
-            <th class="th" mat-header-cell *matHeaderCellDef> Employee ID </th>
-            <td mat-cell *matCellDef="let element"> {{element.employeeId}} </td>
-          </ng-container> -->
-
-    <ng-container matColumnDef="dasId">
-      <th class="th" mat-header-cell *matHeaderCellDef mat-sort-header> Das Id</th>
-      <td mat-cell *matCellDef="let element"> {{element.dasId}} </td>
-    </ng-container>
-
-    <ng-container matColumnDef="name">
-      <th class="th" mat-header-cell *matHeaderCellDef mat-sort-header> Name </th>
-      <td mat-cell *matCellDef="let element"> {{element.name}} </td>
-    </ng-container>
-
-    <ng-container matColumnDef="gcmLevel">
-      <th class="th" mat-header-cell *matHeaderCellDef mat-sort-header> GCM Level </th>
-      <td style="padding-left: 30px;" mat-cell *matCellDef="let element"> {{element.gcmLevel}} </td>
-    </ng-container>
-
-    <ng-container matColumnDef="mobile">
-      <th class="th" mat-header-cell *matHeaderCellDef> Contact No. </th>
-      <td mat-cell *matCellDef="let element"> {{element.mobile}} </td>
-    </ng-container>
-
-    <ng-container matColumnDef="emailId">
-      <th class="th" mat-header-cell *matHeaderCellDef> Email </th>
-      <td mat-cell *matCellDef="let element"> {{element.emailId}} </td>
-    </ng-container>
-
-    <ng-container matColumnDef="reportingManager">
-      <th class="th" mat-header-cell *matHeaderCellDef> Job Role </th>
-      <td mat-cell *matCellDef="let element"> {{element.reportingManager}} </td>
-    </ng-container>
-
-    <ng-container matColumnDef="domain">
-      <th class="th" mat-header-cell *matHeaderCellDef> Reporting Manager </th>
-      <td mat-cell *matCellDef="let element"> {{element.domain}} </td>
-    </ng-container>
-
-    <ng-container matColumnDef="projectName">
-      <th class="th" mat-header-cell *matHeaderCellDef> Project Name </th>
-      <td mat-cell *matCellDef="let element"> {{element.projectName}} </td>
-    </ng-container>
-
-    <ng-container matColumnDef="jobRole">
-      <th class="th" mat-header-cell *matHeaderCellDef> Domain </th>
-      <td mat-cell *matCellDef="let element"> {{element.jobRole}} </td>
-    </ng-container>
-
-
-    <!-- <ng-container matColumnDef="view">
-      <th class="th" mat-header-cell *matHeaderCellDef> View </th>
-      <td mat-cell *matCellDef="let element">
-        <button [routerLink]="['/view',element.dasId]" mat-raised-button style="  height: 35px; width: 20px;" color="warn">
-          <mat-icon>visibility</mat-icon>
+      <!--mat-menu tag is used to display 6 field's i.e. Apply Leave, Change Password, Activate/Deactivate, Export Leave Details, Edit Profile and Logout-->
+      <mat-menu class="contact" #menu="matMenu">
+        <!--button tag is used to redirect to Apply Leave Page-->
+        <button mat-menu-item routerLink="/applyleave">
+          <mat-icon>AL</mat-icon>
+          <span>Apply Leave</span>
         </button>
-      </td>
-    </ng-container> -->
-    <ng-container matColumnDef="view">
-      <th class="th" mat-header-cell *matHeaderCellDef> View </th>
-      <td mat-cell *matCellDef="let element">
-        <button (click)="viewLeave(element.dasId)" mat-raised-button style="  height: 35px; width: 20px;"
-          color="warn">
-          <mat-icon> visibility </mat-icon> &nbsp;&nbsp;
-       </button>
-        
-      </td>
-    </ng-container>
+        <!--button tag is used to redirect to Change Password Page-->
+        <button mat-menu-item routerLink="/changePassword">
+          <mat-icon>lock</mat-icon>
+          <span>Change Password</span>
+        </button>
+        <!--button tag is used to redirect to Activate/Deactivate Page only if the user is Admin-->
+        <button *ngIf="isAdmin" mat-menu-item routerLink="/deactivate">
+          <mat-icon>autorenew</mat-icon>
+          <span>Activate / Deactivate</span>
+        </button>
+        <!--button tag is used to redirect to Export Leave Details Page only if the user is Admin-->
+        <button *ngIf="isAdmin" mat-menu-item routerLink="/export">
+          <mat-icon>download</mat-icon>
+          <span>Export Leave Details</span>
+        </button>
+        <!--button tag is used to redirect to Edit Profile Page-->
+        <button mat-menu-item routerLink="/editprofile">
+          <mat-icon>account_circle</mat-icon>
+          <span>Edit Profile</span>
+        </button>
+        <!--button tag is used to redirect to Sign In Page-->
+        <button mat-menu-item (click)="onLogout()">
+          <mat-icon>logout</mat-icon>
+          <span>Logout</span>
+        </button>
+      </mat-menu>
 
-    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </mat-toolbar>
 
-  </table>
-  <mat-paginator 
-           
-              [pageSizeOptions]="[5,10,15]"
-              showFirstLastButtons
-              aria-label="Select page">
-</mat-paginator> 
- 
+    <router-outlet></router-outlet>
+  </body><br><br>
+  <div>
+    <span class="name"> Welcome,  {{this.name}}</span><br>
+    <span class="details">Employee Details</span><br>
+    <!--mat-form-field tag is used for filter through which we can search any Employee by it's Name and Das Id-->
+    <mat-form-field class="field">
+      <input (keyup)="applyFilter($any($event.target).value)" matInput placeholder="Search by Name and Das Id">
+    </mat-form-field>
+
+    <!--table tag is used to display all the Employee list field's in table where th tag is used for heading and td for row's-->
+    <table class="tab" mat-table [dataSource]="data" matSort class="mat-elevation-z8 demo-table">
+
+      <!--Das Id Coloumn-->
+      <ng-container matColumnDef="dasId">
+        <th class="th" mat-header-cell *matHeaderCellDef mat-sort-header> Das Id</th>
+        <td mat-cell *matCellDef="let element"> {{element.dasId}} </td>
+      </ng-container>
+
+      <!--Name Column-->
+      <ng-container matColumnDef="name">
+        <!--mat-sort-header is used for sorting on Name field-->
+        <th class="th" mat-header-cell *matHeaderCellDef mat-sort-header> Name </th>
+        <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+      </ng-container>
+
+      <!--GCM Level Column-->
+      <ng-container matColumnDef="gcmLevel">
+        <!--mat-sort-header is used for sorting on GCM Level field-->
+        <th class="th" mat-header-cell *matHeaderCellDef mat-sort-header> GCM </th>
+        <td class="gcm" mat-cell *matCellDef="let element"> {{element.gcmLevel}} </td>
+      </ng-container>
+
+      <!--Contact no Column-->
+      <ng-container matColumnDef="mobile">
+        <th class="th" mat-header-cell *matHeaderCellDef> Contact No. </th>
+        <td mat-cell *matCellDef="let element"> {{element.mobile}} </td>
+      </ng-container>
+
+      <!--Email Id column-->
+      <ng-container matColumnDef="emailId">
+        <th class="the" mat-header-cell *matHeaderCellDef> Email </th>
+        <td class="tde" mat-cell *matCellDef="let element"> {{element.emailId}} </td>
+      </ng-container>
+
+      <!--Job Role Column-->
+      <ng-container matColumnDef="reportingManager">
+        <th class="th" mat-header-cell *matHeaderCellDef> Job Role </th>
+        <td mat-cell *matCellDef="let element"> {{element.reportingManager}} </td>
+      </ng-container>
+
+      <!--Reporting Manager Column-->
+      <ng-container matColumnDef="domain">
+        <th class="thr" mat-header-cell *matHeaderCellDef> RM </th>
+        <td class="tdr" mat-cell *matCellDef="let element"> {{element.domain}} </td>
+      </ng-container>
+
+      <!--Project Name Column-->
+      <ng-container matColumnDef="projectName">
+        <th class="th" mat-header-cell *matHeaderCellDef> Project Name </th>
+        <td mat-cell *matCellDef="let element"> {{element.projectName}} </td>
+      </ng-container>
+
+      <!--Domain Name Column-->
+      <ng-container matColumnDef="jobRole">
+        <th class="th" mat-header-cell *matHeaderCellDef> Domain </th>
+        <td mat-cell *matCellDef="let element"> {{element.jobRole}} </td>
+      </ng-container>
+
+      <!--isActive Name Column-->
+      <ng-container matColumnDef="isActive">
+        <th class="ths" mat-header-cell *matHeaderCellDef> Status </th>
+        <td class="tds" mat-cell *matCellDef="let element"> {{element.isActive}} </td>
+      </ng-container>
+
+      <!--View Icon Column-->
+      <ng-container matColumnDef="view">
+        <th class="thv" mat-header-cell *matHeaderCellDef> View </th>
+        <td class="vicon" mat-cell *matCellDef="let element">
+          <button (click)="viewLeave(element.dasId)" mat-raised-button color="warn">
+            <mat-icon> visibility </mat-icon> &nbsp;&nbsp;
+          </button>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+    </table>
+    <!--mat-paginator provides navigation for paged information, typically used with a table-->
+    <mat-paginator [pageSizeOptions]="[5,10,15]" showFirstLastButtons aria-label="Select page">
+    </mat-paginator>
+
+  </div>
 </div>
-</div>
+
 </html>

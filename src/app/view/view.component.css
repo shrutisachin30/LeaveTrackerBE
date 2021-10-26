@@ -10,24 +10,19 @@
   width: 96%;
 }
 
-
 .size{
   margin-top: 0;
   height: 110px;
 }
 
 .spacer {
-  flex: 1 1 auto;
-  
+  flex: 1 1 auto; 
   height: 30%;
   font-size: 55px;
   margin-left: 31%;
-  
 }
 
-.jumbotron{
-  
-  
+.jumbotron{  
   height: 100%;
   background-position: center;
   background-size: cover;
@@ -37,7 +32,6 @@
 }
 
 .imagenav{
-
   margin-left: 10px;
   height:50%;
   width: 100px;
@@ -46,26 +40,28 @@
 .contact{
   font-size: 20px;
 }
+
 .main{
   height: 500px;
   width: 1396px;
 }
-/* .right{
-  margin-left: 10px;
-} */
+
 .home{
-  margin-left: 30%;
+  margin-left: 25%;
 }
+
 .leave{
   margin-left: 43%;
   font-size:20px;
   font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
 }
+
 .num{
 font-size:20px;
 font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
 padding-left : 9px; ;
 }
+
 .details{
   margin-left:42% ;   
   font-size : 30px ; 
@@ -73,4 +69,25 @@ padding-left : 9px; ;
   font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
 }
 
-  
+.Sr{
+padding-left: 40px;
+}
+
+.ng{
+font-size: medium;
+padding-right: 70px;
+}
+
+.tdview{
+margin-right:60px
+}
+
+.buttonv{
+margin-top: 5px;
+margin-left: 1px;
+margin-bottom: 5px;
+}
+
+.button{
+margin-left: 45%;
+}

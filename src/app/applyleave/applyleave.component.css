@@ -66,7 +66,7 @@
 
 .card{
     font-size: medium;
-    margin: 11% 30% 30%;
+    margin: 6% 30% 30%;
     height: 550px;
     background-color:aliceblue;
 }
@@ -90,3 +90,16 @@
 .home{
   margin-left: 30%;
 }
+.details{
+  margin-bottom: 7%;
+   margin-left:43% ;   
+   font-size : 30px ; 
+   font-weight: 200;
+   font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+   font-weight: bold;
+ }
+ .imagel{
+  width: 110px;
+  margin-left: 40%;
+  }
+  

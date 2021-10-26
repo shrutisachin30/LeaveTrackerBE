@@ -13,7 +13,7 @@ export class DialogComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  closeDialog(){
+  closeDialog(){ //After clicking on cancel button dialouge box will appear
     this.dialogRef.close(false);
   }
 }

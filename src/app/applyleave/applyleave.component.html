@@ -1,88 +1,96 @@
 <html lang="en" class="main">
 <div>
-  <body class="jumbotron">
-  <mat-toolbar color="primary" class="size">
-    <img class="imagenav" src="./assets/logo.png">
-    <span class="spacer">Leave Tracker</span>
-    <button class="home" mat-menu-item routerLink="/list">
-      <mat-icon style="color: white;">home</mat-icon>
-    </button>
-    <button class="right" mat-icon-button [matMenuTriggerFor]="menu">
-      <mat-icon>more_vert</mat-icon>
-    </button>
-    <mat-menu class="contact" #menu="matMenu">
-      <button mat-menu-item routerLink="/changePassword">
-        <mat-icon>lock</mat-icon>
-        <span>Change Password</span>
-      </button>
-      <button *ngIf="isAdmin" mat-menu-item routerLink="/deactivate">
-        <mat-icon>autorenew</mat-icon>
-        <span>Activate / Deactivate</span>
-      </button>
-      <button *ngIf="isAdmin" mat-menu-item routerLink="/export">
-        <mat-icon>download</mat-icon>
-        <span>Export Leave Details</span>
-      </button>
-      <button mat-menu-item routerLink="/editprofile">
-        <mat-icon>account_circle</mat-icon>
-        <span>Edit Profile</span>
-      </button>
-      <button mat-menu-item (click)="onLogout()">
-        <mat-icon>logout</mat-icon>
-        <span>Logout</span>
-      </button>
-    </mat-menu>
-    
-  </mat-toolbar>
-</body>
-<form autocomplete="off">
-    
-  <mat-card class="card" >
 
-      <img class="image" style="width: 110px; margin-left: 40%;" src="./assets/applyleave.png">
-      
+  <!--body tag uses jumbotron class and jumbotron class is defined in css-->
+  <body class="jumbotron">
+     <!--mat-toolbar tag is used to display the title of application i.e. Leave Tracker with logo of Atos, Home icon and Menu -->
+    <mat-toolbar color="primary" class="size">
+      <!--img tag is used for Atos Logo-->
+      <img class="imagenav" src="./assets/logo.png">
+      <span class="spacer">Leave Tracker</span>
+       <!--button tag is used for redirect to Home Page-->
+       <button mat-icon-button class="home"  routerLink="/list">
+        <mat-icon>home</mat-icon>
+      </button>
+      <!--button tag is used to trigger menu-->
+      <button class="right" mat-icon-button [matMenuTriggerFor]="menu">
+        <mat-icon>more_vert</mat-icon>
+      </button>
+       <!--mat-menu tag is used to display 5 field's i.e. Change Password, Activate/Deactivate, Export Leave Details, Edit Profile and Logout-->
+      <mat-menu class="contact" #menu="matMenu">
+        <!--button tag is used to redirect to Change Password Page-->
+        <button mat-menu-item routerLink="/changePassword">
+          <mat-icon>lock</mat-icon>
+          <span>Change Password</span>
+        </button>
+        <!--button tag is used to redirect to Activate/Deactivate Page only if the user is Admin-->
+        <button *ngIf="isAdmin" mat-menu-item routerLink="/deactivate">
+          <mat-icon>autorenew</mat-icon>
+          <span>Deactivate</span>
+        </button>
+        <!--button tag is used to redirect to Export Leave Details Page only if the user is Admin-->
+        <button *ngIf="isAdmin" mat-menu-item routerLink="/export">
+          <mat-icon>download</mat-icon>
+          <span>Export Leave Details</span>
+        </button>
+        <!--button tag is used to redirect to Edit Profile Page-->
+        <button mat-menu-item routerLink="/editprofile">
+          <mat-icon>account_circle</mat-icon>
+          <span>Edit Profile</span>
+        </button>
+         <!--button tag is used to redirect to Sign In Page-->
+        <button mat-menu-item (click)="onLogout()">
+          <mat-icon>logout</mat-icon>
+          <span>Logout</span>
+        </button>
+      </mat-menu>
+
+    </mat-toolbar>
+  </body><br><br>
+  <span class="details">Apply Leave</span>
+  <!--form tag is used for Applying Leave of Employee with 3 Field's-->
+  <form autocomplete="off">
+    <!--mat-card tag(all the field's, button are inserted)-->
+    <mat-card class="card">
+       <!--img tag is used for Apply Leave Logo-->
+      <img class="imagel" src="./assets/applyleave.png">
+
+      <!--mat-form-field tag is used for DasId field which is in readonly mode-->
       <mat-form-field class="field" appearance="fill">
         <mat-label>DAS ID</mat-label>
         <input matInput name="EmpID" [(ngModel)]="emp.empid" readonly>
       </mat-form-field>
 
+      <!--mat-form-field tag is used for selecting Start Date-->
       <mat-form-field class="field" appearance="fill">
         <mat-label>Start Date</mat-label>
-        <input matInput type="date"  name="startDate"  [(ngModel)]="user.startDate" required>
+        <input matInput type="date" name="startDate" [(ngModel)]="user.startDate" required>
       </mat-form-field>
 
-       <!-- <mat-form-field appearance="fill">
-        <mat-label>Start date</mat-label>
-        <input matInput [matDatepicker]="picker" [max]="maxDate">
-        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-        <mat-datepicker #picker></mat-datepicker>
-      </mat-form-field> -->
-      
+      <!--mat-form-field tag is used for selecting End Date-->
       <mat-form-field class="field" appearance="fill">
         <mat-label>End Date</mat-label>
-        <input matInput type="date"  name="endDate" [(ngModel)]="user.endDate" required>
+        <input matInput type="date" name="endDate" [(ngModel)]="user.endDate" required>
       </mat-form-field>
- 
-      <!-- <mat-form-field class="field" appearance="fill">
-        <mat-label>Type of Leaves</mat-label>
-        <input matInput type="text" name="typeOfLeave" [(ngModel)]="user.typeOfLeave" required>
-      </mat-form-field> -->
 
+      <!--mat-form-field tag is used for selecting Type of Leave-->
       <mat-form-field class="field" appearance="fill">
         <mat-label>Type of Leave</mat-label>
         <mat-select name="typeOfLeave" [(ngModel)]="user.typeOfLeave" required>
-            <mat-option *ngFor="let leave of typeOfLeave " [value]="leave.value">
-                {{leave.viewValue}}
-            </mat-option>
+          <mat-option *ngFor="let leave of typeOfLeave " [value]="leave.value">
+            {{leave.viewValue}}
+          </mat-option>
         </mat-select>
-      </mat-form-field>  
+      </mat-form-field>
 
+      <!--button tag is used to Apply Leave and Redirect to Sign In Page-->
       <button class="button" type="submit" (click)="applyLeaveEmployee()" mat-raised-button color="primary">
-          Submit
+        Submit
       </button>
 
-  </mat-card>
+    </mat-card>
 
-</form>
+  </form>
 </div>
+
 </html>

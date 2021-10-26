@@ -44,7 +44,8 @@ import { EditprofileComponent } from './editprofile/editprofile.component';
 import { ExportComponent } from './export/export.component';
 import { MatTableExporterModule } from 'mat-table-exporter';
 import { DeactivateComponent } from './deactivate/deactivate.component';
-   
+import {Ng2TelInputModule} from 'ng2-tel-input';
+
   
 @NgModule({
   declarations: [
@@ -73,7 +74,6 @@ import { DeactivateComponent } from './deactivate/deactivate.component';
     BrowserAnimationsModule,
     FormsModule,
     MatTableExporterModule,
-    MatTableExporterModule,
     DemoMaterialModule,
     MatStepperModule,
     ReactiveFormsModule,
@@ -90,6 +90,7 @@ import { DeactivateComponent } from './deactivate/deactivate.component';
     MatSidenavModule,
     MatButtonModule,
     MatIconModule,
+    Ng2TelInputModule,
     MatDividerModule,
     MDBBootstrapModule.forRoot(),
     ToastrModule.forRoot({
@@ -108,6 +109,7 @@ progressBar: true
      MatTableModule, 
      MatMenuModule,
      MatIconModule,
+     Ng2TelInputModule,
      MatProgressSpinnerModule
      ],
 

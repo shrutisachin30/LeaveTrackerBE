@@ -1,20 +1,29 @@
 <html lang="en" class="main">
 <div>
-<body class="jumbotron">
+
+  <!--body tag uses jumbotron class and jumbotron class is defined in css-->
+  <body class="jumbotron">
+    <!--mat-toolbar tag is used to display the title of application i.e. Leave Tracker with logo of Atos, Home icon and Menu -->
     <mat-toolbar color="primary" class="size">
+      <!--img tag is used for Atos Logo-->
       <img class="imagenav" src="./assets/logo.png">
       <span class="spacer">Leave Tracker</span>
-      <button class="home" mat-menu-item routerLink="/list">
-        <mat-icon style="color: white;">home</mat-icon>
+      <!--button tag is used for redirect to Home Page-->
+      <button mat-icon-button class="home" routerLink="/list">
+        <mat-icon>home</mat-icon>
       </button>
+      <!--button tag is used to trigger menu-->
       <button class="right" mat-icon-button [matMenuTriggerFor]="menu">
         <mat-icon>more_vert</mat-icon>
       </button>
+      <!--mat-menu tag is used to display 5 field's i.e. Change Password, Activate/Deactivate, Apply Leave, Edit Profile and Logout-->
       <mat-menu class="contact" #menu="matMenu">
+        <!--button tag is used to redirect to Apply Leave Page-->
         <button mat-menu-item routerLink="/applyleave">
           <mat-icon>AL</mat-icon>
           <span>Apply Leave</span>
         </button>
+        <!--button tag is used to redirect to Change Password Page-->
         <button mat-menu-item routerLink="/changePassword">
           <mat-icon>lock</mat-icon>
           <span>Change Password</span>
@@ -30,56 +39,56 @@
         <button mat-menu-item (click)="onLogout()">
           <mat-icon>logout</mat-icon>
           <span>Logout</span>
-        </button>      
+        </button>
       </mat-menu>
-      
+
     </mat-toolbar>
     <router-outlet></router-outlet>
   </body><br><br>
+  <br><br>
+
+  <span class="details">Export Employee Leave Details</span>
   <mat-card class="card">
-
-
-
-    <img class="image" style="width: 110px; margin-left: 40%;" src="./assets/export.png">
+    <img class="image" src="./assets/export.png">
     <form>
       <mat-form-field class="field" appearance="fill">
         <mat-label>Domain Type</mat-label>
         <mat-select name="typeOfDomain" [(ngModel)]="user.typeOfDomain" required>
-            <mat-option *ngFor="let domain of typeOfDomain " [value]="domain.value">
-                {{domain.viewValue}}
-            </mat-option>
+          <mat-option *ngFor="let domain of typeOfDomain " [value]="domain.value">
+            {{domain.viewValue}}
+          </mat-option>
         </mat-select>
       </mat-form-field>
 
       <mat-form-field class="field" appearance="fill">
         <mat-label>Start Date</mat-label>
-        <input matInput type="date"  name="startDate"  [(ngModel)]="user.startDate" required>
+        <input matInput type="date" name="startDate" [(ngModel)]="user.startDate" required>
       </mat-form-field>
 
       <mat-form-field class="field" appearance="fill">
         <mat-label>End Date</mat-label>
-        <input matInput type="date"  name="endDate" [(ngModel)]="user.endDate" required>
+        <input matInput type="date" name="endDate" [(ngModel)]="user.endDate" required>
       </mat-form-field>
-  
+
     </form><br>
-    <button style ="margin-left: 25%;" mat-raised-button color="primary" (click)="getExport()">Generate</button>
-    <button style ="margin-left: 15%;" [disabled]="!isDataPresent" mat-raised-button color="primary" routerLink="/list" (click)="exporter.exportTable('xls', {fileName : 'Employee Leaves Details'} );">Download</button>
 
-    
+    <button class="buttonGet" mat-raised-button color="primary" (click)="getExport()">Generate</button>
 
+    <button class="buttonExport" [disabled]="!isDataPresent" mat-raised-button color="primary" routerLink="/list"
+      (click)="exporter.exportTable('xls', {fileName : 'Employee Leaves Details'} );">Download</button>
 
-  
-</mat-card>
+  </mat-card>
 
-  <div ng-hide="myValue"  class="ng-hide" >
-    <table mat-table matTableExporter [dataSource]="data" #exporter="matTableExporter" class="mat-elevation-z8 demo-table">
+  <div ng-hide="myValue" class="ng-hide">
+    <table mat-table matTableExporter [dataSource]="data" #exporter="matTableExporter"
+      class="mat-elevation-z8 demo-table">
       <ng-container matColumnDef="dasId">
-        <th class="th" mat-header-cell *matHeaderCellDef > Das Id</th>
+        <th class="th" mat-header-cell *matHeaderCellDef> Das Id</th>
         <td mat-cell *matCellDef="let element"> {{element.dasId}} </td>
       </ng-container>
 
       <ng-container matColumnDef="name">
-        <th class="th" mat-header-cell *matHeaderCellDef > Name </th>
+        <th class="th" mat-header-cell *matHeaderCellDef> Name </th>
         <td mat-cell *matCellDef="let element"> {{element.name}} </td>
       </ng-container>
 
@@ -113,6 +122,11 @@
         <td mat-cell *matCellDef="let element"> {{element.endDate}} </td>
       </ng-container>
 
+      <ng-container matColumnDef="noOfDays">
+        <th mat-header-cell class="th" *matHeaderCellDef> <b>No Of Days</b> </th>
+        <td mat-cell *matCellDef="let element"> {{element.noOfDays}} </td>
+      </ng-container>
+
       <ng-container matColumnDef="status">
         <th class="th" mat-header-cell *matHeaderCellDef> Status </th>
         <td mat-cell *matCellDef="let element"> {{element.status}} </td>
@@ -123,14 +137,17 @@
         <td mat-cell *matCellDef="let element"> {{element.typeOfLeave}} </td>
       </ng-container>
 
+      <ng-container matColumnDef="isActive">
+        <th mat-header-cell *matHeaderCellDef> <b>Active Status</b> </th>
+        <td mat-cell *matCellDef="let element"> {{element.isActive}} </td>
+      </ng-container>
+
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
       <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-      
+
     </table>
-    
+
   </div>
-  </div>
-  </html>
-  <!-- <div> 
-    <button style ="margin-left: 46%;" mat-raised-button color="primary" (click)="export();exporter.exportTable('xls', {fileName : 'Employee List'} );">Export</button>
-  </div> -->
+</div>
+
+</html>
