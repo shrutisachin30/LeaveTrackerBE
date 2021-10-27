@@ -2,6 +2,7 @@
 <div>
 
   <!--body tag uses jumbotron class and jumbotron class is defined in css-->
+
   <body class="jumbotron">
     <!--mat-toolbar tag is used to display the title of application i.e. Leave Tracker with logo of Atos, Home icon and Menu -->
     <mat-toolbar color="primary" class="size">
@@ -28,14 +29,17 @@
           <mat-icon>lock</mat-icon>
           <span>Change Password</span>
         </button>
+        <!--button tag is used to redirect to Activate/Deactivate Page only if the user is Admin-->
         <button mat-menu-item routerLink="/deactivate">
           <mat-icon>autorenew</mat-icon>
           <span>Activate / Deactivate</span>
         </button>
+        <!--button tag is used to redirect to Edit Profile Page-->
         <button mat-menu-item routerLink="/editprofile">
           <mat-icon>account_circle</mat-icon>
           <span>Edit Profile</span>
         </button>
+        <!--button tag is used to redirect to Sign In Page-->
         <button mat-menu-item (click)="onLogout()">
           <mat-icon>logout</mat-icon>
           <span>Logout</span>
@@ -48,9 +52,13 @@
   <br><br>
 
   <span class="details">Export Employee Leave Details</span>
+  <!--mat-card tag(all the field's, button are inserted)-->
   <mat-card class="card">
+     <!--img tag is used for Export Logo-->
     <img class="image" src="./assets/export.png">
+    <!--form tag is used for Export Leave Details of Employee with 3 Field's-->
     <form>
+       <!--mat-form-field tag is used for select Domain type field-->
       <mat-form-field class="field" appearance="fill">
         <mat-label>Domain Type</mat-label>
         <mat-select name="typeOfDomain" [(ngModel)]="user.typeOfDomain" required>
@@ -60,11 +68,13 @@
         </mat-select>
       </mat-form-field>
 
+      <!--mat-form-field tag is used for selecting Start Date-->
       <mat-form-field class="field" appearance="fill">
         <mat-label>Start Date</mat-label>
         <input matInput type="date" name="startDate" [(ngModel)]="user.startDate" required>
       </mat-form-field>
 
+      <!--mat-form-field tag is used for selecting Start Date-->
       <mat-form-field class="field" appearance="fill">
         <mat-label>End Date</mat-label>
         <input matInput type="date" name="endDate" [(ngModel)]="user.endDate" required>
@@ -72,73 +82,88 @@
 
     </form><br>
 
+     <!--button tag is used to Generate the report-->
     <button class="buttonGet" mat-raised-button color="primary" (click)="getExport()">Generate</button>
-
+    <!--button tag is used to Export the report into Excel Sheet-->
     <button class="buttonExport" [disabled]="!isDataPresent" mat-raised-button color="primary" routerLink="/list"
       (click)="exporter.exportTable('xls', {fileName : 'Employee Leaves Details'} );">Download</button>
 
   </mat-card>
-
+  <!--used ng-hide to hide the table on web page -->
   <div ng-hide="myValue" class="ng-hide">
+    <!--table tag is used to display all the Employee Leave list field's in table where th tag is used for heading and td for row's-->
     <table mat-table matTableExporter [dataSource]="data" #exporter="matTableExporter"
       class="mat-elevation-z8 demo-table">
+
+      <!--Das Id Coloumn-->
       <ng-container matColumnDef="dasId">
         <th class="th" mat-header-cell *matHeaderCellDef> Das Id</th>
         <td mat-cell *matCellDef="let element"> {{element.dasId}} </td>
       </ng-container>
 
+      <!--Name Coloumn-->
       <ng-container matColumnDef="name">
         <th class="th" mat-header-cell *matHeaderCellDef> Name </th>
         <td mat-cell *matCellDef="let element"> {{element.name}} </td>
       </ng-container>
 
+      <!--Contact No Coloumn-->
       <ng-container matColumnDef="mobile">
         <th class="th" mat-header-cell *matHeaderCellDef> Contact No </th>
         <td mat-cell *matCellDef="let element"> {{element.mobile}} </td>
       </ng-container>
 
+      <!--Reporting Manager Coloumn-->
       <ng-container matColumnDef="reportingManager">
         <th class="th" mat-header-cell *matHeaderCellDef> reporting Manager </th>
         <td mat-cell *matCellDef="let element"> {{element.reportingManager}} </td>
       </ng-container>
 
+      <!--GCM Level Coloumn-->
       <ng-container matColumnDef="gcmLevel">
         <th class="th" mat-header-cell *matHeaderCellDef> GCM Level </th>
         <td mat-cell *matCellDef="let element"> {{element.gcmLevel}} </td>
       </ng-container>
 
+      <!--Domain Coloumn-->
       <ng-container matColumnDef="domain">
         <th class="th" mat-header-cell *matHeaderCellDef> Domain </th>
         <td mat-cell *matCellDef="let element"> {{element.domain}} </td>
       </ng-container>
 
+      <!--Start Date Coloumn-->
       <ng-container matColumnDef="startDate">
         <th class="th" mat-header-cell *matHeaderCellDef> Start Date </th>
         <td mat-cell *matCellDef="let element"> {{element.startDate}} </td>
       </ng-container>
 
+      <!--End Date Coloumn-->
       <ng-container matColumnDef="endDate">
         <th class="th" mat-header-cell *matHeaderCellDef> End Date </th>
         <td mat-cell *matCellDef="let element"> {{element.endDate}} </td>
       </ng-container>
 
+      <!--No of Days Coloumn-->
       <ng-container matColumnDef="noOfDays">
         <th mat-header-cell class="th" *matHeaderCellDef> <b>No Of Days</b> </th>
         <td mat-cell *matCellDef="let element"> {{element.noOfDays}} </td>
       </ng-container>
 
+      <!--Status Coloumn-->
       <ng-container matColumnDef="status">
         <th class="th" mat-header-cell *matHeaderCellDef> Status </th>
         <td mat-cell *matCellDef="let element"> {{element.status}} </td>
       </ng-container>
 
+      <!--Type Of Leave Coloumn-->
       <ng-container matColumnDef="typeOfLeave">
         <th mat-header-cell *matHeaderCellDef> <b>Type Of Leave</b> </th>
         <td mat-cell *matCellDef="let element"> {{element.typeOfLeave}} </td>
       </ng-container>
 
+      <!--Status Coloumn-->
       <ng-container matColumnDef="isActive">
-        <th mat-header-cell *matHeaderCellDef> <b>Active Status</b> </th>
+        <th mat-header-cell *matHeaderCellDef> <b>Status</b> </th>
         <td mat-cell *matCellDef="let element"> {{element.isActive}} </td>
       </ng-container>
 

@@ -45,6 +45,7 @@ import { ExportComponent } from './export/export.component';
 import { MatTableExporterModule } from 'mat-table-exporter';
 import { DeactivateComponent } from './deactivate/deactivate.component';
 import {Ng2TelInputModule} from 'ng2-tel-input';
+import { AuthGuardComponent } from './auth-guard/auth-guard.component';
 
   
 @NgModule({
@@ -60,7 +61,8 @@ import {Ng2TelInputModule} from 'ng2-tel-input';
     ChangePasswordComponent,
     EditprofileComponent,
     ExportComponent,
-    DeactivateComponent
+    DeactivateComponent,
+    AuthGuardComponent
    
   ],
   imports: [
@@ -113,7 +115,7 @@ progressBar: true
      MatProgressSpinnerModule
      ],
 
-  providers: [],
+  providers: [AuthGuardComponent],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

@@ -66,7 +66,7 @@ export class SigninComponent implements OnInit {
             //Saving DasId into Local Storage
             localStorage.setItem('dasId', this.user.dasId);
             //Saving Name into Local Storage
-            localStorage.setItem('name', (data.name+' '+this.user.dasId));
+            localStorage.setItem('name', (data.name+' '+'('+this.user.dasId+')'));
             if (data.statusCode == "201") {
               if (data.isActive == "Active") {
 

@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { ApplyleaveComponent } from './applyleave/applyleave.component';
+import { AuthGuardComponent } from './auth-guard/auth-guard.component';
 import { ChangePasswordComponent } from './change-password/change-password.component';
 import { DeactivateComponent } from './deactivate/deactivate.component';
 import { EditprofileComponent } from './editprofile/editprofile.component';
@@ -16,15 +17,15 @@ const routes: Routes = [
   {path:'', component: SigninComponent},
   //{path:'**', component: SigninComponent},
   {path:'signup', component: SignupComponent},
-  {path:'changePassword', component: ChangePasswordComponent},
+  {path:'changePassword', component: ChangePasswordComponent, canActivate:[AuthGuardComponent]},
   {path:'signin', component: SigninComponent},
-  {path:'list', component: ListComponent},
-  {path:'applyleave', component: ApplyleaveComponent},
-  {path:'view', component: ViewComponent},
+  {path:'list', component: ListComponent, canActivate:[AuthGuardComponent] },
+  {path:'applyleave', component: ApplyleaveComponent,canActivate:[AuthGuardComponent]},
+  {path:'view', component: ViewComponent,canActivate:[AuthGuardComponent]},
   {path:'forgotpassword', component: ForgotpasswordComponent},
-  {path:'editprofile', component: EditprofileComponent},
-  {path:'export', component: ExportComponent},
-  {path:'deactivate', component: DeactivateComponent}
+  {path:'editprofile', component: EditprofileComponent,canActivate:[AuthGuardComponent]},
+  {path:'export', component: ExportComponent,canActivate:[AuthGuardComponent]},
+  {path:'deactivate', component: DeactivateComponent,canActivate:[AuthGuardComponent]}
 ];
 
 @NgModule({

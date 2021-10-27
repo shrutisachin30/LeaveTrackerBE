@@ -28,7 +28,7 @@ export class DeactivateComponent implements OnInit {
     this.http.post<any>('http://localhost:8080/psa/deactivateEmployee',
       {
         "dasid": this.user.dasId,
-        "isActive": "Deactive",
+        "isActive": "Inactive",
         "df": "Active"
       }).subscribe(
         data => {
@@ -60,7 +60,7 @@ export class DeactivateComponent implements OnInit {
       {
         "dasid": this.user.dasId,
         "isActive": "Active",
-        "df": "Deactive"
+        "df": "Inactive"
       }).subscribe(
         data => {
           //If all the Condition's are true
