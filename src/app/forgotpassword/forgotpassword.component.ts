@@ -55,6 +55,7 @@ export class ForgotpasswordComponent implements OnInit {
 
   //getdasId() function is use to get the das Id and check weather it exist's or not
   getdasId(stepper: MatStepper) {
+    this.showSpinner = true;
     this.stepper = stepper;
     let dasId = this.form1.firstCtrl.value;
     //Http get call for communicating with Backend services
@@ -65,6 +66,7 @@ export class ForgotpasswordComponent implements OnInit {
           this.toastr.success('OTP has been send on your register mail Id');
           localStorage.setItem('dasId:', this.form1.firstCtrl.value);
           this.otp = response.otp;
+          this.showSpinner = false;
           this.stepper.next();
         }
         //If das Id is not registered
@@ -76,9 +78,11 @@ export class ForgotpasswordComponent implements OnInit {
 
   //this function is used to validate the secret key
   validateKey() {
+    this.showSpinner = true;
     //If otp is correct
     if (this.otp === this.form2.secondCtrl.value) {
       this.toastr.success('OTP validated');
+      this.showSpinner = false;
       this.stepper.next();
     }
     //If otp is incorrect
@@ -89,6 +93,7 @@ export class ForgotpasswordComponent implements OnInit {
 
   //this function is used to update the new password
   updatePassword() {
+    this.showSpinner = true;
     //if Confirm Password doesn't match with password
     if (this.form3.thirdCtrl.value !== this.form3.thirdCtrlcpass.value) {
       this.toastr.error('Confirm Password must match Password');
@@ -107,6 +112,7 @@ export class ForgotpasswordComponent implements OnInit {
             //If ll conditions are true
             if (data.statusCode == "201" || data.statusCode == "200") {
               this.toastr.success('Password updated successfully');
+              this.showSpinner = false;
               this.stepper.next();
             }
             else if (data.statusCode == "500") {

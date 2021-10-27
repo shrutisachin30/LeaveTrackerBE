@@ -61,6 +61,7 @@ export class SignupComponent implements OnInit {
   //registration() function is used to fill the form and registration of an Employee
   registration() {
     //After clicking on Submit button, showSpinner is set to true
+    console.log("registration")
     this.showSpinner = true
 
     //If Employee Id field is blank and user click's on Submit button 

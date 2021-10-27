@@ -1,4 +1,4 @@
-import { NgModule, CUSTOM_ELEMENTS_SCHEMA  } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { CommonModule } from '@angular/common';
 import { AppRoutingModule } from './app-routing.module';
@@ -6,11 +6,11 @@ import { AppComponent } from './app.component';
 import { SigninComponent } from './signin/signin.component';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { HttpClient,HttpClientModule } from '@angular/common/http';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 
 //import { ReactiveFormsModule } from '@angular/forms';
-import {MatTabsModule} from '@angular/material/tabs';
-import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import { MatTabsModule } from '@angular/material/tabs';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatButtonModule } from '@angular/material/button';
@@ -28,15 +28,15 @@ import { MatTableModule } from '@angular/material/table';
 
 import { ListComponent } from './list/list.component';
 import { ApplyleaveComponent } from './applyleave/applyleave.component';
-import {MatDatepickerModule} from '@angular/material/datepicker';
+import { MatDatepickerModule } from '@angular/material/datepicker';
 import { SignupComponent } from './signup/signup.component';
-import {MatFormFieldModule} from '@angular/material/form-field';
+import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
 import { MatOptionModule } from '@angular/material/core';
 import { ViewComponent } from './view/view.component';
 import { DialogComponent } from './dialog/dialog.component';
 import { ForgotpasswordComponent } from './forgotpassword/forgotpassword.component';
-import {MatStepperModule} from '@angular/material/stepper';
+import { MatStepperModule } from '@angular/material/stepper';
 import { MatSortModule } from '@angular/material/sort';
 import { DemoMaterialModule } from './material-module';
 import { ChangePasswordComponent } from './change-password/change-password.component';
@@ -44,10 +44,11 @@ import { EditprofileComponent } from './editprofile/editprofile.component';
 import { ExportComponent } from './export/export.component';
 import { MatTableExporterModule } from 'mat-table-exporter';
 import { DeactivateComponent } from './deactivate/deactivate.component';
-import {Ng2TelInputModule} from 'ng2-tel-input';
+import { Ng2TelInputModule } from 'ng2-tel-input';
 import { AuthGuardComponent } from './auth-guard/auth-guard.component';
+import { ShowHidePasswordModule } from 'ngx-show-hide-password';
 
-  
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -63,10 +64,10 @@ import { AuthGuardComponent } from './auth-guard/auth-guard.component';
     ExportComponent,
     DeactivateComponent,
     AuthGuardComponent
-   
+
   ],
   imports: [
-    CommonModule, 
+    CommonModule,
     BrowserModule,
     MatSelectModule,
     MatOptionModule,
@@ -94,26 +95,27 @@ import { AuthGuardComponent } from './auth-guard/auth-guard.component';
     MatIconModule,
     Ng2TelInputModule,
     MatDividerModule,
+    ShowHidePasswordModule,
     MDBBootstrapModule.forRoot(),
     ToastrModule.forRoot({
       timeOut: 5000,
-progressBar: true
+      progressBar: true
     }),
-   
+
   ],
   exports: [
     CommonModule,
-     MatToolbarModule, 
-     MatButtonModule, 
-     MatCardModule, 
-     MatInputModule, 
-     MatDialogModule, 
-     MatTableModule, 
-     MatMenuModule,
-     MatIconModule,
-     Ng2TelInputModule,
-     MatProgressSpinnerModule
-     ],
+    MatToolbarModule,
+    MatButtonModule,
+    MatCardModule,
+    MatInputModule,
+    MatDialogModule,
+    MatTableModule,
+    MatMenuModule,
+    MatIconModule,
+    Ng2TelInputModule,
+    MatProgressSpinnerModule
+  ],
 
   providers: [AuthGuardComponent],
   bootstrap: [AppComponent],

@@ -17,6 +17,7 @@ export class SigninComponent implements OnInit {
 
   //hide is a variable used for Password feild in html for visibility icon
   hide = true;
+  showSpinner = false;
   title = 'signin';
   user = {
     'dasId': '',
@@ -35,7 +36,7 @@ export class SigninComponent implements OnInit {
 
   //login() function is used to login into the actual application
   login() {
-
+    
     //If both the field's are empty and user click's on Login button
     if ((this.user.dasId == '') && (this.user.password == '')) {
       this.toastr.warning('Please enter the username and password');
@@ -56,6 +57,7 @@ export class SigninComponent implements OnInit {
 
     //If both the Field's are filled and user click's on Login button
     else {
+      this.showSpinner = true;
       //Http post call for communicating with Backend services
       this.http.post<any>('http://localhost:8080/psa/loginService',
         {
@@ -63,6 +65,7 @@ export class SigninComponent implements OnInit {
           "password": this.user.password
         }).subscribe(
           data => {
+            
             //Saving DasId into Local Storage
             localStorage.setItem('dasId', this.user.dasId);
             //Saving Name into Local Storage
@@ -75,24 +78,28 @@ export class SigninComponent implements OnInit {
                   
                   localStorage.setItem('Admin', "Yes");
                   this.router.navigate(['list']);
+                  this.showSpinner = false;
                   this.toastr.success('Logged in as Admin');
                 }
 
                 //If user is not Admin just an employee
                 else if (data.isAdmin == "No") {
-                  this.toastr.success('Login successful');
                   this.router.navigate(['list']);
+                  this.showSpinner = false;
+                  this.toastr.success('Login successful');
                 }
               }
 
               //If user is deactivated
               else {
+                this.showSpinner = false;
                 this.toastr.error('User is deactivated please contact Admin');
               }
             }
 
             //If DasId or Password is wrong
             else if (data.statusCode == "500") {
+              this.showSpinner = false;
               this.toastr.error('Login unsuccessful');
             }
           })

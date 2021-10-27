@@ -19,6 +19,7 @@ export class ExportComponent implements OnInit {
   [x: string]: any;
   isDataPresent: any
   res: any;
+  showSpinner=false;
 
   //typeOfDomain which includes 6 Domain's and 'All' option in the Domain list
   typeOfDomain: Domain[] = [
@@ -94,6 +95,12 @@ export class ExportComponent implements OnInit {
         this.data = new MatTableDataSource<any>(this.list);
       }
     )
+  }
+  //load() function is used for loader 
+  load(){
+    this.showSpinner = true;
+    this.router.navigate(['list']);
+    this.showSpinner = false;
   }
   //onLogout() function is to remove each and every item from Local storage and to redirect to Sign In Page
   onLogout() {

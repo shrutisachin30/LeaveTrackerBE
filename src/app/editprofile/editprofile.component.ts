@@ -129,15 +129,16 @@ export class EditprofileComponent implements OnInit {
 
   //updateService() function is use to edit the specific Employee Detail's 
   updateService() {
+    this.showSpinner = true;
     //Http post call for communicating with Backend services to update the specific Employee details
     this._http.post("http://localhost:8080/psa/updateEmployee", this.employee, { responseType: "text" })
       .subscribe(
         (data: any) => {
           //If all condition's are true
           if (data == "Employee Updated Successfuly") {
+            this.router.navigate(['list']);
             this.toastr.success("Employee Details Updated Successfully");
             this.showSpinner = false;
-            this.router.navigate(['list']);
           }
           //If all condition's are not true 
           else {

@@ -77,7 +77,8 @@
         Deactivate</button>
       <button class="buttona" type="activate" (click)="activate()" mat-raised-button color="green"> Activate</button>
     </mat-card>
-
+  <!--After clicking on Submmit till it redirect's to Sign In page, Spinner will be actiavted-->
+  <mat-spinner [diameter]="100" class="loader" *ngIf="showSpinner" color="primary"></mat-spinner>
   </form>
 </div>
 

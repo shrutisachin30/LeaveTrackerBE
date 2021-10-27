@@ -18,6 +18,7 @@ Injectable({
 
 export class ViewComponent implements OnInit {
   title = "view";
+  showSpinner = false;
   url = "http://localhost:8080/psa/";
   //Getting ViewId from Local Storage
   viewDasId: any = localStorage.getItem('viewId');
@@ -107,10 +108,11 @@ export class ViewComponent implements OnInit {
     var uOnFormattedDate: any = day + "-" + month + "-" + year;
     this.dialogservice.openConfirmDialog('Are you sure you want to Cancel?').afterClosed().subscribe(res => {
       if (res) {
+        this.showSpinner = true;
         this.canceldata.dasid = (this.dasid);
         this.canceldata.startdate = startdate;
         this.canceldata.enddate = enddate;
-        //Http post call for communicating with Backend services to cnacel the Leaves from BackEnd
+        //Http post call for communicating with Backend services to cnacel the Leaves 
         this.http.post(this.url + "cancelLeave", this.canceldata).subscribe();
         window.location.reload();
       }

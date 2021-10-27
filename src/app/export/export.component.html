@@ -54,11 +54,11 @@
   <span class="details">Export Employee Leave Details</span>
   <!--mat-card tag(all the field's, button are inserted)-->
   <mat-card class="card">
-     <!--img tag is used for Export Logo-->
+    <!--img tag is used for Export Logo-->
     <img class="image" src="./assets/export.png">
     <!--form tag is used for Export Leave Details of Employee with 3 Field's-->
     <form>
-       <!--mat-form-field tag is used for select Domain type field-->
+      <!--mat-form-field tag is used for select Domain type field-->
       <mat-form-field class="field" appearance="fill">
         <mat-label>Domain Type</mat-label>
         <mat-select name="typeOfDomain" [(ngModel)]="user.typeOfDomain" required>
@@ -82,13 +82,15 @@
 
     </form><br>
 
-     <!--button tag is used to Generate the report-->
+    <!--button tag is used to Generate the report-->
     <button class="buttonGet" mat-raised-button color="primary" (click)="getExport()">Generate</button>
     <!--button tag is used to Export the report into Excel Sheet-->
-    <button class="buttonExport" [disabled]="!isDataPresent" mat-raised-button color="primary" routerLink="/list"
-      (click)="exporter.exportTable('xls', {fileName : 'Employee Leaves Details'} );">Download</button>
+    <button class="buttonExport" [disabled]="!isDataPresent" mat-raised-button color="primary" 
+      (click)="load(); exporter.exportTable('xls', {fileName : 'Employee Leaves Details'} );">Download</button>
 
   </mat-card>
+  <!--After clicking on Submmit till it redirect's to Sign In page, Spinner will be actiavted-->
+  <mat-spinner [diameter]="100" class="loader" *ngIf="showSpinner" color="primary"></mat-spinner>
   <!--used ng-hide to hide the table on web page -->
   <div ng-hide="myValue" class="ng-hide">
     <!--table tag is used to display all the Employee Leave list field's in table where th tag is used for heading and td for row's-->

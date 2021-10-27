@@ -26,7 +26,7 @@ export class ApplyleaveComponent implements OnInit {
   signup: any;
   user: any;
   maxDate = new Date();
-
+  showSpinner = false;
   //typeOfLeaves which includes 3 Leave's in the Leave list
   typeOfLeave: Leave[] = [
     { value: 'Sick Leave', viewValue: 'Sick Leave' },
@@ -72,6 +72,7 @@ export class ApplyleaveComponent implements OnInit {
    }
 
   applyLeaveEmployee() {
+    
     //If Start Date and End Date field is empty
     if (this.user.startDate === undefined && this.user.endDate === undefined) {
       this.toastr.error('Please select Start Date and End Date');
@@ -112,7 +113,7 @@ export class ApplyleaveComponent implements OnInit {
     var uOnFormattedDate = day + "-" + month + "-" + year;
 
     
-
+    this.showSpinner = true;
     //Http post call for communicating with Backend services
     this._http.post<any>('http://localhost:8080/psa/applyLeave',
       {
@@ -130,9 +131,10 @@ export class ApplyleaveComponent implements OnInit {
         data => {
           //If all the Condition's are true
           if (data.statusCode == "201" || data.statusCode == "200") {
-            this.toastr.success('Leave applied successfully');
             localStorage.setItem('viewId', this.emp.empid);
             this.router.navigate(['view']);
+            this.toastr.success('Leave applied successfully');
+            this.showSpinner = false;
           }
           //If leaves are already applied
           else if (data.statusCode == "500") {
@@ -143,4 +145,11 @@ export class ApplyleaveComponent implements OnInit {
           }
         });
   }
+
+  //onLogout() function is to remove each and every item from Local storage and to redirect to Sign In Page
+  onLogout() {
+    localStorage.removeItem('token');
+    localStorage.clear();
+    this.router.navigate(['']);
+    }
 }

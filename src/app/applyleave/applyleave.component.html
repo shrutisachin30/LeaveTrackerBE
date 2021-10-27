@@ -85,12 +85,13 @@
 
       <!--button tag is used to Apply Leave and Redirect to Sign In Page-->
       <button class="button" type="submit" (click)="applyLeaveEmployee()" mat-raised-button color="primary">
-        Submit
+        Apply
       </button>
 
     </mat-card>
 
   </form>
 </div>
-
+ <!--After clicking on Submmit till it redirect's to Sign In page, Spinner will be actiavted-->
+ <mat-spinner [diameter]="100" class="loader" *ngIf="showSpinner" color="primary"></mat-spinner>
 </html>

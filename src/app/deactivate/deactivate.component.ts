@@ -10,6 +10,7 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class DeactivateComponent implements OnInit {
   user: any;
+  showSpinner=false;
 
   constructor(private http: HttpClient, private router: Router, private toastr: ToastrService) {
     this.user = {
@@ -24,6 +25,8 @@ export class DeactivateComponent implements OnInit {
       this.toastr.error('Please enter valid dasId');
       return;
     }
+    else{
+    this.showSpinner = true;
     //Http post call for communicating with Backend services
     this.http.post<any>('http://localhost:8080/psa/deactivateEmployee',
       {
@@ -34,20 +37,23 @@ export class DeactivateComponent implements OnInit {
         data => {
           //If all the Condition's are true
           if (data.statusCode == "201" || data.statusCode == "200") {
-            this.toastr.success('Employee Deactivated');
             this.router.navigate(['list']);
+            this.showSpinner = false;
+            this.toastr.success('Employee Deactivated');
           }
           //If Employee is already deactivated
           else if(data.statusMsg === "Operation already performed") {
+            this.showSpinner = false;
             this.toastr.warning('Employee is already Deactivated');
           }
           //If Das Id is not registered
           else{
+            this.showSpinner = false;
             this.toastr.warning('Employee is not registered');
           }
         });
   }
-
+}
   //activate() function is used to activate the Employee
   activate() {
     //If Das Id field is Blank
@@ -55,6 +61,8 @@ export class DeactivateComponent implements OnInit {
       this.toastr.error('Please enter valid dasId');
       return;
     }
+    else{
+      this.showSpinner = true;
     //Http post call for communicating with Backend services
     this.http.post<any>('http://localhost:8080/psa/deactivateEmployee',
       {
@@ -65,20 +73,23 @@ export class DeactivateComponent implements OnInit {
         data => {
           //If all the Condition's are true
           if (data.statusCode == "201" || data.statusCode == "200") {
-            this.toastr.success('Employee Activated');
             this.router.navigate(['list']);
+            this.showSpinner = false;
+            this.toastr.success('Employee Activated');
           }
           //If Employee is already Activated
           else if(data.statusMsg == "Operation already performed") {
+            this.showSpinner = false;
             this.toastr.warning('Employee is already Activated');
           }
           //If Das Id is not registered
           else {
+            this.showSpinner = false;
             this.toastr.warning('DasId is not registered');
           }
         });
   }
-
+}
   //onLogout() function is to remove each and every item from Local storage and to redirect to Sign In Page
   onLogout() {
     localStorage.removeItem('token');

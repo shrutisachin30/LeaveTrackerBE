@@ -138,9 +138,11 @@
         <!--mat-form-field tag is used for Password field-->
         <mat-form-field class="field" appearance="fill">
           <mat-label>Password</mat-label>
-          <input matInput type="password"
+          <input matInput type="password" id="secret" showHideInput
             pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#/\$%\^\&*_=+-])[a-zA-Z0-9!@#/\$%\^\&*_=+-]+$"
             minlength="8" maxlength="12" name="password" [(ngModel)]="user.Password" #password="ngModel" required>
+          <i matSuffix class="material-icons" showHideTrigger="secret"
+            [showHideStatus]="{ materialIcon: true, id: 'secret',show: 'visibility_off', hide: 'visibility' }"></i>
           <mat-error>
             <div *ngIf="password.invalid && (password.dirty || password.touched)" class="alert">
 
@@ -163,8 +165,10 @@
         <!--mat-form-field tag is used for Confirm Password field-->
         <mat-form-field class="field" appearance="fill">
           <mat-label>Confirm Password</mat-label>
-          <input type="password" matInput minlength="8" maxlength="10" name="cpassword" [(ngModel)]="user.cPassword"
-            #cpassword="ngModel" required>
+          <input type="password" id="secretc" matInput showHideInput minlength="8" maxlength="10" name="cpassword"
+            [(ngModel)]="user.cPassword" #cpassword="ngModel" required>
+          <i matSuffix class="material-icons" showHideTrigger="secretc"
+            [showHideStatus]="{ materialIcon: true, id: 'secretc',show: 'visibility_off', hide: 'visibility' }"></i>
           <mat-error>
             <div *ngIf="cpassword.invalid && (cpassword.dirty || cpassword.touched)" class="alert">
 
@@ -253,7 +257,7 @@
   </mat-card>
 
   <!--After clicking on Submmit till it redirect's to Sign In page, Spinner will be actiavted-->
-  <mat-spinner [diameter]="100" class="loader" *ngIf="showSpinner" color="accent"></mat-spinner>
+  <mat-spinner [diameter]="100" class="loader" *ngIf="showSpinner" color="primary"></mat-spinner>
 
 </div>
 
