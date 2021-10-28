@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-deactivate',
@@ -11,11 +12,14 @@ import { ToastrService } from 'ngx-toastr';
 export class DeactivateComponent implements OnInit {
   user: any;
   showSpinner=false;
-
+  apiEndPoint = environment.apiEndPoint;
   constructor(private http: HttpClient, private router: Router, private toastr: ToastrService) {
     this.user = {
       dasId: ''
     }
+  }
+
+  ngOnInit(): void {
   }
 
   //deactivate() function is used to deactivate the Employee
@@ -28,7 +32,7 @@ export class DeactivateComponent implements OnInit {
     else{
     this.showSpinner = true;
     //Http post call for communicating with Backend services
-    this.http.post<any>('http://localhost:8080/psa/deactivateEmployee',
+    this.http.post<any>(this.apiEndPoint+'deactivateEmployee',
       {
         "dasid": this.user.dasId,
         "isActive": "Inactive",
@@ -64,7 +68,7 @@ export class DeactivateComponent implements OnInit {
     else{
       this.showSpinner = true;
     //Http post call for communicating with Backend services
-    this.http.post<any>('http://localhost:8080/psa/deactivateEmployee',
+    this.http.post<any>(this.apiEndPoint+'deactivateEmployee',
       {
         "dasid": this.user.dasId,
         "isActive": "Active",
@@ -96,8 +100,4 @@ export class DeactivateComponent implements OnInit {
     localStorage.clear();
     this.router.navigate(['']);
   }
-  
-  ngOnInit(): void {
-  }
-
 }

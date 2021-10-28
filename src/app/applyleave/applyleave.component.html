@@ -1,22 +1,20 @@
-<html lang="en" class="main">
 <div>
-
-  <!--body tag uses jumbotron class and jumbotron class is defined in css-->
-  <body class="jumbotron">
-     <!--mat-toolbar tag is used to display the title of application i.e. Leave Tracker with logo of Atos, Home icon and Menu -->
+  <!--div tag uses jumbotron class and jumbotron class is defined in css-->
+  <div class="jumbotron">
+    <!--mat-toolbar tag is used to display the title of application i.e. Leave Tracker with logo of Atos, Home icon and Menu -->
     <mat-toolbar color="primary" class="size">
       <!--img tag is used for Atos Logo-->
       <img class="imagenav" src="./assets/logo.png">
       <span class="spacer">Leave Tracker</span>
-       <!--button tag is used for redirect to Home Page-->
-       <button mat-icon-button class="home"  routerLink="/list">
+      <!--button tag is used for redirect to Home Page-->
+      <button mat-icon-button class="home" routerLink="/list">
         <mat-icon>home</mat-icon>
       </button>
       <!--button tag is used to trigger menu-->
       <button class="right" mat-icon-button [matMenuTriggerFor]="menu">
         <mat-icon>more_vert</mat-icon>
       </button>
-       <!--mat-menu tag is used to display 5 field's i.e. Change Password, Activate/Deactivate, Export Leave Details, Edit Profile and Logout-->
+      <!--mat-menu tag is used to display 5 field's i.e. Change Password, Activate/Deactivate, Export Leave Details, Edit Profile and Logout-->
       <mat-menu class="contact" #menu="matMenu">
         <!--button tag is used to redirect to Change Password Page-->
         <button mat-menu-item routerLink="/changePassword">
@@ -26,7 +24,7 @@
         <!--button tag is used to redirect to Activate/Deactivate Page only if the user is Admin-->
         <button *ngIf="isAdmin" mat-menu-item routerLink="/deactivate">
           <mat-icon>autorenew</mat-icon>
-          <span>Deactivate</span>
+          <span>Activate / Deactivate</span>
         </button>
         <!--button tag is used to redirect to Export Leave Details Page only if the user is Admin-->
         <button *ngIf="isAdmin" mat-menu-item routerLink="/export">
@@ -38,7 +36,7 @@
           <mat-icon>account_circle</mat-icon>
           <span>Edit Profile</span>
         </button>
-         <!--button tag is used to redirect to Sign In Page-->
+        <!--button tag is used to redirect to Sign In Page-->
         <button mat-menu-item (click)="onLogout()">
           <mat-icon>logout</mat-icon>
           <span>Logout</span>
@@ -46,13 +44,13 @@
       </mat-menu>
 
     </mat-toolbar>
-  </body><br><br>
+  </div><br><br>
   <span class="details">Apply Leave</span>
   <!--form tag is used for Applying Leave of Employee with 3 Field's-->
   <form autocomplete="off">
     <!--mat-card tag(all the field's, button are inserted)-->
     <mat-card class="card">
-       <!--img tag is used for Apply Leave Logo-->
+      <!--img tag is used for Apply Leave Logo-->
       <img class="imagel" src="./assets/applyleave.png">
 
       <!--mat-form-field tag is used for DasId field which is in readonly mode-->
@@ -92,6 +90,5 @@
 
   </form>
 </div>
- <!--After clicking on Submmit till it redirect's to Sign In page, Spinner will be actiavted-->
- <mat-spinner [diameter]="100" class="loader" *ngIf="showSpinner" color="primary"></mat-spinner>
-</html>
+<!--After clicking on Submmit till it redirect's to Sign In page, Spinner will be actiavted-->
+<mat-spinner [diameter]="100" class="loader" *ngIf="showSpinner" color="primary"></mat-spinner>

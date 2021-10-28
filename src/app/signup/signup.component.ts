@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { FormBuilder } from '@angular/forms';
+import { environment } from 'src/environments/environment';
 
 //Created an interface Domain which includes two variables
 interface Domain {
@@ -28,6 +29,7 @@ export class SignupComponent implements OnInit {
   title = 'signup';
   signup: any;
   user: any;
+  apiEndPoint = environment.apiEndPoint;
 
   //typeOfDomain which includes 6 Domain's in the Domain list
   typeOfDomain: Domain[] = [
@@ -45,6 +47,8 @@ export class SignupComponent implements OnInit {
       countryCode: '+91 '
     }
   }
+  ngOnInit(): void {
+  }
 
   showToastr() {
     this.toastr.success('some messages', 'title');
@@ -53,9 +57,6 @@ export class SignupComponent implements OnInit {
   //In Contact no. field onCountryChange function is used
   onCountryChange(countryCode: any) {
     this.user.countryCode = '+' + countryCode.dialCode + ' ';
-  }
-
-  ngOnInit(): void {
   }
 
   //registration() function is used to fill the form and registration of an Employee
@@ -149,7 +150,7 @@ export class SignupComponent implements OnInit {
 
     //If both the Field's are filled and user click's on Submit button
     //Http post call for communicating with Backend services
-    this._http.post<any>('http://localhost:8080/psa/registerEmployee',
+    this._http.post<any>(this.apiEndPoint + 'registerEmployee',
       {
         "id": {
           "dasId": this.user.dasId

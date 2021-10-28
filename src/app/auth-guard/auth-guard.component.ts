@@ -10,6 +10,12 @@ import { SigninComponent } from '../signin/signin.component';
 })
 
 export class AuthGuardComponent implements CanActivate {
+
+  constructor(private router: Router) { }
+
+  ngOnInit(): void {
+  }
+
   //canActive function is used to checked whether user is logged in or not
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
     const len = localStorage.length
@@ -21,10 +27,5 @@ export class AuthGuardComponent implements CanActivate {
       this.router.navigate(['/signin'])
       return false;
     }
-  }
-
-  constructor(private router: Router) { }
-
-  ngOnInit(): void {
   }
 }

@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatStepper } from '@angular/material/stepper';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-forgotpassword',
@@ -23,6 +24,7 @@ export class ForgotpasswordComponent implements OnInit {
   stepper: any;
   otp: any;
   user: any;
+  apiEndPoint = environment.apiEndPoint;
 
   constructor(private _formBuilder: FormBuilder, private http: HttpClient, private router: Router, private toastr: ToastrService) {
     //creating a formbuilder group for firstFormGroup
@@ -35,11 +37,17 @@ export class ForgotpasswordComponent implements OnInit {
     });
     //creating a formbuilder group for thirdFormGroup
     this.thirdFormGroup = this._formBuilder.group({
-      thirdCtrl: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(10), Validators.pattern("^[a-zA-Z0-9!@#\$%\^\&*_=+-]{8,10}$")]],
-      thirdCtrlcpass: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(10), Validators.pattern("^[a-zA-Z0-9!@#\$%\^\&*_=+-]{8,10}$")]]
+      thirdCtrl: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(12), Validators.pattern("^[a-zA-Z0-9!@#\$%\^\&*_=+-]{8,12}$")]],
+      thirdCtrlcpass: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(12), Validators.pattern("^[a-zA-Z0-9!@#\$%\^\&*_=+-]{8,12}$")]]
     });
   }
-
+  
+  ngOnInit(): void {
+    //to reset all the form
+    this.firstFormGroup.reset()
+    this.secondFormGroup.reset()
+    this.thirdFormGroup.reset()
+  }
   //to get the firstFormGroup controls into form1
   get form1() {
     return this.firstFormGroup.controls;
@@ -59,7 +67,7 @@ export class ForgotpasswordComponent implements OnInit {
     this.stepper = stepper;
     let dasId = this.form1.firstCtrl.value;
     //Http get call for communicating with Backend services
-    this.http.get<any>("http://localhost:8080/psa/forgotPassword/" + dasId).subscribe(
+    this.http.get<any>(this.apiEndPoint+"forgotPassword/" + dasId).subscribe(
       response => {
         //If all the Condition's are true
         if (response.statusCode == "201" || response.statusCode == "200") {
@@ -103,13 +111,13 @@ export class ForgotpasswordComponent implements OnInit {
     //if Confirm Password matches with password
     else {
       //Http post call for communicating with Backend services
-      this.http.post<any>('http://localhost:8080/psa/updatePassword',
+      this.http.post<any>(this.apiEndPoint+'updatePassword',
         {
           "id": this.form1.firstCtrl.value,
           "password": this.form3.thirdCtrl.value
         }).subscribe(
           data => {
-            //If ll conditions are true
+            //If all conditions are true
             if (data.statusCode == "201" || data.statusCode == "200") {
               this.toastr.success('Password updated successfully');
               this.showSpinner = false;
@@ -121,10 +129,5 @@ export class ForgotpasswordComponent implements OnInit {
           });
     }
   }
-  ngOnInit(): void {
-    //to reset all the form
-    this.firstFormGroup.reset()
-    this.secondFormGroup.reset()
-    this.thirdFormGroup.reset()
-  }
+  
 }

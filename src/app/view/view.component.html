@@ -1,9 +1,7 @@
-<html lang="en" class="main">
 <div>
 
-  <!--body tag uses jumbotron class and jumbotron class is defined in css-->
-
-  <body class="jumbotron">
+  <!--div tag uses jumbotron class and jumbotron class is defined in css-->
+  <div class="jumbotron">
     <!--mat-toolbar tag is used to display the title of application i.e. Leave Tracker with logo of Atos, Home icon and Menu -->
     <mat-toolbar color="primary" class="size">
       <!--img tag is used for Atos Logo-->
@@ -52,7 +50,7 @@
       </mat-menu>
 
     </mat-toolbar>
-  </body><br><br>
+  </div><br><br>
 
   <span class="details">Leave Details</span><br><br>
   <span class="num" *ngIf="dataSource.length > 0">Number of leaves :- {{this.dataSource.length}}</span><br><br>
@@ -124,7 +122,7 @@
   </table><br>
 
   <!--mat-paginator provides navigation for paged information, typically used with a table-->
-  <mat-paginator *ngIf="dataSource.length > 0" [pageSizeOptions]="[5,10,15]" showFirstLastButtons
+  <mat-paginator *ngIf="dataSource.length > 0" [pageSizeOptions]="[5,10]" showFirstLastButtons
     aria-label="Select page">
   </mat-paginator>
 
@@ -139,7 +137,5 @@
   <span class="num" *ngIf="dataSource.length>0">Number of Days for Vacational Leaves :- {{this.VL}}</span><br>
 
   <!--After clicking on Submmit till it redirect's to Sign In page, Spinner will be actiavted-->
-  <mat-spinner [diameter]="100" class="loader" *ngIf="showSpinner" color="accent"></mat-spinner>
+  <mat-spinner [diameter]="100" class="loader" *ngIf="showSpinner" color="primary"></mat-spinner>
 </div>
-
-</html>

@@ -4,6 +4,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router, RouterEvent } from '@angular/router';
 import { DialogService } from '../dialog.service';
+import { environment } from 'src/environments/environment';
 
 Injectable({
   providedIn: 'root'
@@ -19,7 +20,7 @@ Injectable({
 export class ViewComponent implements OnInit {
   title = "view";
   showSpinner = false;
-  url = "http://localhost:8080/psa/";
+  apiEndPoint = environment.apiEndPoint;
   //Getting ViewId from Local Storage
   viewDasId: any = localStorage.getItem('viewId');
   isCancel: any = true;
@@ -61,22 +62,21 @@ export class ViewComponent implements OnInit {
   paginator: MatPaginator;
   data: MatTableDataSource<any>;
   isAdmin: any;
+  id: any;
 
   constructor(private dialogservice: DialogService, private http: HttpClient, private router: Router) {
     this.id = 1;
     this.viewDasId = localStorage.getItem('viewId');
     this.getLeaves(this.viewDasId).subscribe((res: any) => {
       this.dataSource = res;
-      this.fun();
+      this.leaveDetails();
       this.length = this.dataSource.length;
       this.data.paginator = this.paginator;
     });
     //Getting Admin Status from Local Storage
     this.isAdmin = localStorage.getItem('Admin');
   }
-  id: any;
-
-
+  
   ngOnInit(): void {
     //ViewId is equal to DasId
     if (this.viewDasId != this.empid) {
@@ -93,17 +93,18 @@ export class ViewComponent implements OnInit {
     //Getting ViewId from Local Storage
     let Id = localStorage.getItem('viewId');
     //Http get call for communicating with Backend services to get the list of Leaves from BackEnd
-    return this.http.get(this.url + "retrieveLeaveData/" + Id);
+    return this.http.get(this.apiEndPoint + "retrieveLeaveData/" + Id);
   }
 
-  pad2(n: any) {
+  // If date, month and year are less than '10' then '0' will be appended to it(for e.g:-09)
+  formatDate(n: any) {
     return (n < 10 ? '0' : '') + n;
   }
   //cancelLeave() function is use to cancel the leaves of any Employee
   cancelLeave(id: any, startdate: any, enddate: any, updatedBy: any, updatedOn: any) {
     var uOn = new Date();
-    var month = this.pad2(uOn.getMonth() + 1);//months (0-11)
-    var day = this.pad2(uOn.getDate());//day (1-31)
+    var month = this.formatDate(uOn.getMonth() + 1);//months (0-11)
+    var day = this.formatDate(uOn.getDate());//day (1-31)
     var year = uOn.getFullYear();
     var uOnFormattedDate: any = day + "-" + month + "-" + year;
     this.dialogservice.openConfirmDialog('Are you sure you want to Cancel?').afterClosed().subscribe(res => {
@@ -113,7 +114,7 @@ export class ViewComponent implements OnInit {
         this.canceldata.startdate = startdate;
         this.canceldata.enddate = enddate;
         //Http post call for communicating with Backend services to cnacel the Leaves 
-        this.http.post(this.url + "cancelLeave", this.canceldata).subscribe();
+        this.http.post(this.apiEndPoint + "cancelLeave", this.canceldata).subscribe();
         window.location.reload();
       }
     })
@@ -127,8 +128,8 @@ export class ViewComponent implements OnInit {
     return diff;
   }
 
-  //fun() function is used to display the main list of leaves as well as calculate number of days of sick leaves, casual leaves and vacational leaves
-  fun() {
+  //leaveDetails() function is used to display the main list of leaves as well as calculate number of days of sick leaves, casual leaves and vacational leaves
+  leaveDetails() {
     //for loop of dataSource
     for (let l of this.dataSource) {
       l.noOfDays = this.calculateDiff(l.startDate, l.endDate).toString();

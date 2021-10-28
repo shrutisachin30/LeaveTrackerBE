@@ -33,13 +33,11 @@
   }
   
   .jumbotron{
-    
-    
     height: 100%;
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat; 
-    margin: -18px;
+    margin: -8px;
     overflow-x: hidden;
   }
   
@@ -80,10 +78,7 @@
     height: 40px;
     font-size: 18px;
 }
-.main{
-  height: 500px;
-  width: 1396px;
-}
+
 .right{
   margin-left: 1%;
 }

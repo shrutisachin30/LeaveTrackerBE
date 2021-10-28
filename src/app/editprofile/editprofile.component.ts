@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators, NgForm } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { environment } from 'src/environments/environment';
 
 //Created an interface Domain which includes two variables
 interface Domain {
@@ -24,7 +25,7 @@ export class EditprofileComponent implements OnInit {
   title = 'editprofile';
   signup: any;
   user: any;
-
+  apiEndPoint = environment.apiEndPoint;
   //typeOfDomain which includes 6 Domain's in the Domain list
   typeOfDomain: Domain[] = [
     { value: 'ASCV', viewValue: 'ASCV' },
@@ -100,17 +101,10 @@ export class EditprofileComponent implements OnInit {
     alert("Details Updated Successfuly")
   }
 
-  //onLogout() function is to remove each and every item from Local storage and to redirect to Sign In Page
-  onLogout() {
-    localStorage.removeItem('token');
-    localStorage.clear();
-    this.router.navigate(['']);
-  }
-
   //getService() function is to get the specific Employee details 
   getService(dasId: any) {
     //Http get call for communicating with Backend services to get the specific Employee details
-    this._http.get("http://localhost:8080/psa/getEmployee/" + dasId, this.route.snapshot.params.id)
+    this._http.get(this.apiEndPoint+"getEmployee/" + dasId, this.route.snapshot.params.id)
       .subscribe(
         (data: any) => {
           this.editCustomer = this._formBuilder.group({
@@ -131,7 +125,7 @@ export class EditprofileComponent implements OnInit {
   updateService() {
     this.showSpinner = true;
     //Http post call for communicating with Backend services to update the specific Employee details
-    this._http.post("http://localhost:8080/psa/updateEmployee", this.employee, { responseType: "text" })
+    this._http.post(this.apiEndPoint+"updateEmployee", this.employee, { responseType: "text" })
       .subscribe(
         (data: any) => {
           //If all condition's are true
@@ -165,5 +159,12 @@ export class EditprofileComponent implements OnInit {
     this.employee.domain = this.editCustomer.get("domain").value;
     this.employee.jobRole = this.editCustomer.get("jobRole").value;
     this.updateService();
+  }
+
+  //onLogout() function is to remove each and every item from Local storage and to redirect to Sign In Page
+  onLogout() {
+    localStorage.removeItem('token');
+    localStorage.clear();
+    this.router.navigate(['']);
   }
 }

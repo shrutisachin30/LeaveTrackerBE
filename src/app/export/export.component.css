@@ -11,7 +11,7 @@
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
-    margin: -18px;
+    margin: -8px;
     overflow-x: hidden;
   }
 
@@ -56,11 +56,6 @@
   font-size: 15px;
   margin-left: 10%;
  }
-
- .main{
-    height: 500px;
-    width: 1396px;
-  }
 
   .home{
     margin-left: 25%;

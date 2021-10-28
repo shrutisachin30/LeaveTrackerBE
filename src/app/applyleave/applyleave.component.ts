@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
+import { environment } from 'src/environments/environment';
 
 //Created an interface Leave which includes two variables
 interface Leave {
@@ -27,6 +28,7 @@ export class ApplyleaveComponent implements OnInit {
   user: any;
   maxDate = new Date();
   showSpinner = false;
+  apiEndPoint = environment.apiEndPoint;
   //typeOfLeaves which includes 3 Leave's in the Leave list
   typeOfLeave: Leave[] = [
     { value: 'Sick Leave', viewValue: 'Sick Leave' },
@@ -60,7 +62,7 @@ export class ApplyleaveComponent implements OnInit {
   }
 
   //If date, month and year are less than '10' then '0' will be appended to it(for e.g:-09)
-  pad2(n: any) {
+  formatDate(n: any) {
     return (n < 10 ? '0' : '') + n;
   }
   calculateDiff(startDate, endDate){
@@ -95,27 +97,27 @@ export class ApplyleaveComponent implements OnInit {
     }
 
     var sDate = new Date(this.user.startDate);
-    var month = this.pad2(sDate.getMonth() + 1);//months (0-11)
-    var day = this.pad2(sDate.getDate());//day (1-31)
+    var month = this.formatDate(sDate.getMonth() + 1);//months (0-11)
+    var day = this.formatDate(sDate.getDate());//day (1-31)
     var year = sDate.getFullYear();
     var startFormattedDate = day + "-" + month + "-" + year;
 
     var eDate = new Date(this.user.endDate);
-    var month = this.pad2(eDate.getMonth() + 1);//months (0-11)
-    var day = this.pad2(eDate.getDate());//day (1-31)
+    var month = this.formatDate(eDate.getMonth() + 1);//months (0-11)
+    var day = this.formatDate(eDate.getDate());//day (1-31)
     var year = eDate.getFullYear();
     var endFormattedDate = day + "-" + month + "-" + year;
 
     var uOn = new Date();
-    var month = this.pad2(uOn.getMonth() + 1);//months (0-11)
-    var day = this.pad2(uOn.getDate());//day (1-31)
+    var month = this.formatDate(uOn.getMonth() + 1);//months (0-11)
+    var day = this.formatDate(uOn.getDate());//day (1-31)
     var year = uOn.getFullYear();
     var uOnFormattedDate = day + "-" + month + "-" + year;
 
     
     this.showSpinner = true;
     //Http post call for communicating with Backend services
-    this._http.post<any>('http://localhost:8080/psa/applyLeave',
+    this._http.post<any>(this.apiEndPoint+'applyLeave',
       {
         "employee": {
           "id": localStorage.getItem('dasId')
@@ -139,9 +141,11 @@ export class ApplyleaveComponent implements OnInit {
           //If leaves are already applied
           else if (data.statusCode == "500") {
             this.toastr.warning('Leave for these dates already applied, Please Select new dates');
+            this.showSpinner = false;
           }
           else {
             this.toastr.error('Leave application unsuccessful');
+            this.showSpinner = false;
           }
         });
   }

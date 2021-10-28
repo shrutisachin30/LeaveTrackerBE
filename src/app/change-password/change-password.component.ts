@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Injectable } from '@angular/core';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -17,8 +18,8 @@ export class ChangePasswordComponent implements OnInit {
   static subscribe: any;
   [x: string]: any;
   user: any;
-  showSpinner=false;
-  
+  showSpinner = false;
+  apiEndPoint = environment.apiEndPoint;
   constructor(private http: HttpClient, private router: Router, private toastr: ToastrService) {
     this.user = {
       dasId: ''
@@ -30,9 +31,12 @@ export class ChangePasswordComponent implements OnInit {
     this.isAdmin = localStorage.getItem('Admin');
   }
 
+  ngOnInit(): void {
+  }
+
   //changePassword() function is used to change the Password
   changePassword() {
-    
+
 
     //If Enter Old Password field is empty
     if (this.user.oldPassword === undefined || this.user.oldPassword == '') {
@@ -63,7 +67,7 @@ export class ChangePasswordComponent implements OnInit {
     else {
       this.showSpinner = true;
       //Http post call for communicating with Backend services
-      this.http.post<any>('http://localhost:8080/psa/changePassword',
+      this.http.post<any>(this.apiEndPoint+'changePassword',
         {
           "oldpassword": this.user.oldPassword,
           "newpassword": this.user.newPassword,
@@ -83,15 +87,11 @@ export class ChangePasswordComponent implements OnInit {
           });
     }
   }
-  
+
   //onLogout() function is to remove each and every item from Local storage and to redirect to Sign In Page
   onLogout() {
     localStorage.removeItem('token');
     localStorage.clear();
     this.router.navigate(['']);
   }
-    
-  ngOnInit(): void {
-  }
-
 }

@@ -1,9 +1,7 @@
-<html lang="en" class="main">
 <div>
 
-  <!--body tag uses jumbotron class and jumbotron class is defined in css-->
-
-  <body class="jumbotron">
+  <!--div tag uses jumbotron class and jumbotron class is defined in css-->
+  <div class="jumbotron">
     <!--mat-toolbar tag is used to display the title of application i.e. Leave Tracker with logo of Atos, Home icon and Menu -->
     <mat-toolbar color="primary" class="size">
       <!--img tag is used for Atos Logo-->
@@ -47,8 +45,7 @@
       </mat-menu>
 
     </mat-toolbar>
-    <router-outlet></router-outlet>
-  </body><br><br>
+  </div><br><br>
   <br><br>
 
   <span class="details">Export Employee Leave Details</span>
@@ -85,8 +82,8 @@
     <!--button tag is used to Generate the report-->
     <button class="buttonGet" mat-raised-button color="primary" (click)="getExport()">Generate</button>
     <!--button tag is used to Export the report into Excel Sheet-->
-    <button class="buttonExport" [disabled]="!isDataPresent" mat-raised-button color="primary" 
-      (click)="load(); exporter.exportTable('xls', {fileName : 'Employee Leaves Details'} );">Download</button>
+    <button class="buttonExport" [disabled]="!isDataPresent" mat-raised-button color="primary"
+      (click)="loader(); exporter.exportTable('xls', {fileName : 'Employee Leaves Details'} );">Download</button>
 
   </mat-card>
   <!--After clicking on Submmit till it redirect's to Sign In page, Spinner will be actiavted-->
@@ -176,5 +173,3 @@
 
   </div>
 </div>
-
-</html>

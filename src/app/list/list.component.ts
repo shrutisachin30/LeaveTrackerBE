@@ -5,6 +5,7 @@ import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { environment } from 'src/environments/environment';
 
 //List Class is created in which all variables are declared in constructor
 export class List {
@@ -37,6 +38,7 @@ export class ListComponent implements OnInit {
   successMessage: string | undefined;
   title = 'leave';
   list: List[] = [];
+  apiEndPoint = environment.apiEndPoint;
   //Column's are displayed in the way mentioned in displayedColumns: string[], in web browser on web page
   displayedColumns: string[] = ['dasId', 'name', 'gcmLevel', 'mobile', 'emailId', 'reportingManager', 'domain', 'projectName', 'jobRole', 'isActive', 'view'];
   dataSource = this.list;
@@ -62,6 +64,9 @@ export class ListComponent implements OnInit {
     this.name = localStorage.getItem('name');
   }
 
+  ngOnInit(): void {
+    this.getList();
+  }
   //onLogout() function is to remove each and every item from Local storage and to redirect to Sign In Page
   onLogout() {
     localStorage.removeItem('token');
@@ -72,7 +77,7 @@ export class ListComponent implements OnInit {
   //getList() function is used to get the List of Employee's into the table
   getList() {
     //Http get call for communicating with Backend services to get the list of Employee's from BackEnd
-    this._http.get<any>('http://localhost:8080/psa/getEmployeeDetails').subscribe(
+    this._http.get<any>(this.apiEndPoint+'getEmployeeDetails').subscribe(
       response => {
         this.list = response;
         this.data = new MatTableDataSource<any>(this.list);
@@ -95,9 +100,5 @@ export class ListComponent implements OnInit {
   viewLeave(id: any) {
     localStorage.setItem('viewId', id);
     this.router.navigate(['view']);
-  }
-
-  ngOnInit(): void {
-    this.getList();
   }
 }

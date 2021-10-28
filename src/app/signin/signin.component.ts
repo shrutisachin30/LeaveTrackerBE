@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Injectable } from '@angular/core';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -17,6 +18,7 @@ export class SigninComponent implements OnInit {
 
   //hide is a variable used for Password feild in html for visibility icon
   hide = true;
+  apiEndPoint = environment.apiEndPoint;
   showSpinner = false;
   title = 'signin';
   user = {
@@ -59,7 +61,7 @@ export class SigninComponent implements OnInit {
     else {
       this.showSpinner = true;
       //Http post call for communicating with Backend services
-      this.http.post<any>('http://localhost:8080/psa/loginService',
+      this.http.post<any>(this.apiEndPoint + 'loginService',
         {
           "dasId": this.user.dasId,
           "password": this.user.password

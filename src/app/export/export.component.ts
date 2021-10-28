@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { environment } from 'src/environments/environment';
 
 //Created an interface Domain which includes two variables
 interface Domain {
@@ -20,7 +21,7 @@ export class ExportComponent implements OnInit {
   isDataPresent: any
   res: any;
   showSpinner=false;
-
+  apiEndPoint = environment.apiEndPoint;
   //typeOfDomain which includes 6 Domain's and 'All' option in the Domain list
   typeOfDomain: Domain[] = [
     { value: 'ASCV', viewValue: 'ASCV' },
@@ -43,9 +44,9 @@ export class ExportComponent implements OnInit {
     this.emp.empid = localStorage.getItem('dasId');
   }
 
-  pad2(n: any) {
-    return (n < 10 ? '0' : '') + n;
+  ngOnInit(): void {
   }
+
   //getExport() function is used to get the Leave Details of All the Employee's
   getExport() {
     this.isDataPresent = false;
@@ -79,7 +80,7 @@ export class ExportComponent implements OnInit {
     let startDate = this.user.startDate + " 05:30:00"
     let endDate = this.user.endDate + " 05:30:00"
     //Http get call for communicating with Backend services to get the list of Employee's Leaves from BackEnd
-    this._http.get<any>('http://localhost:8080/psa/exportData/' + domain + '/' + startDate + '/' + endDate).subscribe(
+    this._http.get<any>(this.apiEndPoint+'exportData/' + domain + '/' + startDate + '/' + endDate).subscribe(
       res => {
         this.list = res
         this.dataSource = this.list;
@@ -96,19 +97,18 @@ export class ExportComponent implements OnInit {
       }
     )
   }
-  //load() function is used for loader 
-  load(){
+  //loader() function is used for loader 
+  loader(){
     this.showSpinner = true;
     this.router.navigate(['list']);
     this.showSpinner = false;
   }
+
   //onLogout() function is to remove each and every item from Local storage and to redirect to Sign In Page
   onLogout() {
     localStorage.removeItem('token');
     localStorage.clear();
     this.router.navigate(['']);
   }
-  ngOnInit(): void {
-  }
-
+  
 }

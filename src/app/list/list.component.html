@@ -1,8 +1,7 @@
-<html lang="en" class="main">
 <div>
-  <!--body tag uses jumbotron class and jumbotron class is defined in css-->
-
-  <body class="jumbotron">
+  
+  <!--div tag uses jumbotron class and jumbotron class is defined in css-->
+  <div class="jumbotron">
     <!--mat-toolbar tag is used to display the title of application i.e. Leave Tracker with logo of Atos, Home icon and Menu -->
     <mat-toolbar color="primary" class="size">
       <!--img tag is used for Atos Logo-->
@@ -47,9 +46,7 @@
       </mat-menu>
 
     </mat-toolbar>
-
-    <router-outlet></router-outlet>
-  </body><br><br>
+  </div><br><br>
   <div>
     <span class="name"> Welcome,  {{this.name}}</span><br>
     <span class="details">Employee Details</span><br>
@@ -138,10 +135,8 @@
 
     </table>
     <!--mat-paginator provides navigation for paged information, typically used with a table-->
-    <mat-paginator [pageSizeOptions]="[5,10,15]" showFirstLastButtons aria-label="Select page">
+    <mat-paginator [pageSizeOptions]="[5,10]" showFirstLastButtons aria-label="Select page">
     </mat-paginator>
 
   </div>
 </div>
-
-</html>

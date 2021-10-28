@@ -1,8 +1,7 @@
-<html lang="en" class="main">
 <div>
-  <!--body tag uses jumbotron class and jumbotron class is defined in css-->
 
-  <body class="jumbotron">
+  <!--div tag uses jumbotron class and jumbotron class is defined in css-->
+  <div class="jumbotron">
     <!--mat-toolbar tag is used to display the title of application i.e. Leave Tracker with logo of Atos, Home icon and Menu -->
     <mat-toolbar color="primary" class="size">
       <!--img tag is used for Atos Logo-->
@@ -47,7 +46,7 @@
     </mat-toolbar>
 
     <router-outlet></router-outlet>
-  </body><br><br><br>
+  </div><br><br><br>
   <span class="details">Edit Profile</span>
   <!--form tag is used to Edit an Employee details-->
   <form [formGroup]="editCustomer" autocomplete="off">
@@ -86,7 +85,8 @@
       <!--Contact No field-->
       <mat-form-field class="field" appearance="fill">
         <mat-label>Contact No</mat-label>
-        <input matInput formControlName="mobile" pattern="^[+][0-9]+(?:[\d-.\s()]*)$" minlength="13" maxlength="15" required>
+        <input matInput formControlName="mobile" pattern="^[+][0-9]+(?:[\d-.\s()]*)$" minlength="13" maxlength="15"
+          required>
         <mat-error>Enter a valid Mobile Number</mat-error>
       </mat-form-field>
 
@@ -134,8 +134,6 @@
 
     </mat-card>
   </form>
-<!--After clicking on Submmit till it redirect's to Sign In page, Spinner will be actiavted-->
-<mat-spinner [diameter]="100" class="loader" *ngIf="showSpinner" color="primary"></mat-spinner>
+  <!--After clicking on Submmit till it redirect's to Sign In page, Spinner will be actiavted-->
+  <mat-spinner [diameter]="100" class="loader" *ngIf="showSpinner" color="primary"></mat-spinner>
 </div>
-
-</html>
